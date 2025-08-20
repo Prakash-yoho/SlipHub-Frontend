@@ -16,7 +16,7 @@ const HrProfiles = () => {
                 <input type="text" className='bg-[#4A70790D] text-[#4A7079] font-bold border border-[#4A7079] rounded-md px-3 py-[6px] outline-0 w-[400px]' placeholder='Search' />
             </div>
 
-            <div className='mt-10 grid grid-cols-3 gap-6 h-[400px] overflow-y-scroll scrollbar-hide'>
+            <div className='mt-10 grid grid-cols-3 gap-6 lg:h-[57vh] xl:h-[62vh] 2xl:h-[70vh] p-2 overflow-y-scroll scrollbar-hide'>
 
                 {Array(10)
                     .fill(null)

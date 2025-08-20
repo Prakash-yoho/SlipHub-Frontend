@@ -17,8 +17,8 @@ const Employee = () => {
         <input type="text" className='bg-[#4A70790D] text-[#4A7079] font-bold border border-[#4A7079] rounded-md px-3 py-[6px] outline-0 w-[400px]' placeholder='Search' />
       </div>
 
-      <div className='rounded-lg mt-6 h-[65vh] overflow-y-scroll scrollbar-hide'>
-        <table className="w-full border-separate border-spacing-y-4 overflow-auto">
+      <div className='rounded-lg mt-6 md:h-[55vh] lg:h-[60vh] xl:h-[65vh] 2xl:h-[70vh] overflow-y-scroll scrollbar-hide'>
+        <table className="w-full -mt-5 border-separate border-spacing-y-4 overflow-auto">
           <thead className="sticky top-0">
             <tr style={{ background: COLORS.primary }} className='text-left text-white rounded-lg'>
               <th style={{ ...FONTS.table_head }} className="px-4 py-3 rounded-l-lg">S.No</th>

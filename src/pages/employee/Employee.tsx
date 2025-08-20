@@ -24,7 +24,7 @@ const Employee = () => {
       {/* Table wrapper */}
       <div className='rounded-lg mt-6 '>
         <table className="w-full border-separate border-spacing-y-2">
-          <thead className="sticky top-0 z-10">
+          <thead className="sticky top-0 z-10 ">
             <tr style={{ background: COLORS.primary }} className='text-left text-white'>
               <th style={{ ...FONTS.table_head }} className="px-4 py-3 rounded-l-lg">S.No</th>
               <th style={{ ...FONTS.table_head }} className="px-4 py-3">Name</th>
@@ -43,7 +43,7 @@ const Employee = () => {
           <table className="w-full border-separate border-spacing-y-4">
             <tbody>
               {Array(20).fill(null).map((_, index) => (
-                <tr key={index} style={{ color: COLORS.primary }} className='bg-[#DDDED980]'>
+                <tr key={index} style={{ color: COLORS.primary }} className='bg-[#DDDED980] **:text-center'>
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">{index + 1}</td>
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3">Kamal</td>
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3 uppercase">yt2505</td>

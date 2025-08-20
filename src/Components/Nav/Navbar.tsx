@@ -6,13 +6,10 @@ import { FONTS } from '../../constants/uiconstants';
 
 const Navbar = () => {
   return (
-    <div className="flex justify-between items-center  text-white px-4 py-3 pr-10">
-      {/* Logo */}
+    <div className="flex justify-between items-center  text-white px-4 py-3 pr-8">
       <img src={Logo} alt="Logo" className="w-[100px]" />
-
-      {/* Right Side */}
       <div className="flex items-center gap-8">
-        {/* Nav Items */}
+        
         <nav className="flex items-center gap-3 p-[1px] bg-[#4A7079] rounded-lg *:p-2 *:px-6 *:border *:border-transparent">
           <NavLink
             to="/"
@@ -41,19 +38,6 @@ const Navbar = () => {
             HR
           </NavLink>
           <NavLink
-            to="/department"
-            className={({ isActive }) =>
-              `font-semibold px-3 py-1 rounded-lg transition-colors ${
-                isActive
-                  ? 'bg-white text-[#4A7079] border border-[#4A7079] shadow-[0px_10px_44px_0px_#4A707926_inset]'
-                  : 'text-white hover:bg-white hover:text-[#4A7079] hover:shadow-[0px_10px_44px_0px_#4A707926_inset]'
-              }`
-            }
-            style={{...FONTS.Nav}}
-          >
-            Department
-          </NavLink>
-          <NavLink
             to="/employee"
             className={({ isActive }) =>
               `font-semibold px-3 py-1 rounded-lg transition-colors ${
@@ -65,6 +49,19 @@ const Navbar = () => {
             style={{...FONTS.Nav}}
           >
             Employee
+          </NavLink>
+          <NavLink
+            to="/department"
+            className={({ isActive }) =>
+              `font-semibold px-3 py-1 rounded-lg transition-colors ${
+                isActive
+                  ? 'bg-white text-[#4A7079] border border-[#4A7079] shadow-[0px_10px_44px_0px_#4A707926_inset]'
+                  : 'text-white hover:bg-white hover:text-[#4A7079] hover:shadow-[0px_10px_44px_0px_#4A707926_inset]'
+              }`
+            }
+            style={{...FONTS.Nav}}
+          >
+            Department
           </NavLink>
         </nav>
 

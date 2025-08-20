@@ -5,15 +5,15 @@ function MainLayout() {
 
 
   return (
-    <div className="bg-[#F8F8F8] flex flex-col w-screen h-screen overflow-hidden">
+    <div className="bg-[#f5eaea] flex flex-col w-screen h-screen overflow-hidden">
       <Navbar />
 
-        {/* Main Page */}
-        <div className="">
-          <Outlet />
-        </div>
+      {/* Main Page */}
+      <div className="">
+        <Outlet />
       </div>
-   
+    </div>
+
   );
 }
 

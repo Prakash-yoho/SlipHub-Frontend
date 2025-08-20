@@ -6,7 +6,7 @@ import { FONTS } from '../../constants/uiconstants';
 
 const Navbar = () => {
   return (
-    <div className="flex justify-between items-center  text-white px-4 py-3 pr-8">
+    <div className="flex justify-between items-center text-white px-4 py-3 pr-8">
       <img src={Logo} alt="Logo" className="w-[100px]" />
       <div className="flex items-center gap-8">
         

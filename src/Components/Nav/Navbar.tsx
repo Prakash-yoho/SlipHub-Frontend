@@ -51,6 +51,19 @@ const Navbar = () => {
             Employee
           </NavLink>
           <NavLink
+            to="/payroll"
+            className={({ isActive }) =>
+              `font-semibold px-3 py-1 rounded-lg transition-colors ${
+                isActive
+                  ? 'bg-white text-[#4A7079] border border-[#4A7079] shadow-[0px_10px_44px_0px_#4A707926_inset]'
+                  : 'text-white hover:bg-white hover:text-[#4A7079] hover:shadow-[0px_10px_44px_0px_#4A707926_inset]'
+              }`
+            }
+            style={{...FONTS.Nav}}
+          >
+            Payroll
+          </NavLink>
+          <NavLink
             to="/department"
             className={({ isActive }) =>
               `font-semibold px-3 py-1 rounded-lg transition-colors ${

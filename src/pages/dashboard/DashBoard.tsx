@@ -5,7 +5,7 @@ import EmployeeByDpt from "../../Components/dashboad/EmployeeByDpt"
 const DashBoard = () => {
   return (
     <div className="flex flex-col gap-5 p-4">
-      <div className="w-full h-32 border">
+      <div className="w-full h-32 shadow-[0px_0px_15px_0px_#4A707966] rounded-xl">
         <CompanyInfo />
       </div>
       <div className="grid grid-cols-3 w-full gap-5">

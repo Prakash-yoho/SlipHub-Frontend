@@ -67,6 +67,30 @@ export const FONTS = {
         fontWeight: 600,
         fontSize:'10px'
     },
+    payroll_mainhead: {
+        fontFamily: 'Montserrat',
+        fontStyle: 'bold',
+        fontWeight: 600,
+        fontSize:'24px'
+    },
+    payroll_profileHead: {
+        fontFamily: 'Montserrat',
+        fontStyle: 'bold',
+        fontWeight: 600,
+        fontSize:'18px'
+    },
+    payroll_Head: {
+        fontFamily: 'Montserrat',
+        fontStyle: 'bold',
+        fontWeight: 700,
+        fontSize:'12px'
+    },
+    payroll_head: {
+        fontFamily: 'Montserrat',
+        fontStyle: 'bold',
+        fontWeight: 600,
+        fontSize:'20px'
+    },
     inter: {
         fontFamily: 'Inter',
         fontStyle: 'normal',

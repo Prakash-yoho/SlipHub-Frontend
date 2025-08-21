@@ -8,6 +8,7 @@ import Verify from '../pages/auth/otp'
 import { useAuth } from '../Components/auth/AuthContext';
 import Employee from '../pages/employee/Employee';
 import Department from '../pages/department/Department';
+import Payroll from '../pages/payroll/Payroll';
 
 function Approutes() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -30,6 +31,7 @@ function Approutes() {
         <Route path='/hrProfiles' element={<HrProfiles />} />
         <Route path='/department' element={<Department />} />
         <Route path='/employee' element={<Employee />} />
+        <Route path='/payroll' element={<Payroll />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='*' element={<Navigate to='/' />} />
       </Route>

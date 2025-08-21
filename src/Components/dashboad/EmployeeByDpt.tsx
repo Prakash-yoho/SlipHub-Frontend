@@ -10,6 +10,7 @@ import {
     Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { FONTS } from '../../constants/uiconstants';
 
 ChartJS.register(
     CategoryScale,
@@ -50,7 +51,7 @@ const EmployeeByDpt = () => {
                 },
             },
             title: {
-                display: true,
+                display: false,
                 text: 'Employees by Department',
                 color: '#111',
                 font: {
@@ -98,7 +99,8 @@ const EmployeeByDpt = () => {
     };
 
     return (
-        <div className='w-full border border-[#4A7079] p-4'>
+        <div className='w-full border border-[#4A7079] p-4 rounded-lg'>
+            <h1 style={{ ...FONTS.table_head }} className='text-center m-2'>Employees by Department</h1>
             <Bar data={data} options={options} />
         </div>
     );

@@ -1,20 +1,21 @@
 import React from 'react'
-import bell from '../../../assets/Navbar/notification.png'
 import { FONTS } from '../../../constants/uiconstants'
-const TotalsCard: React.FC = ({ title }) => {
+
+interface props {
+    title: { name: string, value: number, image: string }
+}
+
+const TotalsCard: React.FC<props> = ({ title }) => {
     return (
-        <div className='w-full h-full bg-[#9b9c9670] shadow-[0px_0px_15px_0px_#9b9c9670] flex flex-col justify-evenly p-2 rounded-xl'>
-            <div className="flex flex-row gap-5 items-center">
-                <div className="bg-[#4A7079] w-max h-max p-2 rounded-[50%]">
-                    <img src={bell} alt="" className='w-10 h-10' />
+        <div className='w-full h-full bg-[#EAEBE8] shadow-[0px_0px_15px_0px_#4A70791A] flex flex-col justify-evenly p-2 rounded-xl'>
+            <div className="flex flex-col gap-5">
+                <div className='flex flex-row items-center gap-5 px-2'>
+                    <div className="bg-[#4A7079] w-max h-max p-2 rounded-[50%]">
+                        <img src={title?.image} alt="" className='w-10 h-10' />
+                    </div>
+                    <p style={{ ...FONTS.table_data }} className='text-[#4A7079] !font-bold'>{title?.name}</p>
                 </div>
-                <div className="">
-                    <p style={{ ...FONTS.table_data }}>{title}</p>
-                    <p style={{ ...FONTS.table_head }}>345</p>
-                </div>
-            </div>
-            <div className='flex justify-end '>
-                <p>View Details</p>
+                <p style={{ ...FONTS.table_head }} className='text-end -mt-5 px-4 !text-[26px] text-[#4A7079] font-bold'>{title?.value}</p>
             </div>
         </div>
     )

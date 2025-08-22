@@ -6,57 +6,116 @@ import {
     BarElement,
     Title,
     Tooltip,
-    Legend,
+    type ChartOptions,
+    type ChartData,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import faker from 'faker';
-import { FONTS } from '../../constants/uiconstants';
 
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend
-);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
-export const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-            display: false,
-            position: 'top' as const,
-        },
-        title: {
-            display: false,
-            text: 'Chart.js Bar Chart',
-        },
-    },
+type SalaryDetailCardProps = {
+    roles: string[];
+    actualSalaries: number[];
+    totalSalaries: number[];
 };
 
-const labels = ['Software Developer', 'Project Manager', 'Designer', 'QA Engineer'];
+export const SalaryDetailCard: React.FC<SalaryDetailCardProps> = ({
+    roles,
+    actualSalaries,
+    totalSalaries,
+}) => {
+    const remainingSalaries = totalSalaries.map((total, index) => {
+        const actual = actualSalaries[index];
+        return Math.max(total - actual, 0);
+    });
 
-export const data = {
-    labels,
-    datasets: [
-        {
-            label: 'Dataset 1',
-            data: [100, 200, 300, 400, 500],
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    const data: ChartData<'bar'> = {
+        labels: roles,
+        datasets: [
+            {
+                label: 'Actual Salary',
+                data: actualSalaries,
+                backgroundColor: '#4A7079', // Dark color
+                stack: 'salary',
+                borderRadius: {
+                    topLeft: 10,
+                    topRight: 10,
+                },
+                barThickness: 40,
+            },
+            {
+                label: 'Remaining Budget',
+                data: remainingSalaries,
+                backgroundColor: '#4A707933', // Light color
+                stack: 'salary',
+                borderRadius: {
+                    bottomLeft: 0,
+                    bottomRight: 0,
+                },
+                barThickness: 40,
+            },
+        ],
+    };
+
+    // Calculate highest total salary for scaling y-axis
+    const suggestedMaxY = Math.max(...totalSalaries) * 1.1;
+
+    const options: ChartOptions<'bar'> = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false,
+            },
+            tooltip: {
+                callbacks: {
+                    label: (context) => {
+                        const label = context.dataset.label || '';
+                        const value = context.raw as number;
+                        return `${label}: $${value}`;
+                    },
+                },
+            },
         },
-        {
-            label: 'Dataset 2',
-            data: [50, 100, 200, 300, 400],
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        scales: {
+            x: {
+                stacked: true,
+                grid: { display: false },
+                ticks: {
+                    color: '#4A7079',
+                    font: {
+                        family: 'sans-serif',
+                        size: 12,
+                    },
+                },
+            },
+            y: {
+                stacked: true,
+                beginAtZero: true,
+                suggestedMax: suggestedMaxY,
+                grid: { color: '#ccc' },
+                ticks: {
+                    color: '#4A7079',
+                    font: {
+                        family: 'sans-serif',
+                        size: 12,
+                    },
+                    callback: function (value) {
+                        return `$${value}`;
+                    },
+                },
+            },
         },
-    ],
+    };
+
+    return (
+        <div
+            style={{
+                width: '100%',
+                height: '100%',
+            }}
+        >
+            <Bar data={data} options={options} />
+        </div>
+    );
 };
-
-export function SalaryDetailCard() {
-    return <div className="w-full border border-[#4A7079] p-4 rounded-lg">
-        <h1 style={{ ...FONTS.table_head }} className='text-center m-2'>Salaries by Department</h1>
-        <Bar options={options} data={data} />
-    </div>
-
-}

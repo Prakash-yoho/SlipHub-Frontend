@@ -18,7 +18,7 @@ function Approutes() {
   const AuthRoutes = () => (
     <Routes>
       <Route path='/login' element={<Login />} />
-      <Route path='/verification' element={<Verify />} />
+      {/* <Route path='/verification' element={<Verify />} /> */}
       <Route path='*' element={<Navigate to='/login' />} />
     </Routes>
   );

@@ -1,4 +1,3 @@
-import { MoreVertical } from 'lucide-react'
 import { COLORS, FONTS } from '../../constants/uiconstants'
 
 const Employee = () => {
@@ -28,7 +27,7 @@ const Employee = () => {
               <th style={{ ...FONTS.table_head }} className="px-4 py-3">Designation</th>
               <th style={{ ...FONTS.table_head }} className="px-4 py-3">Email</th>
               <th style={{ ...FONTS.table_head }} className="px-4 py-3">CTC</th>
-              <th style={{ ...FONTS.table_head }} className="px-4 py-3 rounded-r-lg">Action</th>
+              {/* <th style={{ ...FONTS.table_head }} className="px-4 py-3 rounded-r-lg">Action</th> */}
             </tr>
           </thead>
 
@@ -45,7 +44,7 @@ const Employee = () => {
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3">Developer</td>
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3">kamal@gmail.com</td>
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3">800000</td>
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg"><MoreVertical className="w-5 h-5 cursor-pointer" /></td>
+                  {/* <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg"><MoreVertical className="w-5 h-5 cursor-pointer" /></td> */}
                 </tr>
               ))}
           </tbody>

@@ -91,11 +91,27 @@ export const FONTS = {
         fontWeight: 600,
         fontSize:'20px'
     },
-    inter: {
-        fontFamily: 'Inter',
-        fontStyle: 'normal',
+    nico_moji:{
+        fontFamily: "Nico Moji",
         fontWeight: 400,
-        fontOpticalSizing: 'auto',
+        fontSize:'96px'
+    },
+    login_head:{
+        fontFamily: "Montserrat",
+        fontWeight: 700,
+        fontSize:'42px'
+    },
+    login_input: {
+        fontFamily: 'Montserrat',
+        fontStyle: 'bold',
+        fontWeight: 400,
+        fontSize:'20px'
+    },
+    otp: {
+        fontFamily: 'Montserrat',
+        fontStyle: 'bold',
+        fontWeight: 400,
+        fontSize:'32px'
     },
     poppins: {
         fontFamily: 'Poppins',

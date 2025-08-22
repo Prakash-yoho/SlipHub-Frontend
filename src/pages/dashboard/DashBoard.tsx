@@ -6,7 +6,7 @@ import { FONTS } from "../../constants/uiconstants"
 
 const DashBoard = () => {
   return (
-    <div className="flex flex-col w-full p-4 h-[95vh]">
+    <div className="flex flex-col w-full p-4 h-[93vh] lg:overflow-y-scroll xl:overflow-hidden" style={{ scrollbarWidth: 'none' }} >
       <h1 style={{ ...FONTS.Main }}>Home</h1>
 
       <div className="flex flex-col h-[90vh] gap-5 w-full">
@@ -18,7 +18,7 @@ const DashBoard = () => {
             <DashBoardView />
           </div>
         </div>
-        <div className="grid grid-cols-2 w-full gap-5">
+        <div className="grid grid-cols-2 w-full gap-5 pb-6">
           <div className="w-full h-[350px] p-6 flex flex-col justify-center items-center bg-[#DDDED980] shadow-[0px_0px_15px_0px_#4A707966] rounded-2xl">
             <h1 className="!text-[#4A7079] !font-semibold w-full text-start p-2 -mt-5" style={{ ...FONTS.table_head }}>Salaries By Department</h1>
             <SalaryDetailCard

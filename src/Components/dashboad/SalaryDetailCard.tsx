@@ -112,7 +112,7 @@ export const SalaryDetailCard: React.FC<SalaryDetailCardProps> = ({
         <div
             style={{
                 width: '100%',
-                height: '100%',
+                height: '300px',
             }}
         >
             <Bar data={data} options={options} />

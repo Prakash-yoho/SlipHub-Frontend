@@ -109,7 +109,7 @@ const EmployeeByDpt: React.FC = () => {
         <div
             style={{
                 width: '100%',
-                height: `${chartHeight}px`,
+                height: '300px',
             }}
         >
             <Bar data={data} options={options} />

@@ -174,16 +174,16 @@
   position: absolute;
   /* margin: auto; */
   top: -3px;
-  right: 28%;
+  right: 27.7%;
   bottom: 0;
   /* left: 0; */
-  width: 51px;
-  height: 51px;
-  transform: rotate(200deg);
+  width: 50px;
+  height: 50px;
+  transform: rotate(-150deg);
   background-color: transparent;
   border-radius: 50%;
-  /* box-shadow: 25px 10px 0px 0px #F8F8F8;  */
-  box-shadow: 25px 10px 0px 0px red; 
+  box-shadow: 25px 10px 0px 0px #F8F8F8; 
+  /* box-shadow: 25px 10px 0px 0px red;  */
 }
 .moonleft{
   position: absolute;

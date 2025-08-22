@@ -1,14 +1,12 @@
-import React from 'react'
 import { COLORS, FONTS } from '../../constants/uiconstants'
 import DownloadIcon from '../../assets/Comman/Download.png'
-import { MoreVertical } from 'lucide-react'
 
 const Payroll = () => {
 
 
 
     return (
-        <div className='p-4'>
+        <div className=''>
             <h1 style={{ ...FONTS.payroll_mainhead }}>Payroll</h1>
             <div className=" bg-[#F8F8F8] flex items-start justify-center pt-4">
                 <div className="curved-notch-div h-full"> <div className='moon'></div> <div className='moonleft'></div></div>

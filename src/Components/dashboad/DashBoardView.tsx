@@ -4,19 +4,16 @@ import TotalsCard from './ui/TotalsCard'
 const DashBoardView: React.FC = () => {
 
     const data = [
-        "Total Hr",
-        "Total Departments",
-        "Total Employees",
-        "Total Payroll Slip",
-
-        "Total WFO Employees",
-        "Total WFH Employees",
-        "Total Salary",
-        "Crited Salary"
+        "Employees",
+        "Salary",
+        "Hr",
+        "Departments",
+        "WFO Employees",
+        "WFH Employees",
     ]
 
     return (
-        <div className='grid grid-cols-4 gap-8 h-36'>
+        <div className='grid grid-cols-2 gap-5 h-full'>
             {
                 data.map((title, index) => (
                     <div key={index}>

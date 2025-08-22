@@ -2,7 +2,7 @@ import { COLORS, FONTS } from '../../constants/uiconstants'
 
 const HrProfiles = () => {
     return (
-        <div className='py-6 px-8'>
+        <div className='py-6 '>
             <div className='flex justify-between items-center'>
                 <h1 style={{ ...FONTS.Main, color: COLORS.primary }}>Hr Profiles</h1>
                 <button style={{ ...FONTS.Main_btn, background: COLORS.primary }} className='text-[#FFFFFF] px-3 py-[4px] rounded-md'>Add HR</button>

@@ -9,7 +9,7 @@ function MainLayout() {
       <Navbar />
 
       {/* Main Page */}
-      <div className="">
+      <div className="scrollbar-hide">
         <Outlet />
       </div>
     </div>

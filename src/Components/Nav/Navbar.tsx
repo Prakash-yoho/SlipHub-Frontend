@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../../assets/Navbar/yohologo.png';
-import NotificationIcon from '../../assets/Navbar/notification.png';
+import NotificationIcon from '../../assets/Navbar/notification-bing.png';
+import ProfileIcon from '../../assets/Navbar/Mask group.png';
 import { FONTS } from '../../constants/uiconstants';
 
 const Navbar = () => {
@@ -80,11 +81,11 @@ const Navbar = () => {
 
         {/* Notification Icons */}
         <section className="flex items-center gap-6">
-          <div className="flex items-center justify-center cursor-pointer bg-[#4A7079] p-3 rounded-full">
-            <img src={NotificationIcon} alt="Notification" className="w-5 h-5" />
+          <div className="flex items-center justify-center cursor-pointer bg-[#4A7079] p-2 rounded-full">
+            <img src={NotificationIcon} alt="Notification" className="w-7 h-7" />
           </div>
-          <div className="flex items-center justify-center cursor-pointer bg-[#4A7079] p-3 rounded-full">
-            <img src={NotificationIcon} alt="Notification" className="w-5 h-5" />
+          <div className="flex items-center justify-center cursor-pointer bg-[#5A5A5A] p-2 rounded-full">
+            <img src={ProfileIcon} alt="Notification" className="w-7 h-7" />
           </div>
         </section>
       </div>

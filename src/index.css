@@ -200,3 +200,8 @@
   box-shadow: 25px 10px 0px 0px #F8F8F8; 
   /* box-shadow: 25px 10px 0px 0px red;  */
 }
+
+.clip-quarter-moon {
+    clip-path:  circle(60% at 30% 50%);
+    border-radius: 50%;
+  }

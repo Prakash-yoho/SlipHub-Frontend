@@ -4,13 +4,265 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./Slip.css">
+    <!-- <link rel="stylesheet" href="./Slip.css"> -->
+
+    <style>
+        * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    margin: 70px 180px 200px;
+}
+
+.overall {
+    /* background: red; */
+    min-height: 100vh;
+    border: 1px solid black;
+}
+
+.header {
+    padding: 15px;
+    border-bottom: 1px solid black;
+    display: flex;
+    position: relative;
+}
+
+.logo-img {
+    width: 150px;
+    position: absolute;
+}
+
+.header-content {
+    width: 100%;
+    text-align: center;
+}
+
+.pf-details {
+    padding: 50px 20px;
+    /* background-color: aqua; */
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 15px;
+}
+
+.pf-details section {
+    /* background-color: aqua; */
+    /* width: 300px; */
+    display: grid;
+    grid-template-columns: 40% 60%;
+    justify-content: space-between;
+}
+
+.pf-details section p:first-child {
+    font-weight: bold;
+}
+
+.pf-details section p {
+    text-align: start;
+}
+
+.pf-table {
+    height: 300px;
+    border-top: 1px solid black;
+}
+
+.salary-section {
+    margin-bottom: 20px;
+}
+
+.salary-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.salary-table td:last-child {
+    border-right: unset;
+}
+
+.salary-table th,
+.salary-table td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: left;
+    border-left: unset;
+}
+
+.salary-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    border-right: unset;
+}
+
+.amount-column {
+    text-align: right;
+    width: 120px;
+}
+
+.total-row {
+    font-weight: bold;
+    background-color: #f9f9f9;
+}
+
+.net-pay {
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+.footer-note {
+            text-align: center;
+            font-size: 12px;
+            font-style: italic;
+            /* margin-top: 20px; */
+        }
+
+        .remove-border{
+            border: unset !important
+        }
+
+        .remove-border-r{
+            border-right: unset !important
+        }
+    </style>
 </head>
-<body>
+<div>
+    <div class="container">
     <div class="overall">
         <div class="header">
-            <img src="../../src/assets/Navbar/yohologo.png" alt="">
+            <img src="../../src/assets/Navbar/yohologo.png" alt="logo" class="logo-img"/>
+
+            <div class="header-content">
+                <h1>Yoho Technologies Private Limited</h1>
+                <p>Pay Slip for the Month of April  2025</p>
+            </div>
         </div>
+
+        <div class="pf-details">
+            <section>
+                <p>Employee Code</p>
+                <p style="text-transform: uppercase;">yt0519</p>
+            </section>
+            <section >
+                <p>PF Account No</p>
+                <p>123456789</p>
+            </section>
+            <section>
+                <p>Employee Name</p>
+                <p>Kamal</p>
+            </section>
+            <section>
+                <p>Standard Days</p>
+                <p>30</p>
+            </section>
+            <section>
+                <p>Date of Joining</p>
+                <p>03/07/2023</p>
+            </section>
+            <section>
+                <p>Worked Days</p>
+                <p>30</p>
+            </section>
+            <section>
+                <p>Designation</p>
+                <p>Softwara Developer</p>
+            </section>
+            <section>
+                <p>Loss Of Pay</p>
+                <p>12</p>
+            </section>
+            <section>
+                <p>Location</p>
+                <p>Chennai</p>
+            </section>
+            <section>
+                <p>No Arrear Day</p>
+                <p>00</p>
+            </section>
+            <section>
+                <p>Level/Grade</p>
+                <p>C</p>
+            </section>
+            <section>
+                <p>Paid Days</p>
+                <p>18</p>
+            </section>
+        </div>
+
+        <div class="salary-section">
+            <table class="salary-table">
+                <thead>
+                    <tr>
+                        <th>Earnings</th>
+                        <th class="amount-column">Amount</th>
+                        <th>Deductions</th>
+                        <th class="amount-column">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>BASIC PAY</td>
+                        <td class="amount-column">3,672.00</td>
+                        <td>Provident Fund</td>
+                        <td class="amount-column">0.00</td>
+                    </tr>
+                    <tr>
+                        <td>HOUSE RENT ALLOWANCE</td>
+                        <td class="amount-column">1,836.00</td>
+                        <td>Medical Insurance</td>
+                        <td class="amount-column">0.00</td>
+                    </tr>
+                    <tr>
+                        <td>LEAVE TRAVEL ALLOWANCE</td>
+                        <td class="amount-column">972.00</td>
+                        <td>Professional Tax</td>
+                        <td class="amount-column">0.00</td>
+                    </tr>
+                    <tr>
+                        <td>SPECIAL ALLOWANCE</td>
+                        <td class="amount-column">1,404.00</td>
+                        <td class="remove-border"></td>
+                        <td class="amount-column remove-border"></td>
+                    </tr>
+                    <tr>
+                        <td>MEDICAL ALLOWANCE</td>
+                        <td class="amount-column">432.00</td>
+                        <td class="remove-border"></td>
+                        <td class="amount-column remove-border"></td>
+                    </tr>
+                    <tr>
+                        <td>PERFORMANCE ALLOWANCE</td>
+                        <td class="amount-column">1,620.00</td>
+                        <td class="remove-border"></td>
+                        <td class="amount-column remove-border"></td>
+                    </tr>
+                    <tr>
+                        <td>CONVEYANCE ALLOWANCE</td>
+                        <td class="amount-column">864.00</td>
+                        <td class="remove-border"></td>
+                        <td class="amount-column remove-border"></td>
+                    </tr>
+                    <tr class="total-row">
+                        <td class="remove-border-r">GROSS EARNINGS</td>
+                        <td class="amount-column ">10,800.00</td>
+                        <td>TOTAL DEDUCTIONS</td>
+                        <td class="amount-column">0.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+         <div class="net-pay">
+            Net Pay for the Month: ₹10,800.00 (Rupees Ten Thousand Eight Hundred Only)
+        </div>
+
     </div>
+    <div class="footer-note">
+        This is a computer generated document, hence no signature is required
+    </div>
+</div>
 </body>
 </html>

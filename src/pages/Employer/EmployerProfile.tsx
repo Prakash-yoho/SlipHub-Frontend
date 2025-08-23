@@ -8,27 +8,27 @@ import EmployerPrevSlip from '../../Components/employer/EmployerPrevSlip'
 const EmployerProfile:React.FC = () => {
     return (
         <div className="w-full h-full mt-5">
-            <h1 style={{ ...FONTS.Main }}>Employer</h1>
+            <h1 style={{ ...FONTS.Main,color:COLORS.primary }}>Employer</h1>
             <div
-                className="w-full h-[82vh] bg-cover rounded-4xl"
+                className="w-full h-[78vh] bg-cover rounded-4xl"
                 style={{ backgroundImage: `url(${bg})` }}
             >
                 <div className="flex flex-row w-full gap-5">
-                    <div className="flex flex-col w-8/12 gap-8">
-                        <div className="w-full h-20 flex flex-row rounded-4xl items-baseline gap-5 p-4">
+                    <div className="flex flex-col w-8/12">
+                        <div className="w-full h-20 flex rounded-4xl items-baseline">
                             <CalendarPicker />
                             <div className="bg-[#7697A0] w-max p-2 px-6 h-max rounded-lg font-bold text-white text-md">Generated</div>
                         </div>
-                        <div className="flex flex-col w-full h-[68vh] mx-4 rounded-3xl gap-5 p-4">
+                        <div className="flex flex-col w-full h-[66vh] mx-4 rounded-3xl gap-5 py-4">
                             <div className="w-full h-52 bg-[#EAEBE8] rounded-2xl">
                                 <EmployerPrevSlip />
                             </div>
 
-                            <div className="w-full h-96 bg-[#EAEBE8] rounded-2xl p-4 overflow-hidden">
-                                <h1 style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Previous PaySlips</h1>
+                            <div className="w-full h-96 bg-[#EAEBE8] rounded-2xl px-4 overflow-y-scroll scrollbar-hide">
+                                <h1 style={{ ...FONTS.payroll_head, color: COLORS.primary }} className='pt-4'>Previous PaySlips</h1>
 
                                 <div className="flex justify-between gap-6">
-                                    <div className="w-full max-h-80  overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
+                                    <div className="w-full max-h-80 " style={{ scrollbarWidth: 'none' }}>
                                         <table className="w-full border-separate border-spacing-y-4" >
                                             <thead className="sticky top-0">
                                                 <tr style={{ background: COLORS.primary }} className="text-left text-white rounded-lg">
@@ -58,8 +58,8 @@ const EmployerProfile:React.FC = () => {
 
                         </div>
                     </div>
-                    <div className="bg-[#EAEBE8] w-3/10 h-[78vh] m-4 rounded-3xl">
-                        <div className='w-full rounded-2xl p-3 overflow-scroll scrollbar-hide h-ful shadow-[0px_0px_15px_0px_#C3C7C64D]'>
+                    <div className="bg-[#EAEBE8] w-3/10 h-[73vh] m-4 rounded-3xl overflow-scroll scrollbar-hide">
+                        <div className='w-full rounded-2xl p-3  h-ful shadow-[0px_0px_15px_0px_#C3C7C64D]'>
                             <section className='flex gap-4 items-center mb-4'>
                                 <div className='bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center' style={{ ...FONTS.card_initial }}>K</div>
                                 <div className='grid gap-1'>

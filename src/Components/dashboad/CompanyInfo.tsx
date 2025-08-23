@@ -6,7 +6,7 @@ const CompanyInfo: React.FC = () => {
     return (
         <div className='w-full p-4 flex flex-col items-center gap-5' >
             <div className="flex flex-row w-full gap-10">
-                <div className='w-80 h-52 p-2 flex items-center'>
+                <div className='w-80 p-2 flex items-center'>
                     <img src={yoho} alt="" className=' object-cover w-full' />
                 </div>
                 <div className="grid grid-cols-2 gap-5 w-full">

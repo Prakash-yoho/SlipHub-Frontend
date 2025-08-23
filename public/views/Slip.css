@@ -1,0 +1,12 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.overall{
+    /* background: red; */
+    height: 100vh;
+    margin: 70px;
+    border: 1px solid black;
+}

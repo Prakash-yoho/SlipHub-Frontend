@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import { COLORS, FONTS } from '../../constants/uiconstants'
+import Form from '../../Components/form/Form';
 
 const HrProfiles = () => {
+     const [isModalOpen, setIsModalOpen] = useState(false);
     return (
         <div className='py-6 '>
             <div className='flex justify-between items-center'>
                 <h1 style={{ ...FONTS.Main, color: COLORS.primary }}>Hr Profiles</h1>
-                <button style={{ ...FONTS.Main_btn, background: COLORS.primary }} className='text-[#FFFFFF] px-3 py-[4px] rounded-md'>Add HR</button>
+                <button onClick={() => setIsModalOpen(true)} style={{ ...FONTS.Main_btn, background: COLORS.primary }} className='text-[#FFFFFF] px-3 py-[4px] rounded-md'>Add HR</button>
             </div>
 
             <div className='flex justify-between items-center mt-6'>
@@ -48,6 +51,9 @@ const HrProfiles = () => {
 
                     ))}
             </div>
+
+            {/* Modal Form */}
+      <Form isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </div>
     )
 }

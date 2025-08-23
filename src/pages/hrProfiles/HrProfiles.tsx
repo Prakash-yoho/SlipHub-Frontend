@@ -1,15 +1,19 @@
 import { useState } from 'react';
 import { COLORS, FONTS } from '../../constants/uiconstants'
 import Form from '../../Components/form/Form';
+import { DrawerForm } from '../../Components/HrProfile/HrProfile';
 
 const HrProfiles = () => {
-     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isOpen, setisOpen] = useState(false);
     return (
         <div className='py-6 '>
             <div className='flex justify-between items-center'>
                 <h1 style={{ ...FONTS.Main, color: COLORS.primary }}>Hr Profiles</h1>
                 <button onClick={() => setIsModalOpen(true)} style={{ ...FONTS.Main_btn, background: COLORS.primary }} className='text-[#FFFFFF] px-3 py-[4px] rounded-md'>Add HR</button>
             </div>
+
+            <DrawerForm isOpen={isOpen} setIsOpen={setisOpen} />
 
             <div className='flex justify-between items-center mt-6'>
                 <section className='flex gap-4'>
@@ -24,7 +28,7 @@ const HrProfiles = () => {
                 {Array(10)
                     .fill(null)
                     .map((_, index) => (
-                        <section className='shadow-[0px_0px_15px_0px_#4A707966] p-4 rounded-xl' style={{ background: COLORS.card_bg }}>
+                        <section key={index} className='shadow-[0px_0px_15px_0px_#4A707966] p-4 rounded-xl' style={{ background: COLORS.card_bg }}>
                             <div className='flex justify-between items-center'>
                                 <section className='flex gap-4 items-center mb-4'>
                                     <div className='bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center' style={{ ...FONTS.card_initial }}>K</div>
@@ -33,7 +37,7 @@ const HrProfiles = () => {
                                         <p style={{ ...FONTS.Nav }} className='uppercase text-[#5A5A5A]'>yt2505</p>
                                     </div>
                                 </section>
-                                <button style={{ ...FONTS.view_btn, background: COLORS.primary }} className='text-[#FFFFFF] px-3 py-[4px] rounded-md'>View</button>
+                                <button style={{ ...FONTS.view_btn, background: COLORS.primary }} onClick={() => setisOpen(true)} className='text-[#FFFFFF] px-3 py-[4px] rounded-md'>View</button>
                             </div>
 
                             <div className='text-[#7697A0] flex justify-between'>
@@ -52,8 +56,7 @@ const HrProfiles = () => {
                     ))}
             </div>
 
-            {/* Modal Form */}
-      <Form isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <Form isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </div>
     )
 }

@@ -3,9 +3,9 @@ import bg from '../../assets/Rectangle.png'
 import DownloadIcon from '../../assets/Comman/Download.png'
 import { COLORS, FONTS } from '../../constants/uiconstants'
 import CalendarPicker from '../../Components/ui/CalendarPicker'
-import EmployerPrevSlip from '../../Components/employer/employerPrevSlip'
+import EmployerPrevSlip from '../../Components/employer/EmployerPrevSlip'
 
-const EmployerProfile = () => {
+const EmployerProfile:React.FC = () => {
     return (
         <div className="w-full h-full mt-5">
             <h1 style={{ ...FONTS.Main }}>Employer</h1>

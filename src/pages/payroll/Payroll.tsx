@@ -18,7 +18,7 @@ const Payroll = () => {
                             {Array(10)
                                 .fill(null)
                                 .map((_, index) => (
-                                    <section className='bg-[#EAEBE8] w-full rounded-lg p-3 grid gap-3'>
+                                    <section key={index} className='bg-[#EAEBE8] w-full rounded-lg p-3 grid gap-3'>
                                         <p style={{ ...FONTS.table_data, color: COLORS.primary }}>Name : Kamal</p>
                                         <p style={{ ...FONTS.table_data, color: COLORS.primary }}>Designation : UI Designer</p>
                                     </section>
@@ -146,7 +146,7 @@ const Payroll = () => {
                                             {Array(10)
                                                 .fill(null)
                                                 .map((_, index) => (
-                                                    <tr style={{ color: COLORS.primary }} className='bg-[#EAEBE8]  rounded-lg'>
+                                                    <tr key={index} style={{ color: COLORS.primary }} className='bg-[#EAEBE8]  rounded-lg'>
                                                         <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">21-08-2025</td>
                                                         <td style={{ ...FONTS.table_data }} className="px-4 py-3">28</td>
                                                         <td style={{ ...FONTS.table_data }} className="px-4 py-3">20000</td>

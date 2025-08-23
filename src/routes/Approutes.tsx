@@ -4,7 +4,7 @@ import DashBoard from '../pages/dashboard/DashBoard';
 import Profile from '../pages/profile/Profile';
 import Login from '../pages/auth/Login';
 import HrProfiles from '../pages/hrProfiles/HrProfiles';
-import Verify from '../pages/auth/otp'
+// import Verify from '../pages/auth/otp'
 import { useAuth } from '../Components/auth/AuthContext';
 import Employee from '../pages/employee/Employee';
 import Department from '../pages/department/Department';

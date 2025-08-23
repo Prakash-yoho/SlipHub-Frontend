@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import Logo from '../../assets/Navbar/yohologo.png'
 import NavBg from '../../assets/Navbar/nav-bg.jpg'
-import { GetLocalStorage, RemoveLocalStorage, StoreLocalStorage } from '../../utils/localstorage';
+import { GetLocalStorage, RemoveLocalStorage} from '../../utils/localstorage';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../Components/auth/AuthContext';
 import { verifyOtp } from '../../features/Auth/service';

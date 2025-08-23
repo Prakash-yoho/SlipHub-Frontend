@@ -14,7 +14,7 @@ const DashBoardView: React.FC = () => {
     ]
 
     return (
-        <div className='grid grid-cols-2 gap-5 h-full bg-[#E3E4E0] shadow-[0px_0px_15px_0px_#4A707966] p-4'>
+        <div className='grid xl:grid-cols-2 lg:grid-cols-1 gap-5 h-full bg-[#E3E4E0] shadow-[0px_0px_15px_0px_#4A707966] p-4'>
             {
                 data.map((title, index) => (
                     <div key={index}>

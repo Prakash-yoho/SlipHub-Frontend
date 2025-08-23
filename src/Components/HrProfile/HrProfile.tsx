@@ -52,7 +52,7 @@ export const DrawerForm: React.FC<props> = ({ isOpen, setIsOpen }) => {
                                     ✕
                                 </div>
                             </div>
-                            <div className='w-full rounded-2xl overflow-scroll scrollbar-hide h-ful shadow-[0px_0px_15px_0px_#C3C7C64D]'>
+                            <div className='w-full rounded-2xl overflow-scroll scrollbar-hide h-ful shadow-[0px_0px_15px_0px_#C3C7C64D] p-2'>
                                 <section className='flex gap-4 items-center mb-4'>
                                     <div className='bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center' style={{ ...FONTS.card_initial }}>K</div>
                                     <div className='grid gap-1'>

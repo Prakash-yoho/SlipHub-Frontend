@@ -11,11 +11,11 @@ const TotalsCard: React.FC<props> = ({ title }) => {
             <div className="flex flex-col gap-5">
                 <div className='flex flex-row items-center gap-5 px-2'>
                     <div className="bg-[#4A7079] w-max h-max p-2 rounded-[50%]">
-                        <img src={title?.image} alt="" className='w-10 h-10' />
+                        <img src={title?.image} alt="" className='lg:w-5 lg:h-5 xl:w-5 xl:h-5' />
                     </div>
-                    <p style={{ ...FONTS.table_data }} className='text-[#4A7079] !font-bold'>{title?.name}</p>
+                    <p style={{ ...FONTS.table_data }} className='text-[#4A7079] !font-bold lg:!text-[16px] xl:!text-[16px]'>{title?.name}</p>
                 </div>
-                <p style={{ ...FONTS.table_head }} className='text-end -mt-5 px-4 !text-[26px] text-[#4A7079] font-bold'>{title?.value}</p>
+                <p style={{ ...FONTS.table_head }} className='text-end -mt-5 px-4 lg:!text-[22px] xl:!text-[26px] text-[#4A7079] font-bold'>{title?.value}</p>
             </div>
         </div>
     )

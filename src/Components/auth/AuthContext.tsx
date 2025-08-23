@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
 	createContext,
 	useContext,
@@ -27,7 +28,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		const token = GetLocalStorage('loginToken');
+		const token = GetLocalStorage('sh_tkn_a');
 		setIsAuthenticated(!!token);
 		setOtpIsAuthenticated(token ? false : true);
 		setIsLoading(false);
@@ -39,7 +40,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	};
 
 	const verifyOTP = (data: any) => {
-		StoreLocalStorage('loginToken', data);
+		StoreLocalStorage('sh_tkn_a', data);
 		// setOtpIsAuthenticated(true);
 		setIsAuthenticated(true);
 	}
@@ -50,7 +51,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	};
 
 	return (
-		<AuthContext.Provider value={{ isAuthenticated, isLoading,isOtpAuthenticated, login, logout,verifyOTP }}>
+		<AuthContext.Provider value={{ isAuthenticated, isLoading, isOtpAuthenticated, login, logout, verifyOTP }}>
 			{children}
 		</AuthContext.Provider>
 	);

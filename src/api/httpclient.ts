@@ -11,9 +11,9 @@ const Axios = axios.create({
 });
 
 Axios.interceptors.request.use((config: any) => {
-    const token = GetLocalStorage("AdminToken")
+    const token = GetLocalStorage("sh_tkn_a")
     if (token) {
-        config.headers["Authorization"] = `Token ${token}`
+        config.headers["Authorization"] = token
     }
     return config
 })
@@ -38,26 +38,26 @@ Axios.interceptors.response.use(
 
 class HttpClient {
     async get(url: string, params?: any) {
-        const reponse = Axios.get(url, { params });
-        return reponse;
+        const reponse = await Axios.get(url, { params });
+        return reponse.data;
     }
     async post(url: string, data: any, params?: any) {
-        const response = Axios.post(url, data, { params });
-        return response;
+        const response = await Axios.post(url, data, { params });
+        return response.data;
     }
     async put(url: string, data: any) {
-        const response = Axios.put(url, data);
-        return response;
+        const response = await Axios.put(url, data);
+        return response.data;
     }
     async delete(url: string) {
-        const response = Axios.delete(url);
-        return response;
+        const response = await Axios.delete(url);
+        return response.data;
     }
     async uploadFile(url: string, data: any) {
-        const response = Axios.post(url, data, {
+        const response = await Axios.post(url, data, {
             headers: { 'Content-Type': 'multipart/form-data' },
         });
-        return response;
+        return response.data;
     }
 }
 

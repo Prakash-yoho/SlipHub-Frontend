@@ -1,19 +1,144 @@
-import React, { useState } from "react";
+import React, { useState, type ChangeEvent, type FormEvent } from "react";
 import { COLORS, FONTS } from "../../constants/uiconstants";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../../store/store";
+import { CreateHrThunks } from "../../features/HrProfile/redux/thunks";
+import type { HrProfileType } from "../../Type/HrProfiles/Type";
+import type { EmployeeProfile } from "../../Type/Emp_profile/Type";
 
 interface FormProps {
   isOpen: boolean;
   onClose: () => void;
+  EmplopyEdit?: EmployeeProfile,
+  HrEdit?: HrProfileType
 }
 
-const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
+const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit }) => {
 
   const [preview, setPreview] = useState<string | null>(null)
+  const formType = "hr"
+  const [HrDetails, setHrDetails] = useState<HrProfileType>({
+    id: 0,
+    auth_id: "",
+    uuid: "",
+    emp_id: "",
+    first_name: "",
+    last_name: "",
+    department: [],
+    contact_info: {
+      email: "",
+      phone: "",
+      address: "",
+    },
+    join_date: "",
+    experience: "",
+    ctc: 0,
+    dob: "",
+    emg_contact: "",
+    father_name: "",
+    qualification: {
+      degree: "",
+      specialization: "",
+      year_of_completion: "",
+      percentage: "",
+    },
+    image: "",
+  });
+  const [EmployeeDetails, setEmployeeDetails] = useState<EmployeeProfile>({
+    id: 0,
+    auth_id: "",
+    uuid: "",
+    emp_id: "",
+    first_name: "",
+    last_name: "",
+    department: [],
+    contact_info: {
+      email: "",
+      phone: "",
+      address: "",
+    },
+    join_date: "",
+    experience: "",
+    ctc: 0,
+    dob: "",
+    emg_contact: "",
+    father_name: "",
+    qualification: {
+      degree: "",
+      specialization: "",
+      year_of_completion: "",
+      percentage: "",
+    },
+    image: "",
+  });
+  const dispatch = useDispatch<AppDispatch>()
+
   if (!isOpen) return null;
   const handleImageChange = (e: any) => {
     const file = e.target.files[0]
     if (file) {
       setPreview(URL.createObjectURL(file))
+    }
+  }
+
+  const handelsubmit = (e: FormEvent<HTMLFormElement>) => {
+    try {
+      e.preventDefault()
+      if (formType === 'hr') {
+        dispatch(CreateHrThunks(HrDetails))
+      } else if (formType === 'employee') {
+        // dispatch()
+      } else {
+        console.log("mention form type")
+      }
+    } catch (error) {
+      console.log(error, "error on hr added")
+    }
+  }
+
+  const handleChangeInput = (key: string, e: ChangeEvent<HTMLInputElement>) => {
+    try {
+      e.preventDefault()
+      const value = e.target.value
+      if (formType === "hr") {
+        setHrDetails((prev) => ({ ...prev, [key]: value }))
+      } else if (formType === "employee") {
+        setEmployeeDetails((prev) => ({ ...prev, [key]: value }))
+      } else {
+        console.log("change input error")
+      }
+    } catch (error) {
+      console.log(error, "change input error")
+    }
+  }
+  const handleContactInput = (key: string, e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    try {
+      e.preventDefault()
+      const value = e.target.value
+      if (formType === "hr") {
+        setHrDetails((prev) => ({ ...prev, contact_info: { ...prev?.contact_info, [key]: value } }))
+      } else if (formType === "employee") {
+        setEmployeeDetails((prev) => ({ ...prev, contact_info: { ...prev?.contact_info, [key]: value } }))
+      } else {
+        console.log("change input error")
+      }
+    } catch (error) {
+      console.log(error, "change input error")
+    }
+  }
+  const handleQualificationInput = (key: string, e: ChangeEvent<HTMLInputElement>) => {
+    try {
+      e.preventDefault()
+      const value = e.target.value
+      if (formType === "hr") {
+        setHrDetails((prev) => ({ ...prev, qualification: { ...prev.qualification, [key]: value } }))
+      } else if (formType === "employee") {
+        setEmployeeDetails((prev) => ({ ...prev, qualification: { ...prev.qualification, [key]: value } }))
+      } else {
+        console.log("change input error")
+      }
+    } catch (error) {
+      console.log(error, "change input error")
     }
   }
 
@@ -39,7 +164,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
 
         <div className="h-[1px] w-full my-4 bg-[#7697A066]"></div>
 
-        <form className="">
+        <form className="" onSubmit={(e) => handelsubmit(e)}>
 
           <section className="flex gap-4 items-center mb-4">
             <div className="bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center overflow-hidden">
@@ -89,9 +214,11 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                 <input
                   type="text"
                   name="FirstName"
+                  value={EmplopyEdit?.first_name || HrEdit?.first_name || undefined}
                   placeholder="Enter Your Name"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                  onChange={(e) => handleChangeInput('first_name', e)}
                 />
               </div>
 
@@ -106,9 +233,11 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                 <input
                   type="text"
                   name="LastName"
+                  value={EmplopyEdit?.last_name || HrEdit?.last_name || undefined}
                   placeholder="Enter Your Name"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                  onChange={(e) => handleChangeInput('last_name', e)}
                 />
               </div>
 
@@ -123,9 +252,11 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                 <input
                   type="text"
                   name="EmployeeID"
+                  value={EmplopyEdit?.emp_id || HrEdit?.emp_id || undefined}
                   placeholder="Enter EmployeeID"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                  onChange={(e) => handleChangeInput('emp_id', e)}
                 />
               </div>
 
@@ -143,6 +274,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                   placeholder="Enter Department"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                // onChange={(e) => handleChangeInput('department', e)}
                 />
               </div>
 
@@ -157,9 +289,11 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                 <input
                   type="text"
                   name="Email"
+                  value={EmplopyEdit?.contact_info?.email || HrEdit?.contact_info?.email || undefined}
                   placeholder="Enter Email"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                  onChange={(e) => handleContactInput('email', e)}
                 />
               </div>
 
@@ -174,9 +308,11 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                 <input
                   type="text"
                   name="Password"
+                  value={EmplopyEdit?.password || HrEdit?.password || undefined}
                   placeholder="Enter Password"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                  onChange={(e) => handleChangeInput('passward', e)}
                 />
               </div>
 
@@ -208,9 +344,11 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                 <input
                   type="text"
                   name="Contact"
+                  value={EmplopyEdit?.contact_info?.phone || HrEdit?.contact_info?.phone || undefined}
                   placeholder="Enter Contact"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                  onChange={(e) => handleContactInput('phone', e)}
                 />
               </div>
             </div>
@@ -233,9 +371,11 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                 <input
                   type="text"
                   name="JoinDate"
+                  value={EmplopyEdit?.join_date}
                   placeholder="Date of Joining"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                  onChange={(e) => handleChangeInput('join_date', e)}
                 />
               </div>
 
@@ -253,6 +393,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                   placeholder="Total Experience"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                  onChange={(e) => handleChangeInput('experience', e)}
                 />
               </div>
 
@@ -270,6 +411,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                   placeholder="Enter CTC"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                  onChange={(e) => handleChangeInput('ctc', e)}
                 />
               </div>
 
@@ -287,6 +429,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                   placeholder="Enter DOB"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                  onChange={(e) => handleChangeInput('dob', e)}
                 />
               </div>
 
@@ -304,6 +447,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                   placeholder="Enter Emergency COntact"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                  onChange={(e) => handleChangeInput('emg_contact', e)}
                 />
               </div>
 
@@ -321,6 +465,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                   placeholder="Enter Father's Name"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                  onChange={(e) => handleChangeInput('father_name', e)}
                 />
               </div>
 
@@ -338,6 +483,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                 placeholder="Enter Address"
                 className="border border-[#4A7079] h-20 rounded-md px-3 py-2 outline-0 w-full resize-none"
                 required
+                onChange={(e) => handleContactInput('address', e)}
               />
             </div>
 
@@ -365,6 +511,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                   placeholder="Enter Degree"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                  onChange={(e) => handleQualificationInput("degree", e)}
                 />
               </div>
 
@@ -382,6 +529,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                   placeholder="Total Specialization"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                  onChange={(e) => handleQualificationInput("specialization", e)}
                 />
               </div>
 
@@ -399,6 +547,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                   placeholder="Enter Year Of Completion"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                  onChange={(e) => handleQualificationInput("year_of_completion", e)}
                 />
               </div>
 
@@ -416,6 +565,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
                   placeholder="Enter Percentage"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                  onChange={(e) => handleQualificationInput("percentage", e)}
                 />
               </div>
 
@@ -423,8 +573,8 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose }) => {
           </section>
 
           <div className='  rounded-lg flex gap-3 justify-end items-center mt-4'>
-            <button className='bg-[#4A70790D] border border-[#4A7079] px-6 py-1 rounded-md' style={{ ...FONTS.view_btn, color: COLORS.primary }}>Cancel</button>
-            <button className='bg-[#4A7079] border border-[#4A7079] text-[#FFFFFF] px-6 py-1 rounded-md' style={{ ...FONTS.view_btn }}>Delete</button>
+            <button type="button" className='bg-[#4A70790D] border border-[#4A7079] px-6 py-1 rounded-md' onClick={onClose} style={{ ...FONTS.view_btn, color: COLORS.primary }}>Cancel</button>
+            <button type="submit" className='bg-[#4A7079] border border-[#4A7079] text-[#FFFFFF] px-6 py-1 rounded-md' style={{ ...FONTS.view_btn }}>submit</button>
           </div>
 
         </form>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useRef, useState } from 'react'
 import NavBg from '../../assets/Navbar/Login.png'
 import GroupImg from '../../assets/Navbar/Group.png'
@@ -31,8 +32,8 @@ const Login = () => {
 
         try {
             const response = await Signin(params);
-            const token = response?.data?.data?.token;
-            const otp = response?.data?.data?.otp;
+            const token = response?.data?.token;
+            const otp = response?.data?.otp;
 
             if (token) {
                 StoreLocalStorage("token", token);
@@ -100,17 +101,17 @@ const Login = () => {
 
         try {
             const response = await verifyOtp(data);
-            if (response?.data?.status) {
+            if (response?.status) {
                 RemoveLocalStorage('token');
                 RemoveLocalStorage('otp');
-                verifyOTP(response?.data?.data?.token)
+                verifyOTP(response?.data?.token)
                 navigate("/")
                 toast.success("OTP Verified Successfully!");
             } else {
-                toast.error(response?.data?.message || "Invalid OTP");
+                toast.error(response?.message || "Invalid OTP");
             }
-        } catch (error) {
-            toast.error("Something went wrong. Try again.");
+        } catch (err: any) {
+            toast.error("Something went wrong. Try again.", err);
         }
     };
     return (
@@ -193,7 +194,7 @@ const Login = () => {
 
                     </div>
 
-                    <div style={{...FONTS.otp,color:COLORS.primary}} className="flex w-full justify-center gap-3 sm:gap-7 my-5">
+                    <div style={{ ...FONTS.otp, color: COLORS.primary }} className="flex w-full justify-center gap-3 sm:gap-7 my-5">
                         {otpInput.map((digit, index) => (
                             <input
                                 key={index}
@@ -219,7 +220,7 @@ const Login = () => {
                         >
                             Verify
                         </button>
-                        <p style={{...FONTS.table_data,color:COLORS.primary}} className="text-white text-sm sm:text-base md:text-lg font-medium cursor-pointer">
+                        <p style={{ ...FONTS.table_data, color: COLORS.primary }} className="text-white text-sm sm:text-base md:text-lg font-medium cursor-pointer">
                             Resend OTP
                         </p>
                     </div>

@@ -1,24 +1,28 @@
 // DrawerForm.tsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { COLORS, FONTS } from '../../constants/uiconstants';
+import edit from '../../assets/edit.png'
 
-export const DrawerForm: React.FC = () => {
-    const [isOpen, setIsOpen] = useState(false);
+interface props {
+    isOpen: boolean;
+    setIsOpen: (data: boolean) => void;
+}
 
-    const openDrawer = () => setIsOpen(true);
+export const DrawerForm: React.FC<props> = ({ isOpen, setIsOpen }) => {
+
+    // const openDrawer = () => setIsOpen(true);
     const closeDrawer = () => setIsOpen(false);
 
     return (
         <>
-            {/* Trigger Button */}
-            <button
+            {/* <button
                 onClick={openDrawer}
                 className="px-4 py-2 bg-teal-700 text-white rounded hover:bg-teal-800 transition"
             >
                 View
-            </button>
+            </button> */}
 
-            {/* AnimatePresence handles mount/unmount animation */}
             <AnimatePresence>
                 {isOpen && (
                     <>
@@ -37,19 +41,111 @@ export const DrawerForm: React.FC = () => {
                             animate={{ x: 0 }}
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                            className="fixed top-0 right-0 w-full max-w-md h-full bg-white shadow-xl z-50 flex flex-col p-6"
+                            className="fixed top-0 right-0 w-full max-w-md h-full bg-[#EAEBE8] shadow-xl z-50 flex flex-col p-6"
                         >
                             <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-xl font-semibold text-teal-700">Salary Detail Form</h2>
-                                <button
+                                <h2 className="text-4xl font-semibold text-teal-700">Profile</h2>
+                                <div
                                     onClick={closeDrawer}
-                                    className="text-gray-500 hover:text-gray-700 transition"
+                                    className="transition bg-[#4A7079] rounded-[50%] text-xl px-3 text-white p-2"
                                 >
                                     ✕
-                                </button>
+                                </div>
+                            </div>
+                            <div className='w-full rounded-2xl overflow-scroll scrollbar-hide h-ful shadow-[0px_0px_15px_0px_#C3C7C64D]'>
+                                <section className='flex gap-4 items-center mb-4'>
+                                    <div className='bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center' style={{ ...FONTS.card_initial }}>K</div>
+                                    <div className='grid gap-1'>
+                                        <h1 style={{ ...FONTS.payroll_profileHead, color: COLORS.primary }} className='!font-bold !text-2xl'>Kamal</h1>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Software Delopment HR</p>
+                                    </div>
+                                    <div className='flex flex-row bg-[#7697A0] py-2  w-max gap-2 h-10 text-xl items-center rounded-lg text-white px-3'>
+                                        <img src={edit} alt="" className='w-5 h-5' />
+                                        <p>Edit</p>
+                                    </div>
+                                </section>
+
+                                <div className='border border-[#C3C7C6] mb-4'></div>
+
+                                <section className='my-4'>
+                                    <h1 style={{ ...FONTS.payroll_Head, color: COLORS.primary }} className='!text-2xl'>Basic Info</h1>
+                                    <div className='flex justify-between gap-4 mt-2'>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Emp ID</p>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }} className='uppercase'>yt2505</p>
+                                    </div>
+                                    <div className='flex justify-between gap-4 mt-1'>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Designation</p>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>HR</p>
+                                    </div>
+                                    <div className='flex justify-between gap-4 mt-1'>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>CTC</p>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>12,000</p>
+                                    </div>
+                                    <div className='flex justify-between gap-4 mt-1'>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Department</p>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Designer</p>
+                                    </div>
+                                    <div className='flex justify-between gap-4 mt-1'>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Email</p>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Kamal@endhiran.com</p>
+                                    </div>
+                                    <div className='flex justify-between gap-4 mt-1'>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Mobile</p>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>98765544322</p>
+                                    </div>
+                                    <div className='flex justify-between gap-4 mt-1'>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Work Mode</p>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>WFO</p>
+                                    </div>
+                                </section>
+
+                                <div className='border border-[#C3C7C6]'></div>
+
+
+                                <section className='my-4'>
+                                    <h1 style={{ ...FONTS.payroll_Head, color: COLORS.primary }} className='!text-2xl'>Qualification</h1>
+                                    <div className='flex justify-between gap-4 mt-2'>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Degree</p>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }} className='uppercase'>B. Tech</p>
+                                    </div>
+                                    <div className='flex justify-between gap-4 mt-1'>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Specialzation</p>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Computer Science</p>
+                                    </div>
+                                    <div className='flex justify-between gap-4 mt-1'>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Computer Science</p>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>2024</p>
+                                    </div>
+                                    <div className='flex justify-between gap-4 mt-1'>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Percentage</p>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>85%</p>
+                                    </div>
+                                </section>
+
+                                <div className='border border-[#C3C7C6]'></div>
+
+
+                                <section className='my-4'>
+                                    <h1 style={{ ...FONTS.payroll_Head, color: COLORS.primary }} className='!text-2xl'>Personal Information</h1>
+                                    <div className='flex justify-between gap-4 mt-2'>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Date of Birth</p>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }} className='uppercase'>30-2-2026</p>
+                                    </div>
+                                    <div className='flex justify-between gap-4 mt-1'>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Father's Name</p>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Rasini Endhiran</p>
+                                    </div>
+                                    <div className='flex justify-between gap-4 mt-1'>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Address</p>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Chennai</p>
+                                    </div>
+                                </section>
                             </div>
 
-                            {/* Form */}
+
+
+
+                            {/*             
                             <form className="flex flex-col gap-4 flex-grow">
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700">Role</label>
@@ -86,7 +182,7 @@ export const DrawerForm: React.FC = () => {
                                         Submit
                                     </button>
                                 </div>
-                            </form>
+                            </form> */}
                         </motion.div>
                     </>
                 )}

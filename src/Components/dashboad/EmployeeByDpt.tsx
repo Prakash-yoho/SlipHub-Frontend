@@ -15,12 +15,12 @@ import { FONTS } from '../../constants/uiconstants';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-// Mock labels and data
+
 const labels = ['Software Developer', 'Project Manager', 'Designer', 'QA Engineer'];
 const employeeCounts = [65, 25, 40, 15];
 
-const heightPerBar = 400;
-const chartHeight = labels.length * heightPerBar;
+// const heightPerBar = 400;
+// const chartHeight = labels.length * heightPerBar;
 
 const data: ChartData<'bar'> = {
     labels,

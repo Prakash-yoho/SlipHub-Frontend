@@ -20,7 +20,7 @@ function Approutes() {
     <Routes>
       <Route path='/' element={<Login />} />
       {/* <Route path='/verification' element={<Verify />} /> */}
-      {/* <Route path='*' element={<Navigate to='/login' />} /> */}
+      <Route path='*' element={<Navigate to='/' />} />
     </Routes>
   );
 

@@ -20,5 +20,8 @@ export const API_ENDPOINTS = {
     department: {
         create: "/api/department/create",
         getAll: "/api/department/all"
+    },
+    common: {
+        getdpt: "/api/common/department/all"
     }
 }

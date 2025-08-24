@@ -2,6 +2,7 @@
 import httpClient from './httpclient';
 import { API_ENDPOINTS } from './endpoints';
 import type { HrProfileType } from '../Type/HrProfiles/Type';
+import type { EmployeeProfile } from '../Type/Emp_profile/Type';
 
 class Client {
 	auth = {
@@ -18,6 +19,13 @@ class Client {
 		create: (data: HrProfileType) => httpClient.post(API_ENDPOINTS.hr.create, data),
 		update: (data: HrProfileType, params: string) => httpClient.put(API_ENDPOINTS.hr.update.replace(":uuid", params), data),
 		delete: (params: string) => httpClient.delete(API_ENDPOINTS.hr.delete.replace(":uuid", params))
+	}
+	employee = {
+		getall: () => httpClient.get(API_ENDPOINTS.employee.getAll),
+		create: (data: EmployeeProfile) => httpClient.post(API_ENDPOINTS.employee.create, data),
+	}
+	common = {
+		getdpt: () => httpClient.get(API_ENDPOINTS.common.getdpt)
 	}
 }
 export default new Client();

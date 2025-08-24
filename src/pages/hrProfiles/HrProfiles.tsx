@@ -68,7 +68,7 @@ const HrProfiles = () => {
                 ))}
             </div>
 
-            <Form isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <Form isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} formType='hr' />
         </div>
     )
 }

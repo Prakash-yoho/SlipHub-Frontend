@@ -31,7 +31,7 @@ function Approutes() {
         <Route path='/hrProfiles' element={<HrProfiles />} />
         <Route path='/department' element={<Department />} />
         <Route path='/employee' element={<Employee />} />
-        <Route path='/employer' element={<EmployerProfile />} />
+        <Route path='/employee/:uuid' element={<EmployerProfile />} />
         <Route path='/payroll' element={<Payroll />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='*' element={<Navigate to='/' />} />

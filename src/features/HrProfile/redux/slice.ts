@@ -16,7 +16,7 @@ const hrprofile: HrProfileType = {
     },
     join_date: "",
     experience: "",
-    ctc: "",
+    ctc: 0,
     dob: "",
     emg_contact: "",
     father_name: "",
@@ -24,7 +24,7 @@ const hrprofile: HrProfileType = {
         degree: "",
         specialization: "",
         year_of_completion: "",
-        perscentage: ""
+        percentage: ""
     },
     pf_active: false,
     image: "",
@@ -40,13 +40,25 @@ const HrSlice = createSlice({
         getHrDetails: (state, action) => {
             state.data = action.payload
         },
-        addHrProfile: (state, action: PayloadAction<HrProfileType>) => {
-            state.data = [...state.data, action.payload]
-        },
+        addAndUpdateHrProfile: (state, action: PayloadAction<HrProfileType>) => {
+            const data = action.payload
 
+            const index = state.data.findIndex((item: HrProfileType) => item.uuid === data.uuid)
+
+            if (index !== -1) {
+                state.data[index] = data
+            } else {
+                state.data.unshift(data)
+            }
+        },
+        deleteHrDetails: (state, action: PayloadAction<string>) => {
+            const data = action.payload
+            const index = state.data.findIndex((item: HrProfileType) => item.uuid === data)
+            state.data.splice(index, 1)
+        },
     },
 })
 
 
-export const { addHrProfile, getHrDetails } = HrSlice.actions
+export const { addAndUpdateHrProfile, getHrDetails, deleteHrDetails } = HrSlice.actions
 export default HrSlice.reducer

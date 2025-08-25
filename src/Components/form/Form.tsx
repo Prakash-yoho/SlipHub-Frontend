@@ -1,80 +1,90 @@
-import React, { useState, type ChangeEvent, type FormEvent } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { COLORS, FONTS } from "../../constants/uiconstants";
-import { useDispatch } from "react-redux";
-import type { AppDispatch } from "../../store/store";
-import { CreateHrThunks } from "../../features/HrProfile/redux/thunks";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../store/store";
+import { CreateHrThunks, UpdateHrThunks } from "../../features/HrProfile/redux/thunks";
 import type { HrProfileType } from "../../Type/HrProfiles/Type";
 import type { EmployeeProfile } from "../../Type/Emp_profile/Type";
+import { CreateEmployeeThunks } from "../../features/EmployeeProfile/redux/thunks";
+import { GetFormDepartmentThunks } from "../../features/common/redux/thunks";
 
 interface FormProps {
   isOpen: boolean;
   onClose: () => void;
   EmplopyEdit?: EmployeeProfile,
-  HrEdit?: HrProfileType
+  HrEdit?: HrProfileType;
+  formType: "hr" | "employee";
 }
 
-const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit }) => {
+const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formType }) => {
 
+  const dispatch = useDispatch<AppDispatch>()
   const [preview, setPreview] = useState<string | null>(null)
-  const formType = "hr"
+
+  const departmentData = useSelector((state: RootState) => state.common.department)
+  const [selectedDepartments, setSelectedDepartments] = useState<string[]>([]);
+  const [empDpt, setempDpt] = useState<string | undefined>(undefined);
+  const [dptDate, setdptDate] = useState<string[]>([]);
+  const [isOpenDpt, setIsOpenDpt] = useState(false);
+
+  useEffect(() => {
+    dispatch(GetFormDepartmentThunks())
+  }, [dispatch]);
+
+
   const [HrDetails, setHrDetails] = useState<HrProfileType>({
-    id: 0,
-    auth_id: "",
-    uuid: "",
-    emp_id: "",
-    first_name: "",
-    last_name: "",
-    department: [],
+    emp_id: HrEdit?.emp_id || "",
+    first_name: HrEdit?.first_name || "",
+    last_name: HrEdit?.last_name || "",
+    department: HrEdit?.department || [],
     contact_info: {
-      email: "",
-      phone: "",
-      address: "",
+      email: HrEdit?.contact_info?.email || "",
+      phone: HrEdit?.contact_info?.phone || "",
+      address: HrEdit?.contact_info?.address || "",
     },
-    join_date: "",
-    experience: "",
-    ctc: 0,
-    dob: "",
-    emg_contact: "",
-    father_name: "",
+    join_date: HrEdit?.join_date || "",
+    experience: HrEdit?.experience || "",
+    ctc: HrEdit?.ctc || 0,
+    dob: HrEdit?.dob || "",
+    emg_contact: HrEdit?.emg_contact || "",
+    father_name: HrEdit?.father_name || "",
     qualification: {
-      degree: "",
-      specialization: "",
-      year_of_completion: "",
-      percentage: "",
+      degree: HrEdit?.qualification?.degree || "",
+      specialization: HrEdit?.qualification?.specialization || "",
+      year_of_completion: HrEdit?.qualification?.year_of_completion || "",
+      percentage: HrEdit?.qualification?.percentage || "",
     },
-    image: "",
+    image: HrEdit?.image || "",
   });
   const [EmployeeDetails, setEmployeeDetails] = useState<EmployeeProfile>({
-    id: 0,
-    auth_id: "",
-    uuid: "",
-    emp_id: "",
-    first_name: "",
-    last_name: "",
-    department: [],
+    emp_id: EmplopyEdit?.emp_id || "",
+    first_name: EmplopyEdit?.first_name || "",
+    last_name: EmplopyEdit?.last_name || "",
+    department: EmplopyEdit?.department || "",
     contact_info: {
-      email: "",
-      phone: "",
-      address: "",
+      email: EmplopyEdit?.contact_info?.email || "",
+      phone: EmplopyEdit?.contact_info?.phone || "",
+      address: EmplopyEdit?.contact_info?.address || "",
     },
-    join_date: "",
-    experience: "",
-    ctc: 0,
-    dob: "",
-    emg_contact: "",
-    father_name: "",
+    join_date: EmplopyEdit?.join_date || "",
+    experience: EmplopyEdit?.experience || "",
+    ctc: EmplopyEdit?.ctc || 0,
+    dob: EmplopyEdit?.dob || "",
+    emg_contact: EmplopyEdit?.emg_contact || "",
+    father_name: EmplopyEdit?.father_name || "",
     qualification: {
-      degree: "",
-      specialization: "",
-      year_of_completion: "",
-      percentage: "",
+      degree: EmplopyEdit?.qualification?.degree || "",
+      specialization: EmplopyEdit?.qualification?.specialization || "",
+      year_of_completion: EmplopyEdit?.qualification?.year_of_completion || "",
+      percentage: EmplopyEdit?.qualification?.percentage || "",
     },
-    image: "",
+    image: EmplopyEdit?.image || "",
   });
-  const dispatch = useDispatch<AppDispatch>()
 
   if (!isOpen) return null;
   const handleImageChange = (e: any) => {
+    e.preventDefault()
     const file = e.target.files[0]
     if (file) {
       setPreview(URL.createObjectURL(file))
@@ -85,9 +95,19 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit }) => 
     try {
       e.preventDefault()
       if (formType === 'hr') {
-        dispatch(CreateHrThunks(HrDetails))
+        HrDetails.department = dptDate
+        if (HrEdit) {
+          dispatch(UpdateHrThunks(HrDetails, HrDetails?.uuid || ""))
+        } else {
+          dispatch(CreateHrThunks(HrDetails))
+        }
+        setSelectedDepartments([])
       } else if (formType === 'employee') {
-        // dispatch()
+        if (EmplopyEdit) {
+          console.log("under developement")
+        } else {
+          dispatch(CreateEmployeeThunks(EmployeeDetails))
+        }
       } else {
         console.log("mention form type")
       }
@@ -116,9 +136,9 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit }) => 
       e.preventDefault()
       const value = e.target.value
       if (formType === "hr") {
-        setHrDetails((prev) => ({ ...prev, contact_info: { ...prev?.contact_info, [key]: value } }))
+        setHrDetails((prev: HrProfileType) => ({ ...prev, contact_info: { ...prev?.contact_info, [key]: value } }))
       } else if (formType === "employee") {
-        setEmployeeDetails((prev) => ({ ...prev, contact_info: { ...prev?.contact_info, [key]: value } }))
+        setEmployeeDetails((prev: EmployeeProfile) => ({ ...prev, contact_info: { ...prev?.contact_info, [key]: value } }))
       } else {
         console.log("change input error")
       }
@@ -141,6 +161,21 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit }) => 
       console.log(error, "change input error")
     }
   }
+
+  const handleDepartmentChange = (data: string, name: string) => {
+    if (selectedDepartments.includes(name)) {
+      const find = selectedDepartments.findIndex((item: any) => item == name)
+      return selectedDepartments.splice(find, 1)
+    }
+    if (selectedDepartments.includes(data)) {
+      const find = selectedDepartments.findIndex((item: any) => item == data)
+      return dptDate.splice(find, 1)
+    }
+    const vls = [...dptDate, data]
+    const values = [...selectedDepartments, name];
+    setSelectedDepartments(values);
+    setdptDate(vls)
+  };
 
   return (
     <div className="fixed inset-0 bg-black/50 bg-opacity-50  flex items-center justify-center z-50">
@@ -185,7 +220,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit }) => 
                 id="imageUpload"
                 accept="image/*"
                 className="hidden"
-                onChange={handleImageChange}
+                onChange={(e) => handleImageChange(e)}
               />
 
               {/* Label as Button */}
@@ -261,22 +296,112 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit }) => 
               </div>
 
 
-              <div className="">
-                <p
-                  style={{ ...FONTS.payroll_head, color: COLORS.primary }}
-                  className="pb-1"
-                >
-                  Department
-                </p>
-                <input
-                  type="text"
-                  name="Department"
-                  placeholder="Enter Department"
-                  className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
-                  required
-                // onChange={(e) => handleChangeInput('department', e)}
-                />
-              </div>
+              {
+                formType === "hr" &&
+                <div className="w-full">
+                  <p
+                    style={{ ...FONTS.payroll_head, color: COLORS.primary }}
+                    className="pb-3"
+                  >
+                    Department
+                  </p>
+
+                  <div className="relative">
+                    <div
+                      onClick={() => setIsOpenDpt(!isOpenDpt)}
+                      className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full flex justify-between items-center"                    >
+                      <span className="font-medium">
+                        {selectedDepartments.map((item) => `${item}`).join(', ')}
+                      </span>
+                      <svg
+                        className={`w-4 h-4 transition-transform ${isOpenDpt ? "rotate-180" : ""
+                          }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </div>
+
+                    {isOpenDpt && (
+                      <div className="absolute top-full h-[40vh] overflow-scroll scrollbar-hide left-0 right-0 mt-2 bg-gray-100 rounded-lg p-2 shadow-lg z-10">
+                        {departmentData.map((option: any, index) => (
+                          <button
+                            type="button"
+                            key={index}
+                            onClick={() => handleDepartmentChange(option?._id, option?.dpt_name)}
+                            className="w-full text-left px-4 py-3 mb-2 last:mb-0 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300 text-gray-700 transition-colors"
+                          >
+                            {option?.dpt_name}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              }
+
+              {
+                formType === "employee" &&
+                <div className="w-full">
+                  <p
+                    style={{ ...FONTS.payroll_head, color: COLORS.primary }}
+                    className="pb-3"
+                  >
+                    Department
+                  </p>
+
+                  <div className="relative">
+                    <div
+                      onClick={() => setIsOpenDpt(!isOpenDpt)}
+                      className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full flex justify-between items-center"                    >
+                      <span className="font-medium">
+                        {empDpt ? empDpt : "selecte Department"}
+                      </span>
+                      <svg
+                        className={`w-4 h-4 transition-transform ${isOpenDpt ? "rotate-180" : ""
+                          }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </div>
+
+                    {isOpenDpt && (
+                      <div className="absolute top-full h-[40vh] overflow-scroll scrollbar-hide left-0 right-0 mt-2 bg-gray-100 rounded-lg p-2 shadow-lg z-10">
+                        {departmentData.map((option: any, index) => (
+                          <button
+                            type="button"
+                            key={index}
+                            onClick={() => {
+                              setempDpt(option?.dpt_name)
+                              setEmployeeDetails((prev) => ({ ...prev, department: option?._id }))
+                              setIsOpenDpt(false)
+                            }}
+                            className="w-full text-left px-4 py-3 mb-2 last:mb-0 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300 text-gray-700 transition-colors"
+                          >
+                            {option?.dpt_name}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              }
+
 
 
               <div className="">
@@ -312,7 +437,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit }) => 
                   placeholder="Enter Password"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
-                  onChange={(e) => handleChangeInput('passward', e)}
+                  onChange={(e) => handleChangeInput('password', e)}
                 />
               </div>
 
@@ -322,14 +447,15 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit }) => 
                   style={{ ...FONTS.payroll_head, color: COLORS.primary }}
                   className="pb-1"
                 >
-                  BloodGroup
+                  Role
                 </p>
                 <input
                   type="text"
-                  name="BloodGroup"
-                  placeholder="Enter BloodGroup"
+                  name="Role"
+                  placeholder="Enter Role"
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   required
+                  onChange={(e) => handleChangeInput('emp_role', e)}
                 />
               </div>
 

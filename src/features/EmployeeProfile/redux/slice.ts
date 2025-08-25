@@ -1,21 +1,34 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import type { EmployeeProfile } from "../../../Type/Emp_profile/Type"
 
-const employeeAll: EmployeeProfile[] = []
+const data: EmployeeProfile[] = []
 
 const employeeSlice = createSlice({
     name: "employeeSlice",
-    initialState: { employeeAll },
+    initialState: { data },
     reducers: {
         getAllemployee: (state, action) => {
-            state.employeeAll = action.payload
+            state.data = action.payload
         },
-        addEmployee: (state, action: PayloadAction<EmployeeProfile>) => {
-            state.employeeAll = [...state.employeeAll, action.payload]
+        addAndUpdateEmployee: (state, action: PayloadAction<EmployeeProfile>) => {
+            const data = action.payload
+
+            const index = state.data.findIndex((item: EmployeeProfile) => item.uuid === data.uuid)
+
+            if (index !== -1) {
+                state.data[index] = data
+            } else {
+                state.data.unshift(data)
+            }
+        },
+        deleteEmployeeDetails: (state, action: PayloadAction<string>) => {
+            const data = action.payload
+            const index = state.data.findIndex((item: EmployeeProfile) => item.uuid === data)
+            state.data.splice(index, 1)
         },
     }
 })
 
-export const { getAllemployee, addEmployee } = employeeSlice.actions
+export const { getAllemployee, addAndUpdateEmployee, deleteEmployeeDetails } = employeeSlice.actions
 
 export default employeeSlice.reducer

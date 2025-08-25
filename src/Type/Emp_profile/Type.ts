@@ -1,4 +1,5 @@
 export type EmployeeProfile = {
+    id?: number,
     uuid?: string,
     auth_id?: string,
     emp_id?: string,
@@ -7,14 +8,11 @@ export type EmployeeProfile = {
     contact_info?: {
         email?: string,
         phone?: string,
-        address1?: string,
-        address2?: string,
-        city?: string,
-        state?: string,
-        region?: string,
+        address?: string,
     },
     department?: any,
     emp_role?: string,
+    experience?: string,
     payroll_slip?: any[],
     ctc?: number,
     qualification?: {
@@ -26,6 +24,8 @@ export type EmployeeProfile = {
     join_date?: string,
     pf_active?: boolean,
     dob?: string,
+    emg_contact?: string,
+    father_name?: string,
     work_mode?: string,
     lpa?: number,
     image?: string,

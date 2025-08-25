@@ -1,12 +1,34 @@
+import { useDispatch, useSelector } from 'react-redux'
 import { COLORS, FONTS } from '../../constants/uiconstants'
+import type { AppDispatch, RootState } from '../../store/store'
+import { useEffect, useState } from 'react'
+import { GetAllEmployeeThunks } from '../../features/EmployeeProfile/redux/thunks'
+import type { EmployeeProfile } from '../../Type/Emp_profile/Type'
+import Form from '../../Components/form/Form'
+import { useNavigate } from 'react-router-dom'
 
 const Employee = () => {
+
+  const [isOpen, setisOpen] = useState(false);
+  const navigate = useNavigate()
+  const dispatch = useDispatch<AppDispatch>()
+  const employies: EmployeeProfile[] = useSelector((state: RootState) => state.empolyee.data)
+
+  useEffect(() => {
+    dispatch(GetAllEmployeeThunks())
+  }, [dispatch]);
+
+  function onclose() {
+    setisOpen(false)
+  }
   return (
     <div className='py-6 px-8 h-screen'>
       <div className='flex justify-between items-center'>
         <h1 style={{ ...FONTS.Main, color: COLORS.primary }}>Employee Profiles</h1>
-        <button style={{ ...FONTS.Main_btn, background: COLORS.primary }} className='text-[#FFFFFF] px-3 py-[4px] rounded-md'>Add Employee</button>
+        <button onClick={() => setisOpen(true)} style={{ ...FONTS.Main_btn, background: COLORS.primary }} className='text-[#FFFFFF] px-3 py-[4px] rounded-md'>Add Employee</button>
       </div>
+
+      <Form isOpen={isOpen} onClose={onclose} formType='employee' />
 
       <div className='flex justify-between items-center mt-6'>
         <section className='flex gap-4'>
@@ -33,20 +55,17 @@ const Employee = () => {
 
           <tbody className='overflow-y-scroll'>
 
-            {Array(10)
-              .fill(null)
-              .map((_, index) => (
-                <tr style={{ color: COLORS.primary }} className='bg-[#DDDED980] rounded-lg'>
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">{index}</td>
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3">Kamal</td>
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3 uppercase">yt2505</td>
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3">20-8-2025</td>
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3">Developer</td>
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3">kamal@gmail.com</td>
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3">800000</td>
-                  {/* <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg"><MoreVertical className="w-5 h-5 cursor-pointer" /></td> */}
-                </tr>
-              ))}
+            {employies.map((items: EmployeeProfile, index) => (
+              <tr style={{ color: COLORS.primary }} className='bg-[#DDDED980] rounded-lg cursor-pointer' onClick={() => navigate('/employee/34567')}>
+                <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">{index + 1}</td>
+                <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.first_name + ' ' + items?.last_name}</td>
+                <td style={{ ...FONTS.table_data }} className="px-4 py-3 uppercase">{items?.emp_id}</td>
+                <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.join_date}</td>
+                <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.emp_role}</td>
+                <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.contact_info?.email}</td>
+                <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.ctc}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

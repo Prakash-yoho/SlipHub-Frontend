@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import hrstore from '../features/HrProfile/redux/slice'
 import empolyee from '../features/EmployeeProfile/redux/slice'
 import common from '../features/common/redux/slice'
+import payroll from '../features/payroll/redux/slice'
 
 const store = configureStore({
 	reducer: {
 		hrstore,
 		empolyee,
 		common,
+		payroll
 	},
 })
 

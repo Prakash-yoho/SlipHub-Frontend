@@ -15,7 +15,7 @@ class Client {
 	};
 	hr = {
 		getall: () => httpClient.get(API_ENDPOINTS.hr.getAll),
-		// getOne:(params:string)=>httpClient.get(API_ENDPOINTS.hr.)
+		getOne: (params: string) => httpClient.get(API_ENDPOINTS.hr.getone.replace(":uuid", params)),
 		create: (data: HrProfileType) => httpClient.post(API_ENDPOINTS.hr.create, data),
 		update: (data: HrProfileType, params: string) => httpClient.put(API_ENDPOINTS.hr.update.replace(":uuid", params), data),
 		delete: (params: string) => httpClient.delete(API_ENDPOINTS.hr.delete.replace(":uuid", params))
@@ -23,14 +23,19 @@ class Client {
 
 	department = {
 		getall: () => httpClient.get(API_ENDPOINTS.department.getAll),
-		create: (data:any) => httpClient.post(API_ENDPOINTS.department.create, data),
+		create: (data: any) => httpClient.post(API_ENDPOINTS.department.create, data),
 	}
 	employee = {
 		getall: () => httpClient.get(API_ENDPOINTS.employee.getAll),
 		create: (data: EmployeeProfile) => httpClient.post(API_ENDPOINTS.employee.create, data),
+		getone: (params: string) => httpClient.get(API_ENDPOINTS.employee.getById.replace(":uuid", params)),
 	}
 	common = {
 		getdpt: () => httpClient.get(API_ENDPOINTS.common.getdpt)
+	}
+	payroll = {
+		create: (data: any) => httpClient.post(API_ENDPOINTS.payroll.create, data),
+		getemp: () => httpClient.get(API_ENDPOINTS.payroll.getemp)
 	}
 }
 export default new Client();

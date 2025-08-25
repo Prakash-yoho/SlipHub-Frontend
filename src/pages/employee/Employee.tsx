@@ -56,7 +56,7 @@ const Employee = () => {
           <tbody className='overflow-y-scroll'>
 
             {employies.map((items: EmployeeProfile, index) => (
-              <tr style={{ color: COLORS.primary }} className='bg-[#DDDED980] rounded-lg cursor-pointer' onClick={() => navigate('/employee/34567')}>
+              <tr style={{ color: COLORS.primary }} className='bg-[#DDDED980] rounded-lg cursor-pointer' onClick={() => navigate(`/employee/${items?.uuid}`)}>
                 <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">{index + 1}</td>
                 <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.first_name + ' ' + items?.last_name}</td>
                 <td style={{ ...FONTS.table_data }} className="px-4 py-3 uppercase">{items?.emp_id}</td>

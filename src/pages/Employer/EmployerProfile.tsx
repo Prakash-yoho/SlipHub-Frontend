@@ -1,20 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import bg from '../../assets/Rectangle.png'
 import DownloadIcon from '../../assets/Comman/Download.png'
 import { COLORS, FONTS } from '../../constants/uiconstants'
 import CalendarPicker from '../../Components/ui/CalendarPicker'
 import EmployerPrevSlip from '../../Components/employer/EmployerPrevSlip'
 import html2pdf from "html2pdf.js"
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import type { AppDispatch, RootState } from '../../store/store'
+import { getOneemployeeThunks } from '../../features/EmployeeProfile/redux/thunks'
 
 const EmployerProfile: React.FC = () => {
+
+    const { uuid } = useParams()
+    const dispatch = useDispatch<AppDispatch>()
+
+    const employer = useSelector((state: RootState) => state.empolyee.selectedEmployee)
 
     const handeldownload = () => {
         // html2pdf
     }
 
+    useEffect(() => {
+        dispatch(getOneemployeeThunks(uuid ?? ""))
+    }, [dispatch, uuid]);
+
     return (
         <div className="w-full h-full mt-5">
-            <h1 style={{ ...FONTS.Main, color: COLORS.primary }}>Employer</h1>
+            <h1 style={{ ...FONTS.Main, color: COLORS.primary }}>Employer, {employer?.first_name + ' ' + employer?.last_name}</h1>
             <div
                 className="w-full h-[78vh] bg-cover rounded-4xl"
                 style={{ backgroundImage: `url(${bg})` }}
@@ -27,7 +40,7 @@ const EmployerProfile: React.FC = () => {
                         </div>
                         <div className="flex flex-col w-full h-[66vh] mx-4 rounded-3xl gap-5 py-4">
                             <div className="w-full h-52 bg-[#EAEBE8] rounded-2xl">
-                                <EmployerPrevSlip />
+                                <EmployerPrevSlip payslip={employer?.payroll_slip?.[-1]} />
                             </div>
 
                             <div className="w-full h-96 bg-[#EAEBE8] rounded-2xl px-4 overflow-y-scroll scrollbar-hide">
@@ -46,16 +59,22 @@ const EmployerProfile: React.FC = () => {
                                             </thead>
 
                                             <tbody>
-                                                {Array(20).fill(null).map((_, index) => (
+                                                {employer?.payroll_slip?.length && employer?.payroll_slip?.length < 0 ? employer?.payroll_slip?.map((items, index) => (
                                                     <tr key={index} style={{ color: COLORS.primary }} className="bg-[#EAEBE8] rounded-lg">
-                                                        <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">21-08-2025</td>
-                                                        <td style={{ ...FONTS.table_data }} className="px-4 py-3">28</td>
-                                                        <td style={{ ...FONTS.table_data }} className="px-4 py-3">20000</td>
+                                                        <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">{items?.created_month}</td>
+                                                        <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.paid_days}</td>
+                                                        <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.gross_total}</td>
                                                         <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg">
                                                             <img src={DownloadIcon} alt="" className="w-[25px] h-[25px]" />
                                                         </td>
                                                     </tr>
-                                                ))}
+                                                )) :
+                                                    <tr>
+                                                        <td></td>
+                                                        <td className='text-center'>No Slip Founded</td>
+                                                        <td></td>
+                                                    </tr>
+                                                }
                                             </tbody>
                                         </table>
                                     </div>
@@ -69,8 +88,8 @@ const EmployerProfile: React.FC = () => {
                             <section className='flex gap-4 items-center mb-4'>
                                 <div className='bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center' style={{ ...FONTS.card_initial }}>K</div>
                                 <div className='grid gap-1'>
-                                    <h1 style={{ ...FONTS.payroll_profileHead, color: COLORS.primary }}>Name : Kamal</h1>
-                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Software Delopment</p>
+                                    <h1 style={{ ...FONTS.payroll_profileHead, color: COLORS.primary }}>Name : {employer?.first_name + ' ' + employer?.last_name}</h1>
+                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.department?.dpt_name}</p>
                                 </div>
                             </section>
 
@@ -80,23 +99,23 @@ const EmployerProfile: React.FC = () => {
                                 <h1 style={{ ...FONTS.payroll_Head, color: COLORS.primary }}>Basic Info</h1>
                                 <div className='flex justify-between gap-4 mt-2'>
                                     <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Emp ID</p>
-                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }} className='uppercase'>yt2505</p>
+                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }} className='uppercase'>{employer?.emp_id}</p>
                                 </div>
                                 <div className='flex justify-between gap-4 mt-1'>
                                     <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Designation</p>
-                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>UI Developer</p>
+                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.emp_role}</p>
                                 </div>
                                 <div className='flex justify-between gap-4 mt-1'>
                                     <p style={{ ...FONTS.Nav, color: COLORS.primary }}>CTC</p>
-                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>12,000</p>
+                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.ctc}</p>
                                 </div>
                                 <div className='flex justify-between gap-4 mt-1'>
                                     <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Department</p>
-                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Designer</p>
+                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.department?.dpt_name}</p>
                                 </div>
                                 <div className='flex justify-between gap-4 mt-1'>
                                     <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Work Mode</p>
-                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>WFO</p>
+                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.work_mode}</p>
                                 </div>
                             </section>
 
@@ -107,23 +126,23 @@ const EmployerProfile: React.FC = () => {
                                 <h1 style={{ ...FONTS.payroll_Head, color: COLORS.primary }}>Personal Information</h1>
                                 <div className='flex justify-between gap-4 mt-2'>
                                     <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Date of Birth</p>
-                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }} className='uppercase'>30-2-2026</p>
+                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }} className='uppercase'>{employer?.dob}</p>
                                 </div>
                                 <div className='flex justify-between gap-4 mt-1'>
                                     <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Father's Name</p>
-                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Rasini Endhiran</p>
+                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.father_name}</p>
                                 </div>
                                 <div className='flex justify-between gap-4 mt-1'>
                                     <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Email</p>
-                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Kamal@endhiran.com</p>
+                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.contact_info?.email}</p>
                                 </div>
                                 <div className='flex justify-between gap-4 mt-1'>
                                     <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Mobile</p>
-                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>98765544322</p>
+                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.contact_info?.phone}</p>
                                 </div>
                                 <div className='flex justify-between gap-4 mt-1'>
                                     <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Address</p>
-                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Chennai</p>
+                                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.contact_info?.address}</p>
                                 </div>
                             </section>
                         </div>

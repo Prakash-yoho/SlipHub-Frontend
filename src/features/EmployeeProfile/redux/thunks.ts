@@ -1,7 +1,7 @@
 import type { AppDispatch } from "../../../store/store"
 import type { EmployeeProfile } from "../../../Type/Emp_profile/Type"
-import { CreateEmployeeService, GetAllEmployeeService } from "../service"
-import { addAndUpdateEmployee, getAllemployee } from "./slice"
+import { CreateEmployeeService, GetAllEmployeeService, GetEmployeeByUUIDService } from "../service"
+import { addAndUpdateEmployee, getAllemployee, getOneemployee } from "./slice"
 
 export const GetAllEmployeeThunks = () => async (dispatch: AppDispatch) => {
     try {
@@ -16,6 +16,15 @@ export const CreateEmployeeThunks = (data: EmployeeProfile) => async (dispatch: 
     try {
         await CreateEmployeeService(data)
         dispatch(addAndUpdateEmployee(data))
+    } catch (error) {
+        console.log(error, "employee thunks")
+    }
+}
+
+export const getOneemployeeThunks = (params: string) => async (dispatch: AppDispatch) => {
+    try {
+        const response = await GetEmployeeByUUIDService(params)
+        dispatch(getOneemployee(response.data))
     } catch (error) {
         console.log(error, "employee thunks")
     }

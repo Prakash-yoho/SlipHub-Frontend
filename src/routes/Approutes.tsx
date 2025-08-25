@@ -10,6 +10,7 @@ import Employee from '../pages/employee/Employee';
 import Department from '../pages/department/Department';
 import Payroll from '../pages/payroll/Payroll';
 import EmployerProfile from '../pages/Employer/EmployerProfile';
+import { GetLocalStorage } from '../utils/localstorage';
 
 function Approutes() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -17,6 +18,7 @@ function Approutes() {
   if (isLoading) return null;
 
   //  const chk = GetLocalStorage.
+  const role = GetLocalStorage('role')
 
   const AuthRoutes = () => (
     <Routes>
@@ -29,7 +31,7 @@ function Approutes() {
     <Routes>
 
       <Route path='/' element={<MainLayout />}>
-        <Route index element={<DashBoard />} />
+        {role === "employee" ? <Route index element={<EmployerProfile />} /> : <Route index element={<DashBoard />} />}
         <Route path='/hrProfiles' element={<HrProfiles />} />
         <Route path='/department' element={<Department />} />
         <Route path='/employee' element={<Employee />} />

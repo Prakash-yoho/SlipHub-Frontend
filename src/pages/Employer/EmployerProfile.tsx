@@ -4,11 +4,11 @@ import DownloadIcon from '../../assets/Comman/Download.png'
 import { COLORS, FONTS } from '../../constants/uiconstants'
 import CalendarPicker from '../../Components/ui/CalendarPicker'
 import EmployerPrevSlip from '../../Components/employer/EmployerPrevSlip'
-import html2pdf from "html2pdf.js"
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import type { AppDispatch, RootState } from '../../store/store'
 import { getOneemployeeThunks } from '../../features/EmployeeProfile/redux/thunks'
+import CompanyInfo from '../../Components/dashboad/CompanyInfo'
 
 const EmployerProfile: React.FC = () => {
 
@@ -17,19 +17,19 @@ const EmployerProfile: React.FC = () => {
 
     const employer = useSelector((state: RootState) => state.empolyee.selectedEmployee)
 
-    const handeldownload = () => {
-        // html2pdf
-    }
 
     useEffect(() => {
         dispatch(getOneemployeeThunks(uuid ?? ""))
     }, [dispatch, uuid]);
 
     return (
+        <div className='overflow-y-scroll h-full scrollbar-hide'>
+
+        <CompanyInfo/>
+
         <div className="w-full h-full mt-5">
-            <h1 style={{ ...FONTS.Main, color: COLORS.primary }}>Employer, {employer?.first_name + ' ' + employer?.last_name}</h1>
             <div
-                className="w-full h-[78vh] bg-cover rounded-4xl"
+                className="w-full h-[87vh] bg-cover rounded-4xl"
                 style={{ backgroundImage: `url(${bg})` }}
             >
                 <div className="flex flex-row w-full gap-5">
@@ -38,7 +38,7 @@ const EmployerProfile: React.FC = () => {
                             <CalendarPicker />
                             <div className="bg-[#7697A0] w-max p-2 px-6 h-max rounded-lg font-bold text-white text-md">Generated</div>
                         </div>
-                        <div className="flex flex-col w-full h-[66vh] mx-4 rounded-3xl gap-5 py-4">
+                        <div className="flex flex-col w-full h-[75vh] mx-4 rounded-3xl gap-5 py-4">
                             <div className="w-full h-52 bg-[#EAEBE8] rounded-2xl">
                                 <EmployerPrevSlip payslip={employer?.payroll_slip?.[-1]} />
                             </div>
@@ -83,7 +83,7 @@ const EmployerProfile: React.FC = () => {
 
                         </div>
                     </div>
-                    <div className="bg-[#EAEBE8] w-3/10 h-[73vh] m-4 rounded-3xl overflow-scroll scrollbar-hide">
+                    <div className="bg-[#EAEBE8] w-3/10 h-[82.3vh] m-4 rounded-3xl overflow-scroll scrollbar-hide">
                         <div className='w-full rounded-2xl p-3  h-ful shadow-[0px_0px_15px_0px_#C3C7C64D]'>
                             <section className='flex gap-4 items-center mb-4'>
                                 <div className='bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center' style={{ ...FONTS.card_initial }}>K</div>
@@ -149,6 +149,8 @@ const EmployerProfile: React.FC = () => {
                     </div>
                 </div>
             </div>
+        </div>
+
         </div>
     )
 }

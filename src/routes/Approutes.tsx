@@ -19,6 +19,7 @@ function Approutes() {
   if (isLoading) return null;
 
 //  const chk = GetLocalStorage.
+const role = GetLocalStorage('role')
 
   const AuthRoutes = () => (
     <Routes>
@@ -31,7 +32,7 @@ function Approutes() {
     <Routes>
 
       <Route path='/' element={<MainLayout />}>
-        <Route index element={<DashBoard />} />
+        {role ==="employee"?<Route index element={<EmployerProfile />} />:<Route index element={<DashBoard />} />}
         <Route path='/hrProfiles' element={<HrProfiles />} />
         <Route path='/department' element={<Department />} />
         <Route path='/employee' element={<Employee />} />

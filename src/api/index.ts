@@ -18,6 +18,11 @@ class Client {
 		create: (data: HrProfileType) => httpClient.post(API_ENDPOINTS.hr.create, data),
 		update: (data: HrProfileType, params: string) => httpClient.put(API_ENDPOINTS.hr.update.replace(":uuid", params), data),
 		delete: (params: string) => httpClient.delete(API_ENDPOINTS.hr.delete.replace(":uuid", params))
+	};
+
+	department = {
+		getall: () => httpClient.get(API_ENDPOINTS.department.getAll),
+		create: (data:any) => httpClient.post(API_ENDPOINTS.department.create, data),
 	}
 }
 export default new Client();

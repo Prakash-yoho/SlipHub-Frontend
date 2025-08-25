@@ -4,9 +4,11 @@ import Logo from '../../assets/Navbar/yohologo.png';
 import NotificationIcon from '../../assets/Navbar/notification-bing.png';
 import ProfileIcon from '../../assets/Navbar/Mask group.png';
 import { FONTS } from '../../constants/uiconstants';
-import { ClearLocalStorage } from '../../utils/localstorage';
+import { ClearLocalStorage, GetLocalStorage } from '../../utils/localstorage';
 
 const Navbar: React.FC = () => {
+
+  const role = GetLocalStorage('role')
 
   const logout = ()=>{
     ClearLocalStorage()
@@ -18,6 +20,7 @@ const Navbar: React.FC = () => {
       <div className="flex items-center gap-8">
 
         <nav className="flex items-center gap-3 p-[1px] bg-[#4A7079] rounded-lg *:p-2 *:px-6 *:border *:border-transparent">
+          {(role==="admin"|| role==="hr")  &&
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -30,6 +33,9 @@ const Navbar: React.FC = () => {
           >
             Dashboard
           </NavLink>
+}
+
+          {role==="admin"  &&
           <NavLink
             to="/hrProfiles"
             className={({ isActive }) =>
@@ -42,6 +48,9 @@ const Navbar: React.FC = () => {
           >
             HR
           </NavLink>
+}
+
+          {role==="hr"  &&
           <NavLink
             to="/employee"
             className={({ isActive }) =>
@@ -54,6 +63,9 @@ const Navbar: React.FC = () => {
           >
             Employee
           </NavLink>
+}
+
+          {role==="admin"||role==="hr"  &&
           <NavLink
             to="/payroll"
             className={({ isActive }) =>
@@ -66,6 +78,9 @@ const Navbar: React.FC = () => {
           >
             Payroll
           </NavLink>
+}
+
+          {role==="admin"  &&
           <NavLink
             to="/department"
             className={({ isActive }) =>
@@ -78,6 +93,8 @@ const Navbar: React.FC = () => {
           >
             Department
           </NavLink>
+}
+
           {/* <NavLink
             to="/employer"
             className={({ isActive }) =>

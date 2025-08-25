@@ -9,3 +9,7 @@ export const GetAllEmployeeService = async () => {
 export const CreateEmployeeService = async (data: EmployeeProfile) => {
     await Client.employee.create(data)
 }
+
+export const UpdateEmployeeService = async (data: EmployeeProfile, params: string) => {
+    // await Client.employee.
+}

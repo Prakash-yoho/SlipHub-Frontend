@@ -53,7 +53,7 @@ const HrProfiles = () => {
                         </div>
 
                         <div className='text-[#7697A0] flex justify-between'>
-                            <p style={{ ...FONTS.card_role }}>{hrdata?.department}</p>
+                            <p style={{ ...FONTS.card_role }}>{hrdata?.department?.[0]?.dpt_name}</p>
                             <span className='w-[2px] bg-[#C3C7C6]'></span>
                             <p style={{ ...FONTS.card_role }}>{hrdata?.contact_info?.email}</p>
                         </div>
@@ -64,7 +64,6 @@ const HrProfiles = () => {
                             <p className='bg-[#E0E0E0] p-2 rounded-lg font-semibold' style={{ ...FONTS.card_detail, color: COLORS.primary }}>Current CTC : {hrdata?.ctc}</p>
                         </div>
                     </section>
-
                 ))}
             </div>
 

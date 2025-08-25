@@ -3,7 +3,7 @@ import React, { useEffect, useState, type ChangeEvent, type FormEvent } from "re
 import { COLORS, FONTS } from "../../constants/uiconstants";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
-import { CreateHrThunks } from "../../features/HrProfile/redux/thunks";
+import { CreateHrThunks, UpdateHrThunks } from "../../features/HrProfile/redux/thunks";
 import type { HrProfileType } from "../../Type/HrProfiles/Type";
 import type { EmployeeProfile } from "../../Type/Emp_profile/Type";
 import { CreateEmployeeThunks } from "../../features/EmployeeProfile/redux/thunks";
@@ -34,52 +34,52 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
 
 
   const [HrDetails, setHrDetails] = useState<HrProfileType>({
-    emp_id: "",
-    first_name: "",
-    last_name: "",
-    department: [],
+    emp_id: HrEdit?.emp_id || "",
+    first_name: HrEdit?.first_name || "",
+    last_name: HrEdit?.last_name || "",
+    department: HrEdit?.department || [],
     contact_info: {
-      email: "",
-      phone: "",
-      address: "",
+      email: HrEdit?.contact_info?.email || "",
+      phone: HrEdit?.contact_info?.phone || "",
+      address: HrEdit?.contact_info?.address || "",
     },
-    join_date: "",
-    experience: "",
-    ctc: 0,
-    dob: "",
-    emg_contact: "",
-    father_name: "",
+    join_date: HrEdit?.join_date || "",
+    experience: HrEdit?.experience || "",
+    ctc: HrEdit?.ctc || 0,
+    dob: HrEdit?.dob || "",
+    emg_contact: HrEdit?.emg_contact || "",
+    father_name: HrEdit?.father_name || "",
     qualification: {
-      degree: "",
-      specialization: "",
-      year_of_completion: "",
-      percentage: "",
+      degree: HrEdit?.qualification?.degree || "",
+      specialization: HrEdit?.qualification?.specialization || "",
+      year_of_completion: HrEdit?.qualification?.year_of_completion || "",
+      percentage: HrEdit?.qualification?.percentage || "",
     },
-    image: "",
+    image: HrEdit?.image || "",
   });
   const [EmployeeDetails, setEmployeeDetails] = useState<EmployeeProfile>({
-    emp_id: "",
-    first_name: "",
-    last_name: "",
-    department: "",
+    emp_id: EmplopyEdit?.emp_id || "",
+    first_name: EmplopyEdit?.first_name || "",
+    last_name: EmplopyEdit?.last_name || "",
+    department: EmplopyEdit?.department || "",
     contact_info: {
-      email: "",
-      phone: "",
-      address: "",
+      email: EmplopyEdit?.contact_info?.email || "",
+      phone: EmplopyEdit?.contact_info?.phone || "",
+      address: EmplopyEdit?.contact_info?.address || "",
     },
-    join_date: "",
-    experience: "",
-    ctc: 0,
-    dob: "",
-    emg_contact: "",
-    father_name: "",
+    join_date: EmplopyEdit?.join_date || "",
+    experience: EmplopyEdit?.experience || "",
+    ctc: EmplopyEdit?.ctc || 0,
+    dob: EmplopyEdit?.dob || "",
+    emg_contact: EmplopyEdit?.emg_contact || "",
+    father_name: EmplopyEdit?.father_name || "",
     qualification: {
-      degree: "",
-      specialization: "",
-      year_of_completion: "",
-      percentage: "",
+      degree: EmplopyEdit?.qualification?.degree || "",
+      specialization: EmplopyEdit?.qualification?.specialization || "",
+      year_of_completion: EmplopyEdit?.qualification?.year_of_completion || "",
+      percentage: EmplopyEdit?.qualification?.percentage || "",
     },
-    image: "",
+    image: EmplopyEdit?.image || "",
   });
 
   if (!isOpen) return null;
@@ -96,10 +96,18 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
       e.preventDefault()
       if (formType === 'hr') {
         HrDetails.department = dptDate
-        dispatch(CreateHrThunks(HrDetails))
+        if (HrEdit) {
+          dispatch(UpdateHrThunks(HrDetails, HrDetails?.uuid || ""))
+        } else {
+          dispatch(CreateHrThunks(HrDetails))
+        }
         setSelectedDepartments([])
       } else if (formType === 'employee') {
-        dispatch(CreateEmployeeThunks(EmployeeDetails))
+        if (EmplopyEdit) {
+          console.log("under developement")
+        } else {
+          dispatch(CreateEmployeeThunks(EmployeeDetails))
+        }
       } else {
         console.log("mention form type")
       }

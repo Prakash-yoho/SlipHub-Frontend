@@ -9,3 +9,7 @@ export const HrGetAll = async () => {
 export const CreateHrService = async (data: HrProfileType) => {
     await Client.hr.create(data)
 }
+
+export const UpdateHrService = async (data: HrProfileType, params: string) => {
+    await Client.hr.update(data, params)
+}

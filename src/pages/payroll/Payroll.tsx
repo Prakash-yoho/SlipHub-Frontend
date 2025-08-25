@@ -1,12 +1,13 @@
 import BgImg from '../../assets/Comman/Rectangle 1.png'
 import { COLORS, FONTS } from '../../constants/uiconstants';
 import DownloadIcon from '../../assets/Comman/Download.png'
+import CalendarPicker from '../../Components/ui/CalendarPicker';
 
 
 const Payroll = () => {
     return (
         <div>
-            <h1 style={{ ...FONTS.Main,color:COLORS.primary }} className='p-2'>Payroll</h1>
+            <h1 style={{ ...FONTS.Main, color: COLORS.primary }} className='p-2'>Payroll</h1>
 
             <div
                 className="h-[78vh] w-full bg-cover rounded-2xl"
@@ -36,7 +37,7 @@ const Payroll = () => {
                         <input type="text" style={{ ...FONTS.Nav, color: COLORS.primary }} placeholder='Search' className='bg-[#4A70790D] absolute w-[94%] m-auto z-99 -top-3 p-3 px-4 border border-[#4A7079] outline-0 rounded-3xl' />
 
                         <div className=' h-[62vh] rounded-lg overflow-y-scroll scrollbar-hide'>
-                            <div className='bg-[#E2E2DE] shadow-0px_0px_15px_0px_[#C3C7C64D] rounded-2xl p-3'>
+                            {/* <div className='bg-[#E2E2DE] shadow-0px_0px_15px_0px_[#C3C7C64D] rounded-2xl p-3'>
                                 <div className='flex justify-between'>
                                     <h1 style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Current Month Slip</h1>
                                     <img src={DownloadIcon} alt="" className='w-[25px] h-[25px]' />
@@ -52,7 +53,7 @@ const Payroll = () => {
                                         <p style={{ ...FONTS.Nav, color: COLORS.primary }}>10</p>
                                     </section>
                                 </div>
-                            </div>
+                            </div> */}
 
 
 
@@ -84,7 +85,7 @@ const Payroll = () => {
                                         min="0"
                                         className="bg-[#EAEBE8] px-3 py-2 rounded-lg w-full border border-[#4A7079] outline-0
                                         [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                                        placeholder="No of Absent"
+                                        placeholder="Loss Of Pay"
                                         onKeyDown={(e) => {
                                             if (["e", "E", "+", "-", "."].includes(e.key)) {
                                                 e.preventDefault();
@@ -98,7 +99,7 @@ const Payroll = () => {
                                         min="0"
                                         className="bg-[#EAEBE8] px-3 py-2 rounded-lg w-full border border-[#4A7079] outline-0
                                         [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                                        placeholder="No of Absent"
+                                        placeholder="No of Arrear Day"
                                         onKeyDown={(e) => {
                                             if (["e", "E", "+", "-", "."].includes(e.key)) {
                                                 e.preventDefault();
@@ -112,7 +113,7 @@ const Payroll = () => {
                                         min="0"
                                         className="bg-[#EAEBE8] px-3 py-2 rounded-lg w-full border border-[#4A7079] outline-0
                                         [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                                        placeholder="No of Absent"
+                                        placeholder="Paid Days"
                                         onKeyDown={(e) => {
                                             if (["e", "E", "+", "-", "."].includes(e.key)) {
                                                 e.preventDefault();
@@ -122,11 +123,16 @@ const Payroll = () => {
                                     />
 
                                 </div>
+                                <div className='grid grid-cols-2'>
+                                    <CalendarPicker />
 
-                                <div className='  rounded-lg flex gap-3 justify-end items-center mt-4'>
-                                    <button className='bg-[#4A70790D] border border-[#4A7079] px-6 py-1 rounded-md' style={{ ...FONTS.view_btn, color: COLORS.primary }}>Reset</button>
-                                    <button className='bg-[#4A7079] border border-[#4A7079] text-[#FFFFFF] px-6 py-1 rounded-md' style={{ ...FONTS.view_btn }}>Generate</button>
+                                    <div className='  rounded-lg flex gap-3 justify-end items-center mt-4'>
+                                        <button className='bg-[#4A70790D] border border-[#4A7079] px-6 py-1 rounded-md' style={{ ...FONTS.view_btn, color: COLORS.primary }}>Reset</button>
+                                        <button className='bg-[#4A7079] border border-[#4A7079] text-[#FFFFFF] px-6 py-1 rounded-md' style={{ ...FONTS.view_btn }}>Generate</button>
+                                    </div>
+
                                 </div>
+
                             </div>
 
                             <div className='bg-[#E2E2DE] shadow-0px_0px_15px_0px_[#C3C7C64D] rounded-2xl p-3 mt-4'>

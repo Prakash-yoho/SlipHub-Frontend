@@ -4,11 +4,17 @@ import DownloadIcon from '../../assets/Comman/Download.png'
 import { COLORS, FONTS } from '../../constants/uiconstants'
 import CalendarPicker from '../../Components/ui/CalendarPicker'
 import EmployerPrevSlip from '../../Components/employer/EmployerPrevSlip'
+import html2pdf from "html2pdf.js"
 
-const EmployerProfile:React.FC = () => {
+const EmployerProfile: React.FC = () => {
+
+    const handeldownload = () => {
+        // html2pdf
+    }
+
     return (
         <div className="w-full h-full mt-5">
-            <h1 style={{ ...FONTS.Main,color:COLORS.primary }}>Employer</h1>
+            <h1 style={{ ...FONTS.Main, color: COLORS.primary }}>Employer</h1>
             <div
                 className="w-full h-[78vh] bg-cover rounded-4xl"
                 style={{ backgroundImage: `url(${bg})` }}

@@ -10,15 +10,13 @@ import Employee from '../pages/employee/Employee';
 import Department from '../pages/department/Department';
 import Payroll from '../pages/payroll/Payroll';
 import EmployerProfile from '../pages/Employer/EmployerProfile';
-import { Signin } from '../features/SignIn/service';
-import { GetLocalStorage } from '../utils/localstorage';
 
 function Approutes() {
   const { isAuthenticated, isLoading } = useAuth();
 
   if (isLoading) return null;
 
-//  const chk = GetLocalStorage.
+  //  const chk = GetLocalStorage.
 
   const AuthRoutes = () => (
     <Routes>

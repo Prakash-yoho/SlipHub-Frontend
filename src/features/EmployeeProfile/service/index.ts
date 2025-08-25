@@ -11,7 +11,7 @@ export const CreateEmployeeService = async (data: EmployeeProfile) => {
 }
 
 export const UpdateEmployeeService = async (data: EmployeeProfile, params: string) => {
-    // await Client.employee.
+    await Client.employee.update(data, params)
 }
 
 export const GetEmployeeByUUIDService = async (params: string) => {

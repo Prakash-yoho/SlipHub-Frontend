@@ -2,7 +2,7 @@ import type { AppDispatch } from "../../../store/store";
 import type { PayRollType } from "../../../Type/payroll/type";
 import { GetEmployeeByUUIDService } from "../../EmployeeProfile/service";
 import { GeneratePayrollService, GetPayrollEmpService } from "../service";
-import { getPayrollEmp, selectedEmp } from "./slice";
+import { getPayrollEmp, selectedEmp, updatePayslip } from "./slice";
 
 export const GetPayrollEmpThunks = () => async (dispatch: AppDispatch) => {
     try {
@@ -25,7 +25,7 @@ export const PayrollSelectedEmpThunks = (params: string) => async (dispath: AppD
 export const GeneratePayrollThunks = (data: PayRollType) => async (dispath: AppDispatch) => {
     try {
         const response = await GeneratePayrollService(data)
-        console.log(response)
+        dispath(updatePayslip(response.data))
     } catch (error) {
         console.log(error, "payroll generate thunks")
     }

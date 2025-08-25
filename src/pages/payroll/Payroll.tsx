@@ -69,7 +69,7 @@ const Payroll = () => {
 
                     <div className='bg-[#E2E2DE] w-[24%] rounded-3xl p-3 shadow-[0px_0px_15px_0px_#C3C7C64D] h-[73vh] overflow-hidden' >
                         <h1 style={{ ...FONTS.payroll_head, color: COLORS.primary, padding: "10px 0" }}>Employee List</h1>
-                        <div className=' grid gap-4 h-full pb-12 pt-1 scrollbar-hide overflow-auto '>
+                        <div className='flex flex-col gap-4 h-full pb-12 pt-1 scrollbar-hide overflow-auto '>
                             {employies.map((items: EmployeeProfile, index) => (
                                 <section key={index} className='bg-[#EAEBE8] w-full h-min rounded-lg p-3 grid gap-3' onClick={() => setEmpUUID(items?.uuid)}>
                                     <p style={{ ...FONTS.table_data, color: COLORS.primary }}>Name : {items?.first_name + ' ' + items?.last_name}</p>

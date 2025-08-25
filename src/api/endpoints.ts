@@ -8,7 +8,8 @@ export const API_ENDPOINTS = {
         create: "/api/hr/create",
         getAll: "/api/hr/all",
         update: "/api/hr/update/:uuid",
-        delete: "/api/hr/delete/:uuid"
+        delete: "/api/hr/delete/:uuid",
+        getone: "/api/hr/get/:uuid"
     },
     employee: {
         create: "/api/employee/create",
@@ -24,5 +25,9 @@ export const API_ENDPOINTS = {
     },
     common: {
         getdpt: "/api/common/department/all"
+    },
+    payroll: {
+        getemp: "/api/payroll/employee",
+        create: "/api/payroll/generate"
     }
 }

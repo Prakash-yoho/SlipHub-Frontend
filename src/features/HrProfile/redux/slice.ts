@@ -33,9 +33,11 @@ const hrprofile: HrProfileType = {
 
 const data: HrProfileType[] = []
 
+const selectedHr: HrProfileType = {}
+
 const HrSlice = createSlice({
     name: "HrSclive",
-    initialState: { hrprofile, data },
+    initialState: { hrprofile, data, selectedHr },
     reducers: {
         getHrDetails: (state, action) => {
             state.data = action.payload
@@ -56,9 +58,15 @@ const HrSlice = createSlice({
             const index = state.data.findIndex((item: HrProfileType) => item.uuid === data)
             state.data.splice(index, 1)
         },
+        getOneHr: (state, action) => {
+            state.selectedHr = action.payload
+        },
+        clearHr: (state) => {
+            state.selectedHr = {}
+        }
     },
 })
 
 
-export const { addAndUpdateHrProfile, getHrDetails, deleteHrDetails } = HrSlice.actions
+export const { addAndUpdateHrProfile, getHrDetails, deleteHrDetails, getOneHr, clearHr } = HrSlice.actions
 export default HrSlice.reducer

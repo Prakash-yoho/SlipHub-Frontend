@@ -10,6 +10,7 @@ import type { HrProfileType } from '../../Type/HrProfiles/Type';
 const HrProfiles = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isOpen, setisOpen] = useState(false);
+    const [selectedHr, setselectedHr] = useState("");
 
     const AllHrProfile = useSelector((state: RootState) => state.hrstore.data)
 
@@ -27,7 +28,7 @@ const HrProfiles = () => {
                 <button onClick={() => setIsModalOpen(true)} style={{ ...FONTS.Main_btn, background: COLORS.primary }} className='text-[#FFFFFF] px-3 py-[4px] rounded-md'>Add HR</button>
             </div>
 
-            <DrawerForm isOpen={isOpen} setIsOpen={setisOpen} />
+            <DrawerForm isOpen={isOpen} setIsOpen={setisOpen} hrUUID={selectedHr} />
 
             <div className='flex justify-between items-center mt-6'>
                 <section className='flex gap-4'>
@@ -49,7 +50,7 @@ const HrProfiles = () => {
                                     <p style={{ ...FONTS.Nav }} className='uppercase text-[#5A5A5A]'>{hrdata?.emp_id}</p>
                                 </div>
                             </section>
-                            <button style={{ ...FONTS.view_btn, background: COLORS.primary }} onClick={() => setisOpen(true)} className='text-[#FFFFFF] px-3 py-[4px] rounded-md'>View</button>
+                            <button style={{ ...FONTS.view_btn, background: COLORS.primary }} onClick={() => { setisOpen(true); setselectedHr(hrdata?.uuid ?? "") }} className='text-[#FFFFFF] px-3 py-[4px] rounded-md'>View</button>
                         </div>
 
                         <div className='text-[#7697A0] flex justify-between'>

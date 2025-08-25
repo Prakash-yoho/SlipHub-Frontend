@@ -13,3 +13,8 @@ export const CreateEmployeeService = async (data: EmployeeProfile) => {
 export const UpdateEmployeeService = async (data: EmployeeProfile, params: string) => {
     // await Client.employee.
 }
+
+export const GetEmployeeByUUIDService = async (params: string) => {
+    const response = await Client.employee.getone(params)
+    return response
+}

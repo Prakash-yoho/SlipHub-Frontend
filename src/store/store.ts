@@ -3,6 +3,7 @@ import hrstore from '../features/HrProfile/redux/slice'
 import empolyee from '../features/EmployeeProfile/redux/slice'
 import common from '../features/common/redux/slice'
 import department from '../features/Department/redux/slice'
+import payroll from '../features/payroll/redux/slice'
 
 const store = configureStore({
 	reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
 		empolyee,
 		common,
 		department,
+		payroll
 	},
 })
 

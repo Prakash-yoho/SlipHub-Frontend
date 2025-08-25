@@ -1,7 +1,7 @@
 import type { AppDispatch } from "../../../store/store"
 import type { HrProfileType } from "../../../Type/HrProfiles/Type"
-import { CreateHrService, HrGetAll, UpdateHrService } from "../service"
-import { addAndUpdateHrProfile, getHrDetails } from "./slice"
+import { CreateHrService, GetHrByUUIDservice, HrGetAll, UpdateHrService } from "../service"
+import { addAndUpdateHrProfile, clearHr, getHrDetails, getOneHr } from "./slice"
 
 export const GetAllHrThunks = () => async (dispatch: AppDispatch) => {
     try {
@@ -27,5 +27,22 @@ export const UpdateHrThunks = (data: HrProfileType, params: string) => async (di
         dispatch(addAndUpdateHrProfile(data))
     } catch (error) {
         console.log(error, "hr add thunks error")
+    }
+}
+
+export const GetHrUUIDThunks = (params: string) => async (dispatch: AppDispatch) => {
+    try {
+        const response = await GetHrByUUIDservice(params)
+        dispatch(getOneHr(response.data))
+    } catch (error) {
+        console.log(error, "hr get ")
+    }
+}
+
+export const ClearHrThunks = () => async (dispatch: AppDispatch) => {
+    try {
+        dispatch(clearHr())
+    } catch (error) {
+        console.log(error, "hr get ")
     }
 }

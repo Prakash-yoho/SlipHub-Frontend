@@ -13,3 +13,8 @@ export const CreateHrService = async (data: HrProfileType) => {
 export const UpdateHrService = async (data: HrProfileType, params: string) => {
     await Client.hr.update(data, params)
 }
+
+export const GetHrByUUIDservice = async (params: string) => {
+    const response = await Client.hr.getOne(params)
+    return response
+}

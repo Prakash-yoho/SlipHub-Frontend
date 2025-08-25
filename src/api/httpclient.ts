@@ -26,11 +26,11 @@ Axios.interceptors.response.use(
             error?.response?.status === 401 &&
             error?.response?.statusText === 'Unauthorized'
         ) {
-            localStorage.removeItem('isAuthenticated');
-            localStorage.removeItem('permissions');
-            localStorage.removeItem('token');
-            localStorage.removeItem('userData');
-            window.location.href = '/';
+            // localStorage.removeItem('isAuthenticated');
+            // localStorage.removeItem('permissions');
+            // localStorage.removeItem('token');
+            // localStorage.removeItem('userData');
+            // window.location.href = '/';
         }
         return Promise.reject(error);
     }

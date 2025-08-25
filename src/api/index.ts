@@ -23,7 +23,8 @@ class Client {
 
 	department = {
 		getall: () => httpClient.get(API_ENDPOINTS.department.getAll),
-		create: (data: any) => httpClient.post(API_ENDPOINTS.department.create, data),
+		create: (data:any) => httpClient.post(API_ENDPOINTS.department.create, data),
+		delete: (params: string) => httpClient.delete(API_ENDPOINTS.department.delete.replace(":uuid", params))
 	}
 	employee = {
 		getall: () => httpClient.get(API_ENDPOINTS.employee.getAll),

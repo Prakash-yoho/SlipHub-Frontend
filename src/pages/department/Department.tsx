@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { COLORS, FONTS } from "../../constants/uiconstants";
 import DepartmentImg from "../../assets/Comman/airpod.png";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../store/store";
+import { GetAllDepartmentThunks } from "../../features/Department/redux/thunks";
+import { GetAllHrThunks } from "../../features/HrProfile/redux/thunks";
+import { CreateDepartmentService, DeleteDepartment } from "../../features/Department/service";
 
 const Department = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    DepartmentID: "",
-    departmentName: "",
+    dpt_id: "",
+    dpt_name: "",
     departmentHead: "",
     HrName: "",
   });
@@ -15,16 +20,23 @@ const Department = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form Submitted:", formData);
 
     // TODO: API call to save department
+    const response = await CreateDepartmentService({
+      ...formData,
+      dpt_id: Number(formData.dpt_id),
+    })
+
+    console.log(response,"responseeeeeeeeeeeee")
+
 
     setIsModalOpen(false);
     setFormData({
-      DepartmentID: "",
-      departmentName: "",
+      dpt_id: "",
+      dpt_name: "",
       departmentHead: "",
       HrName: "",
     });
@@ -33,13 +45,28 @@ const Department = () => {
   // Dropdown state
   const [isOpen, setIsOpen] = useState(false);
 
-  const options = [
-    { value: "Kamal", label: "Kamal" },
-    { value: "Mugilan", label: "Mugilan" },
-    { value: "Ram", label: "Ram" },
-    { value: "Siva", label: "Siva" },
-    { value: "Mathi", label: "Mathi" },
-  ];
+ 
+
+  const AllDepartment = useSelector((state: RootState) => state.department.data)
+  const AllHrProfile = useSelector((state: RootState) => state.hrstore.data)
+
+  const dispatch = useDispatch<AppDispatch>()
+
+  useEffect(() => {
+    dispatch(GetAllDepartmentThunks())
+    dispatch(GetAllHrThunks())
+  }, [dispatch]);
+
+  const options = AllHrProfile.map((data) => {
+    return { value: data?.first_name, label: `${data?.first_name}   ${data?.last_name}`,id:data?.id }
+  })
+  //  [
+  //   { value: AllHrProfile?.first_name, label: "Kamal" },
+  //   { value: "Mugilan", label: "Mugilan" },
+  //   { value: "Ram", label: "Ram" },
+  //   { value: "Siva", label: "Siva" },
+  //   { value: "Mathi", label: "Mathi" },
+  // ];
 
   const handleSelect = (selectedValue: string) => {
     setFormData({ ...formData, HrName: selectedValue });
@@ -50,6 +77,8 @@ const Department = () => {
     (option) => option.value === formData.HrName
   );
 
+
+console.log(AllDepartment,AllHrProfile,"asdfgnm,./")
   return (
     <div className="p-4 h-screen">
       {/* Header */}
@@ -75,12 +104,10 @@ const Department = () => {
 
       {/* Department Cards */}
       <div className="h-[65vh] mt-6 grid grid-cols-3 gap-4 p-2 overflow-y-scroll scrollbar-hide">
-        {Array(10)
-          .fill(null)
-          .map((_, index) => (
+        {AllDepartment?.map((data, index) => (
             <div
               key={index}
-              className="bg-[#DDDED980] shadow-[0px_0px_15px_0px_#4A707966] p-3 rounded-lg grid gap-3"
+              className="bg-[#DDDED980] shadow-[0px_0px_15px_0px_#4A707966] p-3 rounded-lg grid items-center h-fit gap-3"
             >
               <section className="flex items-center gap-4">
                 <img
@@ -89,7 +116,7 @@ const Department = () => {
                   className="w-[25px] h-[25px]"
                 />
                 <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>
-                  Development
+                  {data?.dpt_name}
                 </p>
               </section>
 
@@ -112,9 +139,10 @@ const Department = () => {
                     color: COLORS.primary,
                   }}
                 >
-                  100
+                    {data?.no_of_emp}
                 </p>
               </div>
+              <button onClick={()=>{DeleteDepartment(data?.uuid)}}>Remove Department</button>
             </div>
           ))}
       </div>
@@ -154,8 +182,8 @@ const Department = () => {
                   </p>
                   <input
                     type="text"
-                    name="DepartmentID"
-                    value={formData.DepartmentID}
+                    name="dpt_id"
+                    value={formData.dpt_id}
                     onChange={handleChange}
                     placeholder="Department ID"
                     className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
@@ -173,8 +201,8 @@ const Department = () => {
                   </p>
                   <input
                     type="text"
-                    name="departmentName"
-                    value={formData.departmentName}
+                    name="dpt_name"
+                    value={formData.dpt_name}
                     onChange={handleChange}
                     placeholder="Department Name"
                     className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
@@ -240,7 +268,7 @@ const Department = () => {
                           <button
                             type="button"
                             key={option.value}
-                            onClick={() => handleSelect(option.value)}
+                            onClick={() => handleSelect(option.value ?? "")}
                             className="w-full text-left px-4 py-3 mb-2 last:mb-0 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300 text-gray-700 transition-colors"
                           >
                             {option.label}

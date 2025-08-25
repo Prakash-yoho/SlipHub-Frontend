@@ -12,8 +12,8 @@ import { verifyOtp } from '../../features/Auth/service'
 
 const Login = () => {
 
-    const [email, setEmail] = useState("admin@gmail.com");
-    const [password, setPassword] = useState("admin@2025");
+    const [email, setEmail] = useState("sivashankarrajendran13@gmail.com");
+    const [password, setPassword] = useState("123456");
     const [handleOTP, setHandleOTP] = useState(false);
     const navigate = useNavigate();
     const { login } = useAuth()
@@ -104,7 +104,7 @@ const Login = () => {
             if (response?.status) {
                 RemoveLocalStorage('token');
                 RemoveLocalStorage('otp');
-                verifyOTP(response?.data?.token)
+                verifyOTP(response?.data)
                 navigate("/")
                 toast.success("OTP Verified Successfully!");
             } else {

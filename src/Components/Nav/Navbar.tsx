@@ -4,8 +4,14 @@ import Logo from '../../assets/Navbar/yohologo.png';
 import NotificationIcon from '../../assets/Navbar/notification-bing.png';
 import ProfileIcon from '../../assets/Navbar/Mask group.png';
 import { FONTS } from '../../constants/uiconstants';
+import { ClearLocalStorage } from '../../utils/localstorage';
 
 const Navbar: React.FC = () => {
+
+  const logout = ()=>{
+    ClearLocalStorage()
+    window.location.reload()
+  }
   return (
     <div className="flex justify-between items-center text-white px-4 py-3 pr-8">
       <img src={Logo} alt="Logo" className="w-[100px]" />
@@ -94,6 +100,10 @@ const Navbar: React.FC = () => {
           </div>
           <div className="flex items-center justify-center cursor-pointer bg-[#5A5A5A] p-2 rounded-full">
             <img src={ProfileIcon} alt="Notification" className="w-7 h-7" />
+
+            {/* <div> */}
+              <button className='px-3' onClick={logout}>Logout</button>
+            {/* </div> */}
           </div>
         </section>
       </div>

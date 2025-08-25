@@ -8,6 +8,7 @@ import type { AppDispatch, RootState } from '../../store/store';
 import { GeneratePayrollThunks, GetPayrollEmpThunks, PayrollSelectedEmpThunks } from '../../features/payroll/redux/thunks';
 import type { EmployeeProfile } from '../../Type/Emp_profile/Type';
 import type { PayRollType } from '../../Type/payroll/type';
+import { handleDownload } from '../../features/common/service';
 
 
 const Payroll = () => {
@@ -209,7 +210,7 @@ const Payroll = () => {
                                                     <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">{items?.created_month}</td>
                                                     <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.paid_days}</td>
                                                     <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.gross_total}</td>
-                                                    <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg"><img src={DownloadIcon} alt="" className='w-[25px] h-[25px]' /></td>
+                                                    <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg"><img src={DownloadIcon} alt="" className='w-[25px] h-[25px] cursor-pointer' onClick={() => handleDownload(items?.uuid)} /></td>
                                                 </tr>
                                             )) :
                                                 <tr style={{ color: COLORS.primary }} className='bg-[#EAEBE8]  rounded-lg'>

@@ -59,6 +59,12 @@ class HttpClient {
         });
         return response.data;
     }
+    async getfile(url: string) {
+        const response = await Axios.get(url, {
+            responseType: "blob",
+        })
+        return response.data
+    }
 }
 
 export default new HttpClient();

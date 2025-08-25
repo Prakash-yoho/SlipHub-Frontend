@@ -35,7 +35,8 @@ class Client {
 	}
 	payroll = {
 		create: (data: any) => httpClient.post(API_ENDPOINTS.payroll.create, data),
-		getemp: () => httpClient.get(API_ENDPOINTS.payroll.getemp)
+		getemp: () => httpClient.get(API_ENDPOINTS.payroll.getemp),
+		download: (params: string) => httpClient.getfile(API_ENDPOINTS.payroll.download.replace(":uuid", params))
 	}
 }
 export default new Client();

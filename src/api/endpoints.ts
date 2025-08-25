@@ -27,6 +27,7 @@ export const API_ENDPOINTS = {
     },
     payroll: {
         getemp: "/api/payroll/employee",
-        create: "/api/payroll/generate"
+        create: "/api/payroll/generate",
+        download: "/api/payroll/slip/:uuid/download",
     }
 }

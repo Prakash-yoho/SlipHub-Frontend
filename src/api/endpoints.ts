@@ -1,11 +1,7 @@
 import { GetLocalStorage } from "../utils/localstorage"
 
-function getCompanyId() {
-    const data = GetLocalStorage("company")
-    return data
-}
 
-const companyid = getCompanyId()
+const companyid = GetLocalStorage('company')
 
 export const API_ENDPOINTS = {
     auth: {

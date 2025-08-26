@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react"
 import CompanyInfo from "../../Components/dashboad/CompanyInfo"
 import DashBoardView from "../../Components/dashboad/DashBoardView"
@@ -11,7 +12,7 @@ const DashBoard = () => {
 
   const company = GetLocalStorage("company")
 
-  const [DashBoard, setDashBoard] = useState({});
+  const [DashBoard, setDashBoard] = useState<any>({});
 
   useEffect(() => {
     (async () => {
@@ -29,10 +30,10 @@ const DashBoard = () => {
       <div className="flex flex-col h-[90vh] gap-5 w-full">
         <div className="grid w-full grid-cols-3 gap-5">
           <div className="w-full h-full col-span-2 bg-[#DDDED980] rounded-2xl shadow-[0px_0px_15px_0px_#4A707966]">
-            <CompanyInfo />
+            <CompanyInfo company_details={DashBoard?.company} />
           </div>
           <div className="w-full h-full col-start-3">
-            <DashBoardView />
+            <DashBoardView dashboard={DashBoard} />
           </div>
         </div>
         <div className="grid grid-cols-2 w-full gap-5 pb-6">

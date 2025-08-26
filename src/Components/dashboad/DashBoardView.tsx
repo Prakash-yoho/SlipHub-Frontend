@@ -1,16 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import TotalsCard from './ui/TotalsCard'
 import { DashboardImage } from '../../assets/dashboard/image'
 
-const DashBoardView: React.FC = () => {
+interface props {
+    dashboard: any
+}
+
+const DashBoardView: React.FC<props> = ({ dashboard }) => {
 
     const data = [
-        { name: "Employees", value: 230, image: DashboardImage.empImg },
-        { name: "Salary", value: 450000, image: DashboardImage.salaryImg },
-        { name: "Hr", value: 5, image: DashboardImage.hrImage },
-        { name: "Department", value: 4, image: DashboardImage.dptImage },
-        { name: "WFO ", value: 60, image: DashboardImage.empImg },
-        { name: "WFH ", value: 190, image: DashboardImage.empImg },
+        { name: "Employees", value: dashboard?.no_of_employee, image: DashboardImage.empImg },
+        { name: "Salary", value: dashboard?.total_salary, image: DashboardImage.salaryImg },
+        { name: "Hr", value: dashboard?.no_of_hr, image: DashboardImage.hrImage },
+        { name: "Department", value: dashboard?.no_of_department, image: DashboardImage.dptImage },
+        { name: "WFO ", value: dashboard?.wfo, image: DashboardImage.empImg },
+        { name: "WFH ", value: dashboard?.wfh, image: DashboardImage.empImg },
     ]
 
     return (

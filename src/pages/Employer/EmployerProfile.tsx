@@ -34,7 +34,8 @@ const EmployerProfile: React.FC = () => {
     return (
         <div className='overflow-y-scroll h-full scrollbar-hide'>
 
-            <CompanyInfo />
+            {role ==="employee" && <CompanyInfo />}
+            
 
             <div className="w-full h-full mt-5">
                 <div

@@ -4,7 +4,7 @@ import yoho from '../../assets/Navbar/yohologo.png'
 import { FONTS } from '../../constants/uiconstants'
 
 interface props {
-    company_details: any
+    company_details?: any
 }
 
 const CompanyInfo: React.FC<props> = ({ company_details }) => {

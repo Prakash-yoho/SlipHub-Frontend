@@ -27,7 +27,7 @@ Axios.interceptors.response.use(
             error?.response?.statusText === 'Unauthorized'
         ) {
             ClearLocalStorage()
-            window.location.href = '/';
+            // window.location.href = '/';
         }
         return Promise.reject(error);
     }

@@ -42,7 +42,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const verifyOTP = (data: any) => {
 		StoreLocalStorage('sh_tkn_a', data?.token);
 		StoreLocalStorage('role', data?.role);
-		StoreLocalStorage('uuid',data?.uuid)
+		StoreLocalStorage('uuid', data?.uuid)
+		StoreLocalStorage("company", data?.company)
 		// localStorage.setItem("role", data);
 		// setOtpIsAuthenticated(true);
 		setIsAuthenticated(true);

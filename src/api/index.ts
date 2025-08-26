@@ -33,7 +33,8 @@ class Client {
 		update: (data: EmployeeProfile, params: string) => httpClient.put(API_ENDPOINTS.employee.update.replace(":uuid", params), data)
 	}
 	common = {
-		getdpt: () => httpClient.get(API_ENDPOINTS.common.getdpt)
+		getdpt: () => httpClient.get(API_ENDPOINTS.common.getdpt),
+		dashboard: (params: string) => httpClient.get(API_ENDPOINTS.common.dashboad.replace(":companyid", params))
 	}
 	payroll = {
 		create: (data: any) => httpClient.post(API_ENDPOINTS.payroll.create, data),

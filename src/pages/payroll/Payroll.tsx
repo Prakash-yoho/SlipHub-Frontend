@@ -9,6 +9,8 @@ import { GeneratePayrollThunks, GetPayrollEmpThunks, PayrollSelectedEmpThunks } 
 import type { EmployeeProfile } from '../../Type/Emp_profile/Type';
 import type { PayRollType } from '../../Type/payroll/type';
 import { handleDownload } from '../../features/common/service';
+import dayjs from 'dayjs';
+import toast from 'react-hot-toast';
 
 
 const Payroll = () => {
@@ -19,7 +21,7 @@ const Payroll = () => {
 
     const selectedEmp: EmployeeProfile = useSelector((state: RootState) => state.payroll.selectedEmp)
 
-    const [EmpUUID, setEmpUUID] = useState<string | undefined>(undefined);
+    const [EmpUUID, setEmpUUID] = useState<string | undefined>(selectedEmp?.uuid);
 
     const [selecteDate, setselecteDate] = useState<Date | null>(null);
 
@@ -59,13 +61,24 @@ const Payroll = () => {
     }
 
     const handelGenerateSlip = async (params: string) => {
-        try {
-            setPayRollInput((prev) => ({ ...prev, created_month: selecteDate ?? "", employee_uuid: params }))
-            dispatch(GeneratePayrollThunks(PayRollInput))
-        } catch (error) {
-            console.log(error, "payroll")
-        }
+  try {
+    if (PayRollInput.worked_days != 0 && PayRollInput.paid_days != 0) {
+      const payload: PayRollType = {
+        ...PayRollInput,
+        created_month: selecteDate ?? "",
+        employee_uuid: params,
+      };
+
+      setPayRollInput(payload);
+      dispatch(GeneratePayrollThunks(payload));
+    } else {
+      toast.error("Enter All fields");
     }
+  } catch (error) {
+    console.log(error, "payroll");
+  }
+};
+
 
     const handleReset = () => {
         setPayRollInput({
@@ -76,7 +89,7 @@ const Payroll = () => {
             created_month: "",
             employee_uuid: "",
         });
-        setselecteDate(null); // reset calendar picker
+        setselecteDate(null);
     };
 
 
@@ -157,6 +170,7 @@ const Payroll = () => {
                                                 style={{ ...FONTS.Nav, color: COLORS.primary }}
                                                 type="number"
                                                 min="0"
+                                                required={true}
                                                 className="bg-[#EAEBE8] px-3 py-2 rounded-lg w-full border border-[#4A7079] outline-0
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="No of Worked Days"
@@ -172,6 +186,7 @@ const Payroll = () => {
                                                 style={{ ...FONTS.Nav, color: COLORS.primary }}
                                                 type="number"
                                                 min="0"
+                                                required={true}
                                                 className="bg-[#EAEBE8] px-3 py-2 rounded-lg w-full border border-[#4A7079] outline-0
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="Loss Of Pay"
@@ -187,6 +202,7 @@ const Payroll = () => {
                                                 style={{ ...FONTS.Nav, color: COLORS.primary }}
                                                 type="number"
                                                 min="0"
+                                                required={true}
                                                 className="bg-[#EAEBE8] px-3 py-2 rounded-lg w-full border border-[#4A7079] outline-0
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="No of Arrear Day"
@@ -202,6 +218,7 @@ const Payroll = () => {
                                                 style={{ ...FONTS.Nav, color: COLORS.primary }}
                                                 type="number"
                                                 min="0"
+                                                required={true}
                                                 className="bg-[#EAEBE8] px-3 py-2 rounded-lg w-full border border-[#4A7079] outline-0
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="Paid Days"
@@ -227,7 +244,11 @@ const Payroll = () => {
                                                     Reset
                                                 </button>
                                                 <button
-                                                    onClick={() => handelGenerateSlip(selectedEmp?.uuid ?? "")}
+                                                    onClick={() => {
+                                                        if (selectedEmp?.uuid) {
+                                                            handelGenerateSlip(selectedEmp.uuid);
+                                                        }
+                                                    }}
                                                     className='bg-[#4A7079] border border-[#4A7079] text-[#FFFFFF] px-6 py-1 rounded-md'
                                                     style={{ ...FONTS.view_btn }}
                                                 >
@@ -255,7 +276,7 @@ const Payroll = () => {
                                                 <tbody className='overflow-y-scroll'>
                                                     {selectedEmp?.payroll_slip && selectedEmp?.payroll_slip?.length ? selectedEmp?.payroll_slip?.map((items, index) => (
                                                         <tr key={index} style={{ color: COLORS.primary }} className='bg-[#EAEBE8]  rounded-lg'>
-                                                            <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">{items?.created_month}</td>
+                                                            <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">{dayjs(items?.created_month).format("MMMM-YYYY")}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.paid_days}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.gross_total}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg"><img src={DownloadIcon} alt="" className='w-[25px] h-[25px] cursor-pointer' onClick={() => handleDownload(items?.uuid)} /></td>

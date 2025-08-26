@@ -64,9 +64,9 @@ const Employee = () => {
     <div className='py-6 px-8 h-screen'>
       <div className='flex justify-between items-center'>
         <h1 style={{ ...FONTS.Main, color: COLORS.primary }}>Employee Profiles</h1>
-        <button 
-          onClick={() => setIsOpen(true)} 
-          style={{ ...FONTS.Main_btn, background: COLORS.primary }} 
+        <button
+          onClick={() => setIsOpen(true)}
+          style={{ ...FONTS.Main_btn, background: COLORS.primary }}
           className='text-[#FFFFFF] px-3 py-[4px] rounded-md'
         >
           Add Employee
@@ -79,124 +79,124 @@ const Employee = () => {
       <div className='flex justify-between items-center mt-6'>
         <section className='flex gap-4'>
           {/* Department dropdown */}
-         <div className="relative">
-  {/* Dropdown Trigger */}
-  <div
-    onClick={() => setDeptOpen(!deptOpen)}
-    style={{ ...FONTS.Main_btn, background: COLORS.sub_btn }}
-    className="text-[#FFFFFF] px-3 min-w-[170px] py-[4px] flex justify-between items-center cursor-pointer gap-5 rounded-md"
-  >
-    <span style={{ ...FONTS.Main_btn }}>
-      {selectedDept ?? "Departments"}
-    </span>
-    <svg
-      className={`w-4 h-4 transition-transform ${deptOpen ? "rotate-180" : ""}`}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M19 9l-7 7-7-7"
-      />
-    </svg>
-  </div>
+          <div className="relative">
+            {/* Dropdown Trigger */}
+            <div
+              onClick={() => setDeptOpen(!deptOpen)}
+              style={{ ...FONTS.Main_btn, background: COLORS.sub_btn }}
+              className="text-[#FFFFFF] px-3 min-w-[170px] py-[4px] flex justify-between items-center cursor-pointer gap-5 rounded-md"
+            >
+              <span style={{ ...FONTS.Main_btn }}>
+                {selectedDept ?? "Departments"}
+              </span>
+              <svg
+                className={`w-4 h-4 transition-transform ${deptOpen ? "rotate-180" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
 
-  {/* Dropdown List */}
-  {deptOpen && (
-    <div className="absolute top-full h-[40vh] overflow-scroll scrollbar-hide left-0 right-0 mt-2 bg-gray-100 rounded-lg p-2 shadow-lg z-10">
-      {/* Departments Option */}
-      <button
-        type="button"
-        onClick={() => {
-          setSelectedDept("Departments")
-          setDeptOpen(false)
-        }}
-        className="w-full text-left px-4 py-3 mb-2 last:mb-0 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300 text-gray-700 transition-colors"
-      >
-        Departments
-      </button>
+            {/* Dropdown List */}
+            {deptOpen && (
+              <div className="absolute top-full h-[40vh] overflow-scroll scrollbar-hide left-0 right-0 mt-2 bg-gray-100 rounded-lg p-2 shadow-lg z-10">
+                {/* Departments Option */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedDept("Departments")
+                    setDeptOpen(false)
+                  }}
+                  className="w-full text-left px-4 py-3 mb-2 last:mb-0 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300 text-gray-700 transition-colors"
+                >
+                  Departments
+                </button>
 
-      {/* Department Options */}
-      {departments?.length === 0 ? (
-        <p className="text-center text-gray-500 py-4">No Departments Found</p>
-      ) : (
-        departments?.map((dept: any) => (
-          <button
-            type="button"
-            key={dept?.uuid}
-            onClick={() => {
-              setSelectedDept(dept?.dpt_name)
-              setDeptOpen(false)
-            }}
-            className="w-full text-left px-4 py-3 mb-2 last:mb-0 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300 text-gray-700 transition-colors"
-          >
-            {dept?.dpt_name}
-          </button>
-        ))
-      )}
-    </div>
-  )}
-</div>
+                {/* Department Options */}
+                {departments?.length === 0 ? (
+                  <p className="text-center text-gray-500 py-4">No Departments Found</p>
+                ) : (
+                  departments?.map((dept: any) => (
+                    <button
+                      type="button"
+                      key={dept?.uuid}
+                      onClick={() => {
+                        setSelectedDept(dept?.dpt_name)
+                        setDeptOpen(false)
+                      }}
+                      className="w-full text-left px-4 py-3 mb-2 last:mb-0 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300 text-gray-700 transition-colors"
+                    >
+                      {dept?.dpt_name}
+                    </button>
+                  ))
+                )}
+              </div>
+            )}
+          </div>
 
 
           {/* Experience dropdown */}
           <div className="relative">
-  {/* Dropdown Trigger */}
-  <div
-    onClick={() => setExpOpen(!expOpen)}
-    style={{ ...FONTS.Main_btn, background: COLORS.sub_btn }}
-    className="text-[#FFFFFF] px-3 min-w-[170px] py-[4px] flex justify-between items-center cursor-pointer gap-5 rounded-md"
-  >
-    <span style={{ ...FONTS.Main_btn }}>
-      {selectedExp ?? "Experience"}
-    </span>
-    <svg
-      className={`w-4 h-4 transition-transform ${expOpen ? "rotate-180" : ""}`}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M19 9l-7 7-7-7"
-      />
-    </svg>
-  </div>
+            {/* Dropdown Trigger */}
+            <div
+              onClick={() => setExpOpen(!expOpen)}
+              style={{ ...FONTS.Main_btn, background: COLORS.sub_btn }}
+              className="text-[#FFFFFF] px-3 min-w-[170px] py-[4px] flex justify-between items-center cursor-pointer gap-5 rounded-md"
+            >
+              <span style={{ ...FONTS.Main_btn }}>
+                {selectedExp ?? "Experience"}
+              </span>
+              <svg
+                className={`w-4 h-4 transition-transform ${expOpen ? "rotate-180" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
 
-  {/* Dropdown List */}
-  {expOpen && (
-    <div className="absolute top-full max-h-[40vh] overflow-scroll scrollbar-hide left-0 right-0 mt-2 bg-gray-100 rounded-lg p-2 shadow-lg z-10">
-      {["All Experience", "0-1 Years", "1-3 Years", "3+ Years"].map((exp) => (
-        <button
-          type="button"
-          key={exp}
-          onClick={() => {
-            setSelectedExp(exp)
-            setExpOpen(false)
-          }}
-          className="w-full text-left px-4 py-3 mb-2 last:mb-0 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300 text-gray-700 transition-colors"
-        >
-          {exp}
-        </button>
-      ))}
-    </div>
-  )}
-</div>
+            {/* Dropdown List */}
+            {expOpen && (
+              <div className="absolute top-full max-h-[40vh] overflow-scroll scrollbar-hide left-0 right-0 mt-2 bg-gray-100 rounded-lg p-2 shadow-lg z-10">
+                {["All Experience", "0-1 Years", "1-3 Years", "3+ Years"].map((exp) => (
+                  <button
+                    type="button"
+                    key={exp}
+                    onClick={() => {
+                      setSelectedExp(exp)
+                      setExpOpen(false)
+                    }}
+                    className="w-full text-left px-4 py-3 mb-2 last:mb-0 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300 text-gray-700 transition-colors"
+                  >
+                    {exp}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
         </section>
 
         {/* Search */}
-        <input 
-          type="text" 
+        <input
+          type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className='bg-[#4A70790D] text-[#4A7079] font-bold border border-[#4A7079] rounded-md px-3 py-[6px] outline-0 w-[400px]' 
-          placeholder='Search by name, ID, email...' 
+          className='bg-[#4A70790D] text-[#4A7079] font-bold border border-[#4A7079] rounded-md px-3 py-[6px] outline-0 w-[400px]'
+          placeholder='Search by name, ID, email...'
         />
       </div>
 
@@ -218,10 +218,10 @@ const Employee = () => {
           <tbody>
             {filteredEmployees.length > 0 ? (
               filteredEmployees.map((items: EmployeeProfile, index) => (
-                <tr 
-                  key={items?.uuid} 
-                  style={{ color: COLORS.primary }} 
-                  className='bg-[#DDDED980] rounded-lg cursor-pointer' 
+                <tr
+                  key={items?.uuid}
+                  style={{ color: COLORS.primary }}
+                  className='bg-[#DDDED980] rounded-lg cursor-pointer'
                   onClick={() => navigate(`/employee/${items?.uuid}`)}
                 >
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">{index + 1}</td>

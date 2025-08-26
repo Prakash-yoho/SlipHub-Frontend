@@ -11,6 +11,8 @@ import type { AppDispatch, RootState } from '../../store/store'
 import { getOneemployeeThunks } from '../../features/EmployeeProfile/redux/thunks'
 import CompanyInfo from '../../Components/dashboad/CompanyInfo'
 import { GetLocalStorage } from '../../utils/localstorage'
+import dayjs from "dayjs";
+import { handleDownload } from '../../features/common/service'
 
 const EmployerProfile: React.FC = () => {
 
@@ -18,6 +20,9 @@ const EmployerProfile: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>()
 
     const employer = useSelector((state: RootState) => state.empolyee.selectedEmployee)
+
+    const len = employer?.payroll_slip?.length
+    console.log(len,"fdfdfdjkfmdkfm")
 
     const role = GetLocalStorage("role")
 
@@ -46,11 +51,11 @@ const EmployerProfile: React.FC = () => {
                         <div className="flex flex-col w-8/12">
                             <div className="w-full h-20 flex rounded-4xl items-baseline">
                                 <CalendarPicker />
-                                <div className="bg-[#7697A0] w-max p-2 px-6 h-max rounded-lg font-bold text-white text-md">Generated</div>
+                                <div className="bg-[#7697A0] w-max p-2 px-6 h-max rounded-lg font-bold text-white text-md">Generate</div>
                             </div>
                             <div className="flex flex-col w-full h-[75vh] mx-4 rounded-3xl gap-5 py-4">
                                 <div className="w-full h-52 bg-[#EAEBE8] rounded-2xl">
-                                    <EmployerPrevSlip payslip={employer?.payroll_slip?.[-1]} />
+                                    <EmployerPrevSlip payslip={len ? employer?.payroll_slip?.[len-1] : undefined} />
                                 </div>
 
                                 <div className="w-full h-96 bg-[#EAEBE8] rounded-2xl px-4 overflow-y-scroll scrollbar-hide">
@@ -69,13 +74,13 @@ const EmployerProfile: React.FC = () => {
                                                 </thead>
 
                                                 <tbody>
-                                                    {employer?.payroll_slip?.length && employer?.payroll_slip?.length < 0 ? employer?.payroll_slip?.map((items, index) => (
+                                                    {employer?.payroll_slip && employer?.payroll_slip?.length > 0 ? employer?.payroll_slip?.map((items, index) => (
                                                         <tr key={index} style={{ color: COLORS.primary }} className="bg-[#EAEBE8] rounded-lg">
-                                                            <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">{items?.created_month}</td>
+                                                            <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg"> {dayjs(items?.created_month).format("MMMM-YYYY")}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.paid_days}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.gross_total}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg">
-                                                                <img src={DownloadIcon} alt="" className="w-[25px] h-[25px]" />
+                                                                <img src={DownloadIcon} alt="" className="w-[25px] h-[25px]" onClick={()=>handleDownload(items?.uuid)}/>
                                                             </td>
                                                         </tr>
                                                     )) :

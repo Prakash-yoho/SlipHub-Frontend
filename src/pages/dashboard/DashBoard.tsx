@@ -1,10 +1,27 @@
+import { useEffect, useState } from "react"
 import CompanyInfo from "../../Components/dashboad/CompanyInfo"
 import DashBoardView from "../../Components/dashboad/DashBoardView"
 import EmployeeByDpt from "../../Components/dashboad/EmployeeByDpt"
 import { SalaryDetailCard } from "../../Components/dashboad/SalaryDetailCard"
 import { FONTS } from "../../constants/uiconstants"
+import { GetLocalStorage } from "../../utils/localstorage"
+import { dashboadService } from "../../features/Auth/service"
 
 const DashBoard = () => {
+
+  const company = GetLocalStorage("company")
+
+  const [DashBoard, setDashBoard] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      const data = await dashboadService(company)
+      setDashBoard(data)
+    })()
+  }, [company]);
+
+  console.log(DashBoard, "dashboard")
+
   return (
     <div className="flex flex-col w-full p-4 h-[93vh] overflow-y-scroll" style={{ scrollbarWidth: 'none' }} >
       <h1 style={{ ...FONTS.Main }}>Home</h1>

@@ -1,3 +1,12 @@
+import { GetLocalStorage } from "../utils/localstorage"
+
+function getCompanyId() {
+    const data = GetLocalStorage("company")
+    return data
+}
+
+const companyid = getCompanyId()
+
 export const API_ENDPOINTS = {
     auth: {
         login: "/api/auth/login",
@@ -5,30 +14,31 @@ export const API_ENDPOINTS = {
         register: "/api/auth/register",
     },
     hr: {
-        create: "/api/hr/create",
-        getAll: "/api/hr/all",
-        update: "/api/hr/update/:uuid",
-        delete: "/api/hr/delete/:uuid",
-        getone: "/api/hr/get/:uuid"
+        create: `/api/hr/${companyid}/create`,
+        getAll: `/api/hr/${companyid}/all`,
+        update: `/api/hr/${companyid}/update/:uuid`,
+        delete: `/api/hr/${companyid}/delete/:uuid`,
+        getone: `/api/hr/${companyid}/get/:uuid`
     },
     employee: {
-        create: "/api/employee/create",
-        getAll: "/api/employee/all",
-        getById: "/api/employee/get/:uuid",
-        update: "/api/employee/update/:uuid",
-        delete: "/api/employee/delete/:uuid"
+        create: `/api/employee/${companyid}/create`,
+        getAll: `/api/employee/${companyid}/all`,
+        getById: `/api/employee/${companyid}/get/:uuid`,
+        update: `/api/employee/${companyid}/update/:uuid`,
+        delete: `/api/employee/${companyid}/delete/:uuid`
     },
     department: {
-        create: "/api/department/create",
-        getAll: "/api/department/all",
-        delete:"api/department/delete/:uuid"
+        create: `/api/department/${companyid}/create`,
+        getAll: `/api/department/${companyid}/all`,
+        delete: `api/department/${companyid}/delete/:uuid`
     },
     common: {
-        getdpt: "/api/common/department/all"
+        getdpt: `/api/common/${companyid}/department/all`,
+        dashboad: `/api/dashboard/:companyid`
     },
     payroll: {
-        getemp: "/api/payroll/employee",
-        create: "/api/payroll/generate",
-        download: "/api/payroll/slip/:uuid/download",
+        getemp: `/api/payroll/${companyid}/employee`,
+        create: `/api/payroll/${companyid}/generate`,
+        download: `/api/payroll/${companyid}/slip/:uuid/download`,
     }
 }

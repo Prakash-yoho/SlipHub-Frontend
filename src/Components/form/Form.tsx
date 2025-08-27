@@ -8,6 +8,7 @@ import type { HrProfileType } from "../../Type/HrProfiles/Type";
 import type { EmployeeProfile } from "../../Type/Emp_profile/Type";
 import { CreateEmployeeThunks } from "../../features/EmployeeProfile/redux/thunks";
 import { GetFormDepartmentThunks } from "../../features/common/redux/thunks";
+import toast from "react-hot-toast";
 
 interface FormProps {
   isOpen: boolean;
@@ -102,6 +103,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
           dispatch(CreateHrThunks(HrDetails))
         }
         setSelectedDepartments([])
+        onClose()
       } else if (formType === 'employee') {
         if (EmplopyEdit) {
           console.log("under developement")
@@ -113,6 +115,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
       }
     } catch (error) {
       console.log(error, "error on hr added")
+      toast.error("Error")
     }
   }
 
@@ -174,7 +177,8 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
     const vls = [...dptDate, data]
     const values = [...selectedDepartments, name];
     setSelectedDepartments(values);
-    setdptDate(vls)
+    setdptDate(vls);
+    setIsOpenDpt(false)
   };
 
   return (

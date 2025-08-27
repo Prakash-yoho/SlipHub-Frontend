@@ -9,15 +9,17 @@ import toast from 'react-hot-toast'
 import { GetLocalStorage, RemoveLocalStorage, StoreLocalStorage } from '../../utils/localstorage'
 import { COLORS, FONTS } from '../../constants/uiconstants'
 import { verifyOtp } from '../../features/Auth/service'
+import { MobileResponsive } from '../../hooks/MobileResponsive'
 
 const Login = () => {
 
-    const [email, setEmail] = useState("sivashankarrajendran13@gmail.com");
-    const [password, setPassword] = useState("123456");
+    const [email, setEmail] = useState("admin@gmail.com");
+    const [password, setPassword] = useState("admin@2025");
     const [handleOTP, setHandleOTP] = useState(false);
     const navigate = useNavigate();
     const { login } = useAuth()
     const { verifyOTP } = useAuth();
+    const { MobileView } = MobileResponsive()
 
 
     const handleSignIn = async (e: React.FormEvent) => {
@@ -124,48 +126,50 @@ const Login = () => {
             }}
         >
 
-            <div className='w-1/2'>
-                <h1 style={{ ...FONTS.nico_moji, color: COLORS.primary }}>
+            <div className={MobileView ? 'w-full' : 'w-1/2'} >
+                <h1 style={{ ...FONTS.nico_moji, color: COLORS.primary }} className={MobileView ? `!text-6xl pt-10` : ``}>
                     SlipHub
                 </h1>
-                <p style={{ ...FONTS.Nav, color: COLORS.primary }}>
+                <p style={{ ...FONTS.Nav, color: COLORS.primary }} className={MobileView ? `!w-full text-sm` : ``}>
                     Your one-stop solution for all your HRMS needs. Streamline your processes and enhance productivity with Slip Hub.
                 </p>
             </div>
 
 
-            <div className='grid grid-cols-2 gap-10 mt-6'>
-                <section className=' flex justify-center items-center h-[60vh]'>
-                    <img src={GroupImg} alt="" className='w-fit h-full' />
-                </section>
+            <div className={MobileView ? 'flex flex-col' : 'grid grid-cols-2 gap-10 mt-6'}>
+                {!MobileView &&
+                    <section className='flex justify-center items-center h-[60vh]'>
+                        <img src={GroupImg} alt="" className='w-fit h-full' />
+                    </section>
+                }
 
                 {!handleOTP && <section className='grid items-center px-4 h-[60vh]'>
                     <div>
-                        <h1 style={{ ...FONTS.login_head, color: COLORS.primary }}>Welcome!</h1>
+                        <h1 style={{ ...FONTS.login_head, color: COLORS.primary }} className={MobileView ? '!text-3xl -mt-20' : ''}>Welcome!</h1>
 
                         <div>
                             <form onSubmit={handleSignIn} className="flex flex-col items-center w-full mt-4 gap-4">
                                 <div className='w-full'>
-                                    <p style={{ ...FONTS.payroll_mainhead, color: COLORS.primary, padding: "0 0 10px 0" }}>Email</p>
+                                    <p style={{ ...FONTS.payroll_mainhead, color: COLORS.primary, padding: "0 0 10px 0" }} className={MobileView ? '!text-lg' : ''}>Email</p>
                                     <input
                                         type="text"
                                         placeholder="Username"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         style={{ ...FONTS.login_input, color: COLORS.primary }}
-                                        className="flex-1 p-2 w-full rounded-lg outline-none bg-[#4A70790D] text-black placeholder-gray-500 border border-[#4A7079]"
+                                        className={`flex-1 ${MobileView && '!text-md'} p-2 w-full rounded-lg outline-none bg-[#4A70790D] text-black placeholder-gray-500 border border-[#4A7079]`}
                                     />
                                 </div>
 
                                 <div className='w-full'>
-                                    <p style={{ ...FONTS.payroll_mainhead, color: COLORS.primary, padding: "0 0 10px 0" }}>Password</p>
+                                    <p style={{ ...FONTS.payroll_mainhead, color: COLORS.primary, padding: "0 0 10px 0" }} className={MobileView ? '!text-lg' : ''}>Password</p>
                                     <input
                                         type="password"
                                         placeholder="Password"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         style={{ ...FONTS.login_input, color: COLORS.primary }}
-                                        className="flex-1 p-2 w-full rounded-lg outline-none bg-[#4A70790D] text-black placeholder-gray-500 border border-[#4A7079]"
+                                        className={`flex-1 p-2 ${MobileView && '!text-md'} w-full rounded-lg outline-none bg-[#4A70790D] text-black placeholder-gray-500 border border-[#4A7079]`}
                                     />
                                 </div>
 
@@ -183,12 +187,12 @@ const Login = () => {
                 }
 
 
-                {handleOTP && <section className='w-[80%] m-auto'>
+                {handleOTP && <section className={MobileView ? 'w-full' : 'w-[80%] m-auto'}>
 
                     <div>
-                        <h1 style={{ ...FONTS.login_head, color: COLORS.primary }} className='mb-2'>Otp Verification</h1>
-                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Enter the 6 Digit OTP sent to your Mobile Number OTP</p>
-                        <p style={{ ...FONTS.Nav, color: COLORS.primary }} className='text-center'>
+                        <h1 style={{ ...FONTS.login_head, color: COLORS.primary }} className={MobileView ? '!text-3xl mt-10' : 'mb-2'}>Otp Verification</h1>
+                        <p style={{ ...FONTS.Nav, color: COLORS.primary }} className={MobileView ? '!text-sm' : ''}>Enter the 6 Digit OTP sent to your Mobile Number OTP</p>
+                        <p style={{ ...FONTS.Nav, color: COLORS.primary }} className={MobileView ? '!text-sm' : 'text-center'}>
                             OTP (for demo): {otpValue ?? ""}
                         </p>
 
@@ -212,7 +216,7 @@ const Login = () => {
                         ))}
                     </div>
 
-                    <div className="w-full flex flex-col items-center gap-5">
+                    <div className={MobileView ? "w-full flex flex-col items-center gap-5 mb-5" : "w-full flex flex-col items-center gap-5"}>
                         <button
                             onClick={handlesubmit}
                             style={{ ...FONTS.card_name, backgroundColor: COLORS.primary }}
@@ -226,7 +230,11 @@ const Login = () => {
                     </div>
                 </section>}
 
-
+                {MobileView &&
+                    <section className={handleOTP ? '' : '-mt-28'}>
+                        <img src={GroupImg} alt="" className='w-fit h-full' />
+                    </section>
+                }
             </div>
 
         </div>

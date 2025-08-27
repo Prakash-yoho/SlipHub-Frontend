@@ -13,6 +13,7 @@ import CompanyInfo from '../../Components/dashboad/CompanyInfo'
 import { GetLocalStorage } from '../../utils/localstorage'
 import dayjs from "dayjs";
 import { handleDownload } from '../../features/common/service'
+import { MobileResponsive } from '../../hooks/MobileResponsive'
 
 const EmployerProfile: React.FC = () => {
 
@@ -22,7 +23,8 @@ const EmployerProfile: React.FC = () => {
     const employer = useSelector((state: RootState) => state.empolyee.selectedEmployee)
 
     const len = employer?.payroll_slip?.length
-    console.log(len,"fdfdfdjkfmdkfm")
+
+    const { MobileView } = MobileResponsive()
 
     const role = GetLocalStorage("role")
 
@@ -39,8 +41,8 @@ const EmployerProfile: React.FC = () => {
     return (
         <div className='overflow-y-scroll h-full scrollbar-hide'>
 
-            {role ==="employee" && <CompanyInfo />}
-            
+            {role === "employee" && <CompanyInfo />}
+
 
             <div className="w-full h-full mt-5">
                 <div
@@ -48,14 +50,14 @@ const EmployerProfile: React.FC = () => {
                     style={{ backgroundImage: `url(${bg})` }}
                 >
                     <div className="flex flex-row w-full gap-5">
-                        <div className="flex flex-col w-8/12">
+                        <div className={MobileView ? 'flex flex-col w-full' : "flex flex-col w-8/12"}>
                             <div className="w-full h-20 flex rounded-4xl items-baseline">
                                 <CalendarPicker />
                                 <div className="bg-[#7697A0] w-max p-2 px-6 h-max rounded-lg font-bold text-white text-md">Generate</div>
                             </div>
                             <div className="flex flex-col w-full h-[75vh] mx-4 rounded-3xl gap-5 py-4">
                                 <div className="w-full h-52 bg-[#EAEBE8] rounded-2xl">
-                                    <EmployerPrevSlip payslip={len ? employer?.payroll_slip?.[len-1] : undefined} />
+                                    <EmployerPrevSlip payslip={len ? employer?.payroll_slip?.[len - 1] : undefined} />
                                 </div>
 
                                 <div className="w-full h-96 bg-[#EAEBE8] rounded-2xl px-4 overflow-y-scroll scrollbar-hide">
@@ -80,7 +82,7 @@ const EmployerProfile: React.FC = () => {
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.paid_days}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.gross_total}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg">
-                                                                <img src={DownloadIcon} alt="" className="w-[25px] h-[25px]" onClick={()=>handleDownload(items?.uuid)}/>
+                                                                <img src={DownloadIcon} alt="" className="w-[25px] h-[25px]" onClick={() => handleDownload(items?.uuid)} />
                                                             </td>
                                                         </tr>
                                                     )) :
@@ -98,70 +100,73 @@ const EmployerProfile: React.FC = () => {
 
                             </div>
                         </div>
-                        <div className="bg-[#EAEBE8] w-3/10 h-[82.3vh] m-4 rounded-3xl overflow-scroll scrollbar-hide">
-                            <div className='w-full rounded-2xl p-3  h-ful shadow-[0px_0px_15px_0px_#C3C7C64D]'>
-                                <section className='flex gap-4 items-center mb-4'>
-                                    <div className='bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center' style={{ ...FONTS.card_initial }}>K</div>
-                                    <div className='grid gap-1'>
-                                        <h1 style={{ ...FONTS.payroll_profileHead, color: COLORS.primary }}>Name : {employer?.first_name + ' ' + employer?.last_name}</h1>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.department?.dpt_name}</p>
-                                    </div>
-                                </section>
+                        {
+                            !MobileView &&
+                            <div className="bg-[#EAEBE8] w-3/10 h-[82.3vh] m-4 rounded-3xl overflow-scroll scrollbar-hide">
+                                <div className='w-full rounded-2xl p-3  h-ful shadow-[0px_0px_15px_0px_#C3C7C64D]'>
+                                    <section className='flex gap-4 items-center mb-4'>
+                                        <div className='bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center' style={{ ...FONTS.card_initial }}>K</div>
+                                        <div className='grid gap-1'>
+                                            <h1 style={{ ...FONTS.payroll_profileHead, color: COLORS.primary }}>Name : {employer?.first_name + ' ' + employer?.last_name}</h1>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.department?.dpt_name}</p>
+                                        </div>
+                                    </section>
 
-                                <div className='border border-[#C3C7C6] mb-4'></div>
+                                    <div className='border border-[#C3C7C6] mb-4'></div>
 
-                                <section className='my-4'>
-                                    <h1 style={{ ...FONTS.payroll_Head, color: COLORS.primary }}>Basic Info</h1>
-                                    <div className='flex justify-between gap-4 mt-2'>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Emp ID</p>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }} className='uppercase'>{employer?.emp_id}</p>
-                                    </div>
-                                    <div className='flex justify-between gap-4 mt-1'>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Designation</p>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.emp_role}</p>
-                                    </div>
-                                    <div className='flex justify-between gap-4 mt-1'>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>CTC</p>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.ctc}</p>
-                                    </div>
-                                    <div className='flex justify-between gap-4 mt-1'>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Department</p>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.department?.dpt_name}</p>
-                                    </div>
-                                    <div className='flex justify-between gap-4 mt-1'>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Work Mode</p>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.work_mode}</p>
-                                    </div>
-                                </section>
+                                    <section className='my-4'>
+                                        <h1 style={{ ...FONTS.payroll_Head, color: COLORS.primary }}>Basic Info</h1>
+                                        <div className='flex justify-between gap-4 mt-2'>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Emp ID</p>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }} className='uppercase'>{employer?.emp_id}</p>
+                                        </div>
+                                        <div className='flex justify-between gap-4 mt-1'>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Designation</p>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.emp_role}</p>
+                                        </div>
+                                        <div className='flex justify-between gap-4 mt-1'>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>CTC</p>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.ctc}</p>
+                                        </div>
+                                        <div className='flex justify-between gap-4 mt-1'>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Department</p>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.department?.dpt_name}</p>
+                                        </div>
+                                        <div className='flex justify-between gap-4 mt-1'>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Work Mode</p>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.work_mode}</p>
+                                        </div>
+                                    </section>
 
-                                <div className='border border-[#C3C7C6]'></div>
+                                    <div className='border border-[#C3C7C6]'></div>
 
 
-                                <section className='my-4'>
-                                    <h1 style={{ ...FONTS.payroll_Head, color: COLORS.primary }}>Personal Information</h1>
-                                    <div className='flex justify-between gap-4 mt-2'>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Date of Birth</p>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }} className='uppercase'>{employer?.dob}</p>
-                                    </div>
-                                    <div className='flex justify-between gap-4 mt-1'>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Father's Name</p>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.father_name}</p>
-                                    </div>
-                                    <div className='flex justify-between gap-4 mt-1'>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Email</p>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.contact_info?.email}</p>
-                                    </div>
-                                    <div className='flex justify-between gap-4 mt-1'>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Mobile</p>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.contact_info?.phone}</p>
-                                    </div>
-                                    <div className='flex justify-between gap-4 mt-1'>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Address</p>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.contact_info?.address}</p>
-                                    </div>
-                                </section>
+                                    <section className='my-4'>
+                                        <h1 style={{ ...FONTS.payroll_Head, color: COLORS.primary }}>Personal Information</h1>
+                                        <div className='flex justify-between gap-4 mt-2'>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Date of Birth</p>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }} className='uppercase'>{employer?.dob}</p>
+                                        </div>
+                                        <div className='flex justify-between gap-4 mt-1'>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Father's Name</p>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.father_name}</p>
+                                        </div>
+                                        <div className='flex justify-between gap-4 mt-1'>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Email</p>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.contact_info?.email}</p>
+                                        </div>
+                                        <div className='flex justify-between gap-4 mt-1'>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Mobile</p>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.contact_info?.phone}</p>
+                                        </div>
+                                        <div className='flex justify-between gap-4 mt-1'>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Address</p>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.contact_info?.address}</p>
+                                        </div>
+                                    </section>
+                                </div>
                             </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>

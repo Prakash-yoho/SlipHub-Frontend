@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useDispatch, useSelector } from 'react-redux'
 import { COLORS, FONTS } from '../../constants/uiconstants'
 import type { AppDispatch, RootState } from '../../store/store'

@@ -43,7 +43,7 @@ const Department = () => {
   };
 
   // Dropdown state
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
  
 
@@ -57,9 +57,9 @@ const Department = () => {
     dispatch(GetAllHrThunks())
   }, [dispatch]);
 
-  const options = AllHrProfile.map((data) => {
-    return { value: data?.first_name, label: `${data?.first_name}   ${data?.last_name}`,id:data?.id }
-  })
+  // const options = AllHrProfile.map((data) => {
+  //   return { value: data?.first_name, label: `${data?.first_name}   ${data?.last_name}`,id:data?.id }
+  // })
   //  [
   //   { value: AllHrProfile?.first_name, label: "Kamal" },
   //   { value: "Mugilan", label: "Mugilan" },
@@ -68,14 +68,14 @@ const Department = () => {
   //   { value: "Mathi", label: "Mathi" },
   // ];
 
-  const handleSelect = (selectedValue: string) => {
-    setFormData({ ...formData, HrName: selectedValue });
-    setIsOpen(false);
-  };
+  // const handleSelect = (selectedValue: string) => {
+  //   setFormData({ ...formData, HrName: selectedValue });
+  //   setIsOpen(false);
+  // };
 
-  const selectedOption = options.find(
-    (option) => option.value === formData.HrName
-  );
+  // const selectedOption = options.find(
+  //   (option) => option.value === formData.HrName
+  // );
 
 
 console.log(AllDepartment,AllHrProfile,"asdfgnm,./")

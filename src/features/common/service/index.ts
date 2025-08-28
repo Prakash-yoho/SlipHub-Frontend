@@ -18,8 +18,8 @@ export const handleDownload = async (data: string) => {
     URL.revokeObjectURL(url);
 }
 
-export const handleDownloadMonth = async (data: any) => {
-    const response = await Client.payroll.downloadMonth(data);
+export const handleDownloadMonth = async (data: any, emp: any) => {
+    const response = await Client.payroll.downloadMonth(data, emp);
     const url = window.URL.createObjectURL(response);
     const a = document.createElement('a');
     a.href = url;

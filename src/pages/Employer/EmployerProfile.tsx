@@ -148,7 +148,7 @@ const EmployerProfile: React.FC = () => {
                                         <h1 style={{ ...FONTS.payroll_Head, color: COLORS.primary }}>Personal Information</h1>
                                         <div className='flex justify-between gap-4 mt-2'>
                                             <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Date of Birth</p>
-                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }} className='uppercase'>{employer?.dob}</p>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }} className='uppercase'>{dayjs(employer?.dob).format("DD-MMM-YYYY")}</p>
                                         </div>
                                         <div className='flex justify-between gap-4 mt-1'>
                                             <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Father's Name</p>

@@ -71,7 +71,7 @@ const EmployerProfile: React.FC = () => {
                                             <table className="w-full border-separate border-spacing-y-4" >
                                                 <thead className="sticky top-0">
                                                     <tr style={{ background: COLORS.primary }} className="text-left text-white rounded-lg">
-                                                        <th style={{ ...FONTS.table_head }} className="px-4 py-3 rounded-l-lg">Date</th>
+                                                        <th style={{ ...FONTS.table_head }} className="px-4 py-3 rounded-l-lg">Month</th>
                                                         <th style={{ ...FONTS.table_head }} className="px-4 py-3">Wrk Days</th>
                                                         <th style={{ ...FONTS.table_head }} className="px-4 py-3">Credited Amt</th>
                                                         <th style={{ ...FONTS.table_head }} className="px-4 py-3 rounded-r-lg">Action</th>
@@ -83,7 +83,7 @@ const EmployerProfile: React.FC = () => {
                                                         <tr key={index} style={{ color: COLORS.primary }} className="bg-[#F8F8F8] rounded-lg">
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg"> {dayjs(items?.created_month).format("MMMM-YYYY")}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.paid_days}</td>
-                                                            <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.gross_total}</td>
+                                                            <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.net_salary}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg">
                                                                 <img src={DownloadIcon} alt="" className="w-[25px] h-[25px] cursor-pointer" onClick={() => handleDownload(items?.uuid)} />
                                                             </td>
@@ -135,10 +135,10 @@ const EmployerProfile: React.FC = () => {
                                             <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Department</p>
                                             <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.department?.dpt_name}</p>
                                         </div>
-                                        <div className='flex justify-between gap-4 mt-1'>
+                                        {/* <div className='flex justify-between gap-4 mt-1'>
                                             <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Work Mode</p>
                                             <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.work_mode}</p>
-                                        </div>
+                                        </div> */}
                                     </section>
 
                                     <div className='border border-[#C3C7C6]'></div>

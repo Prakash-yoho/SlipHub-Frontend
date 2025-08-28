@@ -1,3 +1,4 @@
+import toast from "react-hot-toast"
 import type { AppDispatch } from "../../../store/store"
 import type { HrProfileType } from "../../../Type/HrProfiles/Type"
 import { CreateHrService, GetHrByUUIDservice, HrGetAll, UpdateHrService } from "../service"
@@ -16,6 +17,7 @@ export const CreateHrThunks = (data: HrProfileType) => async (dispatch: AppDispa
     try {
         await CreateHrService(data)
         dispatch(addAndUpdateHrProfile(data))
+        toast.success("Hr Added Successfully")
     } catch (error) {
         console.log(error, "hr add thunks error")
     }

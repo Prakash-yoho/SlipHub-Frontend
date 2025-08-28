@@ -260,6 +260,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
           console.log("under developement")
         } else {
           dispatch(CreateEmployeeThunks(EmployeeDetails))
+          onClose()
         }
       } else {
         console.log("mention form type")
@@ -360,7 +361,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
       <div className="bg-[#EAEBE8] rounded-xl shadow-lg w-[65%] h-[90vh] overflow-y-scroll scrollbar-hide p-6 ">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold text-center" style={{ ...FONTS.Main, color: COLORS.primary }}>
-            Add Hr
+            {formType==="hr"?"Add Hr":"Add Employee"}
           </h2>
 
           <div
@@ -687,12 +688,12 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
 
               <div className="">
                 <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  Emergency COntact
+                  Emergency Contact
                 </p>
                 <input
                   type="text"
-                  name="Emergency COntact"
-                  placeholder="Enter Emergency COntact"
+                  name="Emergency Contact"
+                  placeholder="Enter Emergency Contact"
                   value={EmplopyEdit?.emg_contact || HrEdit?.emg_contact || undefined}
                   className={`border ${errors.emg_contact ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
@@ -816,7 +817,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
           <div className="  rounded-lg flex gap-3 justify-end items-center mt-4">
             <button
               type="button"
-              className="bg-[#4A70790D] border border-[#4A7079] px-6 py-1 rounded-md"
+              className="bg-[#4A70790D] border border-[#4A7079] px-6 py-1 rounded-md cursor-pointer"
               onClick={onClose}
               style={{ ...FONTS.view_btn, color: COLORS.primary }}
             >
@@ -824,7 +825,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
             </button>
             <button
               type="submit"
-              className="bg-[#4A7079] border border-[#4A7079] text-[#FFFFFF] px-6 py-1 rounded-md"
+              className="bg-[#4A7079] border border-[#4A7079] text-[#FFFFFF] px-6 py-1 rounded-md cursor-pointer"
               style={{ ...FONTS.view_btn }}
             >
               submit

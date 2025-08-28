@@ -1,3 +1,4 @@
+import toast from "react-hot-toast"
 import type { AppDispatch } from "../../../store/store"
 import type { EmployeeProfile } from "../../../Type/Emp_profile/Type"
 import { CreateEmployeeService, GetAllEmployeeService, GetEmployeeByUUIDService } from "../service"
@@ -16,6 +17,7 @@ export const CreateEmployeeThunks = (data: EmployeeProfile) => async (dispatch: 
     try {
         await CreateEmployeeService(data)
         dispatch(addAndUpdateEmployee(data))
+        toast.success("Employee Added Successfully")
     } catch (error) {
         console.log(error, "employee thunks")
     }

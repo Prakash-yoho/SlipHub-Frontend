@@ -31,6 +31,7 @@ const Login = () => {
         }
 
         const params = { email, password };
+        toast.loading("Please Wait Until You Get OTP")
 
         try {
             const response = await Signin(params);
@@ -40,11 +41,9 @@ const Login = () => {
             if (token) {
                 StoreLocalStorage("token", token);
                 StoreLocalStorage("otp", otp);
-
                 login(token);
                 setHandleOTP(true);
 
-                // navigate("/verification");
             } else {
                 toast.error("Invalid credentials. Please try again.");
             }
@@ -176,7 +175,7 @@ const Login = () => {
                                 <button
                                     type="submit"
                                     style={{ ...FONTS.card_name, backgroundColor: COLORS.primary }}
-                                    className="text-[#FFFFFF] p-2 mt-4 w-full rounded-lg font-medium shadow-md transition"
+                                    className="text-[#FFFFFF] p-2 mt-4 w-full rounded-lg font-medium shadow-md transition cursor-pointer"
                                 >
                                     Login
                                 </button>

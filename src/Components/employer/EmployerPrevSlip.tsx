@@ -37,7 +37,7 @@ const EmployerPrevSlip: React.FC<props> = ({ payslip }) => {
                 </section>
                 <section className='bg-[#ffffff77] px-3 py-2 rounded-lg flex justify-between w-full'>
                     <p style={{ ...FONTS.Nav, color: COLORS.primary }}>salary</p>
-                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{payslip?.gross_total}</p>
+                    <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{payslip?.net_salary}</p>
                 </section>
             </div>
         </div>

@@ -234,7 +234,13 @@ const Employee = () => {
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3 uppercase">{items?.emp_id}</td>
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3">{dayjs(items?.join_date).format("DD-MMM-YYYY")}</td>
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.emp_role}</td>
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.contact_info?.email}</td>
+                  <td style={{ ...FONTS.table_data }} className="px-4 py-3">
+                    {items?.contact_info?.email
+                      ? items.contact_info.email.length > 20
+                        ? items.contact_info.email.slice(0, 20) + "...."
+                        : items.contact_info.email
+                      : ""}
+                  </td>
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg">{items?.ctc}</td>
                 </tr>
               ))

@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast'
 import Client from '../../../api/index'
 import type { DepartmentType } from '../../../Type/Department/Type'
 
@@ -16,4 +17,5 @@ export const CreateDepartmentService = async (data: DepartmentType) => {
 
 export const DeleteDepartment = async (data:any)=>{
     await Client.department.delete(data)
+    toast.success("Deleted Successfully")
 }

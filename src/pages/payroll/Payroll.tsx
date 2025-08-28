@@ -162,7 +162,7 @@ const Payroll = () => {
                         <input
                             type="text"
                             style={{ ...FONTS.Nav, color: COLORS.primary }}
-                            placeholder='Search'
+                            placeholder='Search By Employee Name'
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             className='bg-[#4A70790D] absolute w-[94%] m-auto z-99 -top-3 p-3 px-4 border border-[#4A7079] outline-0 rounded-3xl'

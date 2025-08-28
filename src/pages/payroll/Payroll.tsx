@@ -330,7 +330,7 @@ const Payroll = () => {
                                                         <tr key={index} style={{ color: COLORS.primary }} className='bg-[#EAEBE8]  rounded-lg'>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">{dayjs(items?.created_month).format("MMMM-YYYY")}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.paid_days}</td>
-                                                            <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.gross_total}</td>
+                                                            <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.net_salary}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg"><img src={DownloadIcon} alt="" className='w-[25px] h-[25px] cursor-pointer' onClick={() => handleDownload(items?.uuid)} /></td>
                                                         </tr>
                                                     )) :

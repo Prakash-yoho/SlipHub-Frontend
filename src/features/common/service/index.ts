@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Client from '../../../api/index'
 
 export const GetFormDepartmentService = async () => {
@@ -7,6 +8,18 @@ export const GetFormDepartmentService = async () => {
 
 export const handleDownload = async (data: string) => {
     const response = await Client.payroll.download(data);
+    const url = window.URL.createObjectURL(response);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `payrollslip-${data}.pdf`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+}
+
+export const handleDownloadMonth = async (data: any) => {
+    const response = await Client.payroll.downloadMonth(data);
     const url = window.URL.createObjectURL(response);
     const a = document.createElement('a');
     a.href = url;

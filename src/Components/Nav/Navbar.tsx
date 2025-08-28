@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
           </NavLink>
 }
 
-          {role==="hr" || role==="admin" &&
+          {(role==="hr" || role==="admin") &&
           <NavLink
             to="/employee"
             className={({ isActive }) =>
@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
           </NavLink>
 }
 
-          {role==="admin"||role==="hr"  &&
+          {role==="hr" &&
           <NavLink
             to="/payroll"
             className={({ isActive }) =>
@@ -119,7 +119,7 @@ const Navbar: React.FC = () => {
             <img src={ProfileIcon} alt="Notification" className="w-7 h-7" />
 
             {/* <div> */}
-              <button className='px-3' onClick={logout}>Logout</button>
+              <button className='px-3 cursor-pointer' onClick={logout}>Logout</button>
             {/* </div> */}
           </div>
         </section>

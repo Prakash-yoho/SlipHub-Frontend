@@ -56,7 +56,7 @@ const HrProfiles = () => {
                 <button
                     onClick={() => setIsModalOpen(true)}
                     style={{ ...FONTS.Main_btn, background: COLORS.primary }}
-                    className='text-[#FFFFFF] px-3 py-[4px] rounded-md'
+                    className='text-[#FFFFFF] px-3 py-[4px] rounded-md cursor-pointer'
                 >
                     Add HR
                 </button>
@@ -124,7 +124,7 @@ const HrProfiles = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className='bg-[#4A70790D] text-[#4A7079] font-bold border border-[#4A7079] rounded-md px-3 py-[6px] outline-0 w-[400px]'
-                    placeholder='Search by name or employee ID'
+                    placeholder='Search by name or HR ID'
                 />
             </div>
 
@@ -158,7 +158,7 @@ const HrProfiles = () => {
                                 <button
                                     style={{ ...FONTS.view_btn, background: COLORS.primary }}
                                     onClick={() => { setisOpen(true); setselectedHr(hrdata?.uuid ?? "") }}
-                                    className='text-[#FFFFFF] px-3 py-[4px] rounded-md'
+                                    className='text-[#FFFFFF] px-3 py-[4px] rounded-md cursor-pointer'
                                 >
                                     View
                                 </button>

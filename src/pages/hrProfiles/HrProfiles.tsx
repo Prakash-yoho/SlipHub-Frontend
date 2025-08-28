@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react';
 import { COLORS, FONTS } from '../../constants/uiconstants'
 import Form from '../../Components/form/Form';
@@ -19,6 +20,7 @@ const HrProfiles = () => {
     const [selectedDepartment, setSelectedDepartment] = useState<string | null>(null);
     const [isOpenDpt, setIsOpenDpt] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
+    const [selectHrData, setselectHrData] = useState<HrProfileType | null>(null);
 
     const dispatch = useDispatch<AppDispatch>()
 
@@ -59,7 +61,7 @@ const HrProfiles = () => {
                 </button>
             </div>
 
-            <DrawerForm isOpen={isOpen} setIsOpen={setisOpen} hrUUID={selectedHr} />
+            <DrawerForm isOpen={isOpen} setIsOpen={setisOpen} hrUUID={selectedHr} seletedHrData={setselectHrData} setIsModalOpen={setIsModalOpen} />
 
             <div className='flex justify-between items-center mt-6'>
                 <section className='flex gap-4'>
@@ -189,7 +191,7 @@ const HrProfiles = () => {
                 )}
             </div>
 
-            <Form isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} formType='hr' />
+            <Form isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} formType='hr' HrEdit={selectHrData} />
         </div>
     )
 }

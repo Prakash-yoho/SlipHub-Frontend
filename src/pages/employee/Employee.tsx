@@ -9,6 +9,7 @@ import type { EmployeeProfile } from '../../Type/Emp_profile/Type'
 import Form from '../../Components/form/Form'
 import { useNavigate } from 'react-router-dom'
 import { GetLocalStorage } from '../../utils/localstorage'
+import dayjs from 'dayjs'
 
 const Employee = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -231,7 +232,7 @@ const Employee = () => {
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">{index + 1}</td>
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.first_name + ' ' + items?.last_name}</td>
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3 uppercase">{items?.emp_id}</td>
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.join_date}</td>
+                  <td style={{ ...FONTS.table_data }} className="px-4 py-3">{dayjs(items?.join_date).format("DD-MMM-YYYY")}</td>
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.emp_role}</td>
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.contact_info?.email}</td>
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg">{items?.ctc}</td>

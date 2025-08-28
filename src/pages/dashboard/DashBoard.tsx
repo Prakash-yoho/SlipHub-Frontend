@@ -40,15 +40,15 @@ const DashBoard = () => {
           <div className="w-full h-[350px] p-6 flex flex-col justify-center items-center bg-[#DDDED980] shadow-[0px_0px_15px_0px_#4A707966] rounded-2xl">
             <h1 className="!text-[#4A7079] !font-semibold w-full text-start p-2 -mt-5" style={{ ...FONTS.table_head }}>Salaries By Department</h1>
             <SalaryDetailCard
-              roles={['Developer', 'Manager', 'Designer', 'QA']}
-              actualSalaries={[1200, 1500, 800, 600]}
-              totalSalaries={[2500, 2000, 1000, 600]}
+              roles={DashBoard?.salary_chts?.roles ?? []}
+              actualSalaries={DashBoard?.salary_chts?.actualSalaries ?? []}
+              totalSalaries={DashBoard?.salary_chts?.totalSalaries ?? []}
             />
 
           </div>
           <div className="w-full h-[350px] p-6 flex flex-col bg-[#DDDED980] shadow-[0px_0px_15px_0px_#4A707966] gap-5 rounded-2xl">
             <h1 className="!text-[#4A7079] !font-semibold w-full h-full -mt-5" style={{ ...FONTS.table_head }}>Employeis By Department</h1>
-            <EmployeeByDpt />
+            <EmployeeByDpt employeeData={DashBoard?.department_chart} />
           </div>
         </div>
       </div>

@@ -24,7 +24,7 @@ export const SalaryDetailCard: React.FC<SalaryDetailCardProps> = ({
     actualSalaries,
     totalSalaries,
 }) => {
-    const remainingSalaries = totalSalaries.map((total, index) => {
+    const remainingSalaries = totalSalaries?.map((total, index) => {
         const actual = actualSalaries[index];
         return Math.max(total - actual, 0);
     });

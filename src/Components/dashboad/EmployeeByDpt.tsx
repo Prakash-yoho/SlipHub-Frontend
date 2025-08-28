@@ -16,26 +16,18 @@ import { FONTS } from '../../constants/uiconstants';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 
-const labels = ['Software Developer', 'Project Manager', 'Designer', 'QA Engineer'];
-const employeeCounts = [65, 25, 40, 15];
+// const labels = ['Software Developer', 'Project Manager', 'Designer', 'QA Engineer'];
+// const employeeCounts = [65, 25, 40, 15];
+
+interface props {
+    employeeData: {
+        label: string[],
+        employeeCounts: number[],
+    }
+}
 
 // const heightPerBar = 400;
 // const chartHeight = labels.length * heightPerBar;
-
-const data: ChartData<'bar'> = {
-    labels,
-    datasets: [
-        {
-            label: 'Number of Employees',
-            data: employeeCounts,
-            backgroundColor: '#4A7079',
-            borderRadius: 10,
-            barThickness: 10,
-            categoryPercentage: 0.8,
-            barPercentage: 0.9,
-        },
-    ],
-};
 
 const options: ChartOptions<'bar'> = {
     indexAxis: 'y',
@@ -104,12 +96,31 @@ const options: ChartOptions<'bar'> = {
     },
 };
 
-const EmployeeByDpt: React.FC = () => {
+const EmployeeByDpt: React.FC<props> = ({ employeeData }) => {
+
+    const employeeCounts = employeeData?.employeeCounts
+    const labels = employeeData?.label
+
+    const data: ChartData<'bar'> = {
+        labels,
+        datasets: [
+            {
+                label: 'Number of Employees',
+                data: employeeCounts,
+                backgroundColor: '#4A7079',
+                borderRadius: 10,
+                barThickness: 10,
+                categoryPercentage: 0.8,
+                barPercentage: 0.9,
+            },
+        ],
+    };
+
     return (
         <div
             style={{
                 width: '100%',
-                height: '300px',
+                height: '100%',
             }}
         >
             <Bar data={data} options={options} />

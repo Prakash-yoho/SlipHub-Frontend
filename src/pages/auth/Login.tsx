@@ -231,7 +231,7 @@ const Login = () => {
                 </section>}
 
                 {MobileView &&
-                    <section className={handleOTP ? '' : '-mt-28'}>
+                    <section className={handleOTP ? '' : '-mt-24'}>
                         <img src={GroupImg} alt="" className='w-fit h-full' />
                     </section>
                 }

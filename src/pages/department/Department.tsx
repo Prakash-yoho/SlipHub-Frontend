@@ -211,7 +211,7 @@ console.log(AllDepartment,AllHrProfile,"asdfgnm,./")
                 </div>
 
                 {/* Department Head */}
-                <div className="w-full">
+                {/* <div className="w-full">
                   <p
                     style={{ ...FONTS.payroll_head, color: COLORS.primary }}
                     className="pb-3"
@@ -227,10 +227,10 @@ console.log(AllDepartment,AllHrProfile,"asdfgnm,./")
                     className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                     required
                   />
-                </div>
+                </div> */}
 
                 {/* HR Dropdown */}
-                <div className="w-full">
+                {/* <div className="w-full">
                   <p
                     style={{ ...FONTS.payroll_head, color: COLORS.primary }}
                     className="pb-3"
@@ -277,7 +277,7 @@ console.log(AllDepartment,AllHrProfile,"asdfgnm,./")
                       </div>
                     )}
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <div className="flex justify-between mt-2">

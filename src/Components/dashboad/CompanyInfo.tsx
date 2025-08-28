@@ -10,7 +10,7 @@ interface props {
 
 const CompanyInfo: React.FC<props> = ({ company_details }) => {
 
-    const MobileView = MobileResponsive()
+    const { MobileView } = MobileResponsive()
 
     return (
         <div className='w-full p-4 flex flex-col items-center gap-5' >

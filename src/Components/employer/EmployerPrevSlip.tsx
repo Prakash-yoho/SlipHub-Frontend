@@ -10,7 +10,7 @@ interface props {
 
 const EmployerPrevSlip: React.FC<props> = ({ payslip }) => {
 
-    const MobileView = MobileResponsive()
+    const { MobileView } = MobileResponsive()
 
     return (
         <div className='w-full h-full p-4 flex flex-col gap-2'>

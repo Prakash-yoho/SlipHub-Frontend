@@ -86,7 +86,7 @@ console.log(AllDepartment,AllHrProfile,"asdfgnm,./")
         <h1 style={{ ...FONTS.Main, color: COLORS.primary }}>Department</h1>
         <button
           style={{ ...FONTS.Main_btn, background: COLORS.primary }}
-          className="text-[#FFFFFF] px-3 py-[4px] rounded-md"
+          className="text-[#FFFFFF] px-3 py-[4px] rounded-md cursor-pointer"
           onClick={() => setIsModalOpen(true)}
         >
           Add Department
@@ -142,7 +142,7 @@ console.log(AllDepartment,AllHrProfile,"asdfgnm,./")
                     {data?.no_of_emp}
                 </p>
               </div>
-              <button onClick={()=>{DeleteDepartment(data?.uuid)}}>Remove Department</button>
+              <button onClick={()=>{DeleteDepartment(data?.uuid)}} className="cursor-pointer">Remove Department</button>
             </div>
           ))}
       </div>

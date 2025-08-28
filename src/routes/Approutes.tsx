@@ -32,11 +32,11 @@ function Approutes() {
 
       <Route path='/' element={<MainLayout />}>
         {role === "employee" ? <Route index element={<EmployerProfile />} /> : <Route index element={<DashBoard />} />}
-        <Route path='/hrProfiles' element={<HrProfiles />} />
-        <Route path='/department' element={<Department />} />
-        <Route path='/employee' element={<Employee />} />
+        {role === "admin" && <Route path='/hrProfiles' element={<HrProfiles />} />}
+        {(role === "admin" || role === "hr") && <Route path='/employee' element={<Employee />} />}
+        {role === "hr" && <Route path='/payroll' element={<Payroll />} />}
+        {role === "admin" && <Route path='/department' element={<Department />} />}
         <Route path='/employee/:uuid' element={<EmployerProfile />} />
-        <Route path='/payroll' element={<Payroll />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='*' element={<Navigate to='/' />} />
       </Route>

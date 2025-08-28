@@ -8,6 +8,7 @@ import type { AppDispatch, RootState } from '../../store/store';
 import { GetAllHrThunks } from '../../features/HrProfile/redux/thunks';
 import type { HrProfileType } from '../../Type/HrProfiles/Type';
 import { GetFormDepartmentThunks } from '../../features/common/redux/thunks';
+import dayjs from 'dayjs';
 
 const HrProfiles = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -55,7 +56,7 @@ const HrProfiles = () => {
                 <button
                     onClick={() => setIsModalOpen(true)}
                     style={{ ...FONTS.Main_btn, background: COLORS.primary }}
-                    className='text-[#FFFFFF] px-3 py-[4px] rounded-md'
+                    className='text-[#FFFFFF] px-3 py-[4px] rounded-md cursor-pointer'
                 >
                     Add HR
                 </button>
@@ -123,7 +124,7 @@ const HrProfiles = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className='bg-[#4A70790D] text-[#4A7079] font-bold border border-[#4A7079] rounded-md px-3 py-[6px] outline-0 w-[400px]'
-                    placeholder='Search by name or employee ID'
+                    placeholder='Search by name or HR ID'
                 />
             </div>
 
@@ -157,21 +158,21 @@ const HrProfiles = () => {
                                 <button
                                     style={{ ...FONTS.view_btn, background: COLORS.primary }}
                                     onClick={() => { setisOpen(true); setselectedHr(hrdata?.uuid ?? "") }}
-                                    className='text-[#FFFFFF] px-3 py-[4px] rounded-md'
+                                    className='text-[#FFFFFF] px-3 py-[4px] rounded-md cursor-pointer'
                                 >
                                     View
                                 </button>
                             </div>
 
-                            <div className='text-[#7697A0] flex justify-between'>
-                                <p style={{ ...FONTS.card_role }}>{hrdata?.department?.[0]?.dpt_name}</p>
+                            <div className='text-[#7697A0] flex justify-evenly'>
+                                <p className='break-words w-1/2' style={{ ...FONTS.card_role }}>{hrdata?.department?.[0]?.dpt_name}</p>
                                 <span className='w-[2px] bg-[#C3C7C6]'></span>
-                                <p style={{ ...FONTS.card_role }}>{hrdata?.contact_info?.email}</p>
+                                <p className='break-words w-1/2 pl-3' style={{ ...FONTS.card_role }}>{hrdata?.contact_info?.email}</p>
                             </div>
 
                             <div className=' grid grid-cols-3 gap-2 mt-5'>
                                 <p className='bg-[#E0E0E0] p-2 rounded-lg font-semibold' style={{ ...FONTS.card_detail, color: COLORS.primary }}>
-                                    Join Date : {hrdata?.join_date}
+                                    Join Date : {} {dayjs(hrdata?.join_date).format("DD-MMM-YYYY")}
                                 </p>
                                 <p className='bg-[#E0E0E0] p-2 rounded-lg font-semibold' style={{ ...FONTS.card_detail, color: COLORS.primary }}>
                                     Experience : {hrdata?.experience}

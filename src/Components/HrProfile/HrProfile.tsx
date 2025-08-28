@@ -53,7 +53,7 @@ export const DrawerForm: React.FC<props> = ({ isOpen, setIsOpen, setIsModalOpen,
                                 <h2 className="text-4xl font-semibold text-teal-700">Profile</h2>
                                 <div
                                     onClick={closeDrawer}
-                                    className="transition bg-[#4A7079] rounded-[50%] text-xl px-3 text-white p-2"
+                                    className="transition bg-[#4A7079] rounded-[50%] text-xl px-3 text-white p-2 cursor-pointer"
                                 >
                                     ✕
                                 </div>
@@ -65,12 +65,12 @@ export const DrawerForm: React.FC<props> = ({ isOpen, setIsOpen, setIsModalOpen,
                                         <h1 style={{ ...FONTS.payroll_profileHead, color: COLORS.primary }} className='!font-bold !text-2xl'>{selectedHr?.first_name + ' ' + selectedHr?.last_name}</h1>
                                         <p style={{ ...FONTS.Nav, color: COLORS.primary }}>HR</p>
                                     </div>
-                                    <div className='flex flex-row bg-[#7697A0] py-2  w-max gap-2 h-10 text-xl items-center rounded-lg text-white px-3' onClick={() => {
+                                    <div className='flex flex-row bg-[#7697A0] py-2  w-max gap-2 h-10 text-xl items-center rounded-lg text-white px-3 cursor-pointer' onClick={() => {
                                         setIsModalOpen?.(true);
                                         seletedHrData(selectedHr)
                                     }
                                     }>
-                                        <img src={edit} alt="" className='w-5 h-5' />
+                                        <img src={edit} alt="" className='w-5 h-5 ' />
                                         <p>Edit</p>
                                     </div>
                                 </section>

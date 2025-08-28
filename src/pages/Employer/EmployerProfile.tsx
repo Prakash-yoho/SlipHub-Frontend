@@ -89,10 +89,10 @@ const EmployerProfile: React.FC = () => {
                                                             </td>
                                                         </tr>
                                                     )) :
-                                                        <tr>
-                                                            <td></td>
-                                                            <td className='text-center'>No Slip Founded</td>
-                                                            <td></td>
+                                                        <tr  style={{ color: COLORS.primary }} className="bg-[#F8F8F8] rounded-lg">
+                                                            
+                                                            <td style={{ ...FONTS.table_data }} className="px-4 py-3 text-center rounded-lg" colSpan={4}>No Slip Founded</td>
+                                                            
                                                         </tr>
                                                     }
                                                 </tbody>

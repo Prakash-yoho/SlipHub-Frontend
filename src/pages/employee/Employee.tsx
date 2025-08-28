@@ -8,6 +8,7 @@ import { GetAllDepartmentThunks } from '../../features/Department/redux/thunks'
 import type { EmployeeProfile } from '../../Type/Emp_profile/Type'
 import Form from '../../Components/form/Form'
 import { useNavigate } from 'react-router-dom'
+import { GetLocalStorage } from '../../utils/localstorage'
 
 const Employee = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,18 +61,20 @@ const Employee = () => {
         emp?.contact_info?.email?.toLowerCase().includes(search.toLowerCase())
       );
   }, [employees, selectedDept, selectedExp, search]);
+  const role = GetLocalStorage('role')
 
   return (
     <div className='py-6 px-8 h-screen'>
       <div className='flex justify-between items-center'>
         <h1 style={{ ...FONTS.Main, color: COLORS.primary }}>Employee Profiles</h1>
-        <button
+        {role==="hr" && <button
           onClick={() => setIsOpen(true)}
           style={{ ...FONTS.Main_btn, background: COLORS.primary }}
           className='text-[#FFFFFF] px-3 py-[4px] rounded-md cursor-pointer'
         >
           Add Employee
-        </button>
+        </button>}
+        
       </div>
 
       <Form isOpen={isOpen} onClose={onclose} formType='employee' />

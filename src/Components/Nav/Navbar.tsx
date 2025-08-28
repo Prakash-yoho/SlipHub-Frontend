@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
           </NavLink>
 }
 
-          {role==="hr"  &&
+          {role==="hr" || role==="admin" &&
           <NavLink
             to="/employee"
             className={({ isActive }) =>

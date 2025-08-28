@@ -56,7 +56,7 @@ const EmployerProfile: React.FC = () => {
                         <div className={MobileView ? 'flex flex-col w-full' : "flex flex-col w-8/12"}>
                             <div className="w-full h-20 flex rounded-4xl items-baseline">
                                 <CalendarPicker setselecteDate={setchoseDate} />
-                                <div className="bg-[#7697A0] w-max p-2 px-6 h-max rounded-lg font-bold text-white text-md" onClick={() => handleDownloadMonth(choseDate, employer?.uuid)}>Generate</div>
+                                <div className="bg-[#7697A0] w-max p-2 px-6 h-max rounded-lg font-bold text-white text-md cursor-pointer" onClick={() => handleDownloadMonth(choseDate, employer?.uuid)}>Generate</div>
                             </div>
                             <div className="flex flex-col w-full h-[75vh] mx-4 rounded-3xl gap-5 py-4">
                                 <div className={`w-full ${MobileView ? 'h-42 -ml-2' : 'h-52'}  bg-[#EAEBE8] rounded-2xl`}>

@@ -61,23 +61,23 @@ const Payroll = () => {
     }
 
     const handelGenerateSlip = async (params: string) => {
-  try {
-    if (PayRollInput.worked_days != 0 && PayRollInput.paid_days != 0) {
-      const payload: PayRollType = {
-        ...PayRollInput,
-        created_month: selecteDate ?? "",
-        employee_uuid: params,
-      };
+        try {
+            if (PayRollInput.worked_days != 0 && PayRollInput.paid_days != 0) {
+                const payload: PayRollType = {
+                    ...PayRollInput,
+                    created_month: selecteDate ?? "",
+                    employee_uuid: params,
+                };
 
-      setPayRollInput(payload);
-      dispatch(GeneratePayrollThunks(payload));
-    } else {
-      toast.error("Enter All fields");
-    }
-  } catch (error) {
-    console.log(error, "payroll");
-  }
-};
+                setPayRollInput(payload);
+                dispatch(GeneratePayrollThunks(payload));
+            } else {
+                toast.error("Enter All fields");
+            }
+        } catch (error) {
+            console.log(error, "payroll");
+        }
+    };
 
 
     const handleReset = () => {
@@ -92,6 +92,22 @@ const Payroll = () => {
         setselecteDate(null);
     };
 
+
+
+    const [openConfirm, setOpenConfirm] = useState(false);
+
+    const handleGenerateClick = () => {
+        if (selectedEmp?.uuid) {
+            setOpenConfirm(true); // open modal
+        }
+    };
+
+    const confirmGenerate = () => {
+        if (selectedEmp.uuid) {
+            handelGenerateSlip(selectedEmp.uuid);
+        }
+        setOpenConfirm(false);
+    };
 
     return (
         <div>
@@ -232,28 +248,59 @@ const Payroll = () => {
                                             />
                                         </div>
 
-                                        <div className='grid grid-cols-2'>
+                                        <div className='flex items-center justify-center mt-4'>
                                             <CalendarPicker setselecteDate={setselecteDate} />
 
-                                            <div className='  rounded-lg flex gap-3 justify-end items-center mt-4'>
+                                            <div className='  rounded-lg flex gap-3 justify-end items-center '>
                                                 <button
                                                     onClick={handleReset}
-                                                    className='bg-[#4A70790D] border border-[#4A7079] px-6 py-1 rounded-md'
+                                                    className='bg-[#4A70790D] border border-[#4A7079] px-6 py-1 rounded-md cursor-pointer'
                                                     style={{ ...FONTS.view_btn, color: COLORS.primary }}
                                                 >
                                                     Reset
                                                 </button>
                                                 <button
-                                                    onClick={() => {
-                                                        if (selectedEmp?.uuid) {
-                                                            handelGenerateSlip(selectedEmp.uuid);
-                                                        }
-                                                    }}
-                                                    className='bg-[#4A7079] border border-[#4A7079] text-[#FFFFFF] px-6 py-1 rounded-md'
-                                                    style={{ ...FONTS.view_btn }}
+                                                    onClick={handleGenerateClick}
+                                                    className="bg-[#4A7079] border border-[#4A7079] text-[#FFFFFF] px-6 py-1 rounded-md cursor-pointer"
                                                 >
                                                     Generate
                                                 </button>
+
+
+
+                                                {openConfirm && (
+                                                    <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+                                                        <div className="bg-white rounded-2xl p-6 shadow-lg w-[450px]">
+                                                            <h2 className="" style={{...FONTS.card_name,color:COLORS.primary}}>
+                                                                Confirm Slip Generation
+                                                            </h2>
+                                                            <p className="text-sm text-gray-600 mt-2">
+                                                                Are you sure you want to generate a slip for{" "}
+                                                                <span className="font-medium text-[#4A7079]">
+                                                                    {(selectedEmp?.first_name && selectedEmp?.last_name) ? `${selectedEmp.first_name} ${selectedEmp.last_name}` : "this employee"}
+                                                                </span>
+                                                                ?
+                                                            </p>
+
+                                                            <div className="mt-4 flex justify-end gap-3">
+                                                                <button
+                                                                    onClick={() => setOpenConfirm(false)}
+                                                                    className="px-4 py-1 rounded-md border border-gray-300 text-gray-700 cursor-pointer"
+                                                                    style={{...FONTS.view_btn}}
+                                                                >
+                                                                    Cancel
+                                                                </button>
+                                                                <button
+                                                                    onClick={confirmGenerate}
+                                                                    className="px-4 py-1 rounded-md bg-[#4A7079] text-white cursor-pointer"
+                                                                    style={{...FONTS.view_btn}}
+                                                                >
+                                                                    Yes, Generate
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     </div>

@@ -14,7 +14,7 @@ const Employee = () => {
   const [deptOpen, setDeptOpen] = useState(false);
   const [expOpen, setExpOpen] = useState(false);
   const [selectedDept, setSelectedDept] = useState<string>("Departments");
-  const [selectedExp, setSelectedExp] = useState<string>("All Experience");
+  const [selectedExp, setSelectedExp] = useState<string>("Experience");
   const [search, setSearch] = useState<string>("");
 
   const navigate = useNavigate()
@@ -68,7 +68,7 @@ const Employee = () => {
         <button
           onClick={() => setIsOpen(true)}
           style={{ ...FONTS.Main_btn, background: COLORS.primary }}
-          className='text-[#FFFFFF] px-3 py-[4px] rounded-md'
+          className='text-[#FFFFFF] px-3 py-[4px] rounded-md cursor-pointer'
         >
           Add Employee
         </button>
@@ -212,7 +212,7 @@ const Employee = () => {
               <th style={{ ...FONTS.table_head }} className="px-4 py-3">Join Date</th>
               <th style={{ ...FONTS.table_head }} className="px-4 py-3">Designation</th>
               <th style={{ ...FONTS.table_head }} className="px-4 py-3">Email</th>
-              <th style={{ ...FONTS.table_head }} className="px-4 py-3">CTC</th>
+              <th style={{ ...FONTS.table_head }} className="px-4 py-3 rounded-r-lg">CTC</th>
             </tr>
           </thead>
 
@@ -231,7 +231,7 @@ const Employee = () => {
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.join_date}</td>
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.emp_role}</td>
                   <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.contact_info?.email}</td>
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.ctc}</td>
+                  <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg">{items?.ctc}</td>
                 </tr>
               ))
             ) : (

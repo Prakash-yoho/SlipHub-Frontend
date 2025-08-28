@@ -20,7 +20,7 @@ const EmployerProfile: React.FC = () => {
     const { uuid } = useParams()
     const dispatch = useDispatch<AppDispatch>()
 
-    const employer = useSelector((state: RootState) => state.empolyee.selectedEmployee)
+    const employer:any = useSelector((state: RootState) => state.empolyee.selectedEmployee)
 
     const len = employer?.payroll_slip?.length
 
@@ -41,7 +41,7 @@ const EmployerProfile: React.FC = () => {
     return (
         <div className='overflow-y-scroll h-full scrollbar-hide'>
 
-            {role === "employee" && <CompanyInfo />}
+            {role === "employee" && <CompanyInfo company_details={employer?.company_id}/>}
 
 
             <div className="w-full h-full mt-5">
@@ -76,13 +76,13 @@ const EmployerProfile: React.FC = () => {
                                                 </thead>
 
                                                 <tbody>
-                                                    {employer?.payroll_slip && employer?.payroll_slip?.length > 0 ? employer?.payroll_slip?.map((items, index) => (
-                                                        <tr key={index} style={{ color: COLORS.primary }} className="bg-[#EAEBE8] rounded-lg">
+                                                    {employer?.payroll_slip && employer?.payroll_slip?.length > 0 ? employer?.payroll_slip?.map((items:any, index:any) => (
+                                                        <tr key={index} style={{ color: COLORS.primary }} className="bg-[#F8F8F8] rounded-lg">
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg"> {dayjs(items?.created_month).format("MMMM-YYYY")}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.paid_days}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.gross_total}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg">
-                                                                <img src={DownloadIcon} alt="" className="w-[25px] h-[25px]" onClick={() => handleDownload(items?.uuid)} />
+                                                                <img src={DownloadIcon} alt="" className="w-[25px] h-[25px] cursor-pointer" onClick={() => handleDownload(items?.uuid)} />
                                                             </td>
                                                         </tr>
                                                     )) :

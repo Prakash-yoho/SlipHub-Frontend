@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import bg from '../../assets/Rectangle.png'
 import DownloadIcon from '../../assets/Comman/Download.png'
 import { COLORS, FONTS } from '../../constants/uiconstants'
@@ -12,7 +12,7 @@ import { getOneemployeeThunks } from '../../features/EmployeeProfile/redux/thunk
 import CompanyInfo from '../../Components/dashboad/CompanyInfo'
 import { GetLocalStorage } from '../../utils/localstorage'
 import dayjs from "dayjs";
-import { handleDownload } from '../../features/common/service'
+import { handleDownload, handleDownloadMonth } from '../../features/common/service'
 import { MobileResponsive } from '../../hooks/MobileResponsive'
 
 const EmployerProfile: React.FC = () => {
@@ -20,7 +20,9 @@ const EmployerProfile: React.FC = () => {
     const { uuid } = useParams()
     const dispatch = useDispatch<AppDispatch>()
 
-    const employer:any = useSelector((state: RootState) => state.empolyee.selectedEmployee)
+    const employer: any = useSelector((state: RootState) => state.empolyee.selectedEmployee)
+
+    const [choseDate, setchoseDate] = useState<Date | null>(null);
 
     const len = employer?.payroll_slip?.length
 
@@ -41,7 +43,7 @@ const EmployerProfile: React.FC = () => {
     return (
         <div className='overflow-y-scroll h-full scrollbar-hide'>
 
-            {role === "employee" && <CompanyInfo company_details={employer?.company_id}/>}
+            {role === "employee" && <CompanyInfo company_details={employer?.company_id} />}
 
 
             <div className="w-full h-full mt-5">
@@ -52,8 +54,8 @@ const EmployerProfile: React.FC = () => {
                     <div className="flex flex-row w-full gap-5">
                         <div className={MobileView ? 'flex flex-col w-full' : "flex flex-col w-8/12"}>
                             <div className="w-full h-20 flex rounded-4xl items-baseline">
-                                <CalendarPicker />
-                                <div className="bg-[#7697A0] w-max p-2 px-6 h-max rounded-lg font-bold text-white text-md">Generate</div>
+                                <CalendarPicker setselecteDate={setchoseDate} />
+                                <div className="bg-[#7697A0] w-max p-2 px-6 h-max rounded-lg font-bold text-white text-md" onClick={() => handleDownloadMonth(choseDate)}>Generate</div>
                             </div>
                             <div className="flex flex-col w-full h-[75vh] mx-4 rounded-3xl gap-5 py-4">
                                 <div className="w-full h-52 bg-[#EAEBE8] rounded-2xl">
@@ -76,7 +78,7 @@ const EmployerProfile: React.FC = () => {
                                                 </thead>
 
                                                 <tbody>
-                                                    {employer?.payroll_slip && employer?.payroll_slip?.length > 0 ? employer?.payroll_slip?.map((items:any, index:any) => (
+                                                    {employer?.payroll_slip && employer?.payroll_slip?.length > 0 ? employer?.payroll_slip?.map((items: any, index: any) => (
                                                         <tr key={index} style={{ color: COLORS.primary }} className="bg-[#F8F8F8] rounded-lg">
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg"> {dayjs(items?.created_month).format("MMMM-YYYY")}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.paid_days}</td>

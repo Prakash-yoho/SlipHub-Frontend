@@ -44,7 +44,9 @@ class Client {
 	payroll = {
 		create: (data: any) => httpClient.post(API_ENDPOINTS.payroll.create.replace(":companyid", getid()), data),
 		getemp: () => httpClient.get(API_ENDPOINTS.payroll.getemp.replace(":companyid", getid())),
-		download: (params: string) => httpClient.getfile(API_ENDPOINTS.payroll.download.replace(":uuid", params).replace(":companyid", getid()))
+		download: (params: string) => httpClient.getfile(API_ENDPOINTS.payroll.download.replace(":uuid", params).replace(":companyid", getid())),
+		downloadMonth: (params: any) => httpClient.getfile(API_ENDPOINTS.payroll.downloadMonth.replace(":date", params).replace(":companyid", getid())),
+
 	}
 }
 export default new Client();

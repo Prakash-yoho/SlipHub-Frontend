@@ -14,7 +14,7 @@ const EmployerPrevSlip: React.FC<props> = ({ payslip }) => {
 
     return (
         <div className='w-full h-full p-4 flex flex-col gap-2'>
-            <div className='flex flex-row justify-between'>
+            <div className='flex flex-row justify-between items-center pb-2'>
                 <h1 style={{ ...FONTS.payroll_head, color: COLORS.primary }} className={`${MobileView && '!text-[12px]'}`}>Current month Slip</h1>
                 <div className={`bg-[#7697A0] font-bold text-white text-md p-2 rounded-lg cursor-pointer ${MobileView && '!text-[10px]'}`} onClick={() => handleDownload(payslip?.uuid)}>Download</div>
             </div>

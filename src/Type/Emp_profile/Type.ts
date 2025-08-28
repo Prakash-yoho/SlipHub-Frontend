@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type EmployeeProfile = {
+    company_id: any;
+    _id?: string,
     id?: number,
     uuid?: string,
     auth_id?: string,

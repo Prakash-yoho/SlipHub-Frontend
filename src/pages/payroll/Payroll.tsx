@@ -62,10 +62,10 @@ const Payroll = () => {
 
     const handelGenerateSlip = async (params: string) => {
         try {
-            if (PayRollInput.worked_days != 0 && PayRollInput.paid_days != 0) {
+            if (PayRollInput.worked_days != 0 && PayRollInput.paid_days != 0 && selecteDate) {
                 const payload: PayRollType = {
                     ...PayRollInput,
-                    created_month: selecteDate ?? "",
+                    created_month: selecteDate,
                     employee_uuid: params,
                 };
 
@@ -81,6 +81,7 @@ const Payroll = () => {
 
 
     const handleReset = () => {
+        console.log("reset")
         setPayRollInput({
             worked_days: 0,
             loss_of_pay: 0,
@@ -187,6 +188,7 @@ const Payroll = () => {
                                                 type="number"
                                                 min="0"
                                                 required={true}
+                                                value={PayRollInput?.worked_days == 0 ? '' : PayRollInput?.worked_days}
                                                 className="bg-[#EAEBE8] px-3 py-2 rounded-lg w-full border border-[#4A7079] outline-0
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="No of Worked Days"
@@ -203,6 +205,7 @@ const Payroll = () => {
                                                 type="number"
                                                 min="0"
                                                 required={true}
+                                                // value={PayRollInput?.loss_of_pay == 0 ? '' : PayRollInput?.loss_of_pay}
                                                 className="bg-[#EAEBE8] px-3 py-2 rounded-lg w-full border border-[#4A7079] outline-0
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="Loss Of Pay"
@@ -219,6 +222,7 @@ const Payroll = () => {
                                                 type="number"
                                                 min="0"
                                                 required={true}
+                                                // value={PayRollInput?.arrear_days == 0 ? '' : PayRollInput?.arrear_days}
                                                 className="bg-[#EAEBE8] px-3 py-2 rounded-lg w-full border border-[#4A7079] outline-0
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="No of Arrear Day"
@@ -235,6 +239,7 @@ const Payroll = () => {
                                                 type="number"
                                                 min="0"
                                                 required={true}
+                                                value={PayRollInput?.paid_days == 0 ? '' : PayRollInput?.paid_days}
                                                 className="bg-[#EAEBE8] px-3 py-2 rounded-lg w-full border border-[#4A7079] outline-0
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="Paid Days"

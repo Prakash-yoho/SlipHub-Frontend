@@ -6,14 +6,17 @@ import edit from '../../assets/edit.png'
 import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from '../../store/store';
 import { GetHrUUIDThunks } from '../../features/HrProfile/redux/thunks';
+import type { HrProfileType } from '../../Type/HrProfiles/Type';
 
 interface props {
     isOpen: boolean;
     setIsOpen: (data: boolean) => void;
+    setIsModalOpen?: (data: boolean) => void;
     hrUUID: string;
+    seletedHrData: (data: HrProfileType) => void;
 }
 
-export const DrawerForm: React.FC<props> = ({ isOpen, setIsOpen, hrUUID }) => {
+export const DrawerForm: React.FC<props> = ({ isOpen, setIsOpen, setIsModalOpen, hrUUID, seletedHrData }) => {
 
     const closeDrawer = () => { setIsOpen(false); };
     const dispatch = useDispatch<AppDispatch>()
@@ -62,7 +65,11 @@ export const DrawerForm: React.FC<props> = ({ isOpen, setIsOpen, hrUUID }) => {
                                         <h1 style={{ ...FONTS.payroll_profileHead, color: COLORS.primary }} className='!font-bold !text-2xl'>{selectedHr?.first_name + ' ' + selectedHr?.last_name}</h1>
                                         <p style={{ ...FONTS.Nav, color: COLORS.primary }}>HR</p>
                                     </div>
-                                    <div className='flex flex-row bg-[#7697A0] py-2  w-max gap-2 h-10 text-xl items-center rounded-lg text-white px-3'>
+                                    <div className='flex flex-row bg-[#7697A0] py-2  w-max gap-2 h-10 text-xl items-center rounded-lg text-white px-3' onClick={() => {
+                                        setIsModalOpen?.(true);
+                                        seletedHrData(selectedHr)
+                                    }
+                                    }>
                                         <img src={edit} alt="" className='w-5 h-5' />
                                         <p>Edit</p>
                                     </div>

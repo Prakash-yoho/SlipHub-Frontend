@@ -16,6 +16,7 @@ const Login = () => {
     const [email, setEmail] = useState("admin@gmail.com");
     const [password, setPassword] = useState("admin@2025");
     const [handleOTP, setHandleOTP] = useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const { login } = useAuth()
     const { verifyOTP } = useAuth();
@@ -29,9 +30,11 @@ const Login = () => {
             toast.error("Please enter valid email and password");
             return;
         }
+        setLoading(true);
+        toast.loading("Please Wait Until You Get OTP")
+
 
         const params = { email, password };
-        toast.loading("Please Wait Until You Get OTP")
 
         try {
             const response = await Signin(params);
@@ -50,6 +53,9 @@ const Login = () => {
         } catch (error: any) {
             console.error("Sign-in error:", error);
             toast.error("Login failed");
+        } finally {
+            setLoading(false);
+            toast.dismiss();
         }
     };
 
@@ -174,11 +180,17 @@ const Login = () => {
 
                                 <button
                                     type="submit"
-                                    style={{ ...FONTS.card_name, backgroundColor: COLORS.primary }}
-                                    className="text-[#FFFFFF] p-2 mt-4 w-full rounded-lg font-medium shadow-md transition cursor-pointer"
+                                    disabled={loading}
+                                    style={{
+                                        ...FONTS.card_name,
+                                        backgroundColor: loading ? "#ccc" : COLORS.primary,
+                                        cursor: loading ? "not-allowed" : "pointer"
+                                    }}
+                                    className="text-[#FFFFFF] p-2 mt-4 w-full rounded-lg font-medium shadow-md transition"
                                 >
-                                    Login
+                                    {loading ? "Logging in..." : "Login"}
                                 </button>
+
                             </form>
                         </div>
                     </div>
@@ -209,7 +221,7 @@ const Login = () => {
                                 }}
                                 onChange={(e) => handleChange(e, index)}
                                 onKeyDown={(e) => handleKeyDown(e, index)}
-                                className="bg-[#4A70790D] border-1 border-[#4A7079] w-10 h-10 sm:w-12 sm:h-12 md:w-12 md:h-12 sm:text-xl text-center rounded-md focus:outline-none"
+                                className="bg-[#4A70790D] border-1 border-[#4A7079] w-10 h-10 sm:w-12 sm:h-12 md:w-12 md:h-12 sm:text-lg lg:text-xl text-center rounded-md focus:outline-none"
                                 required
                             />
                         ))}
@@ -223,9 +235,9 @@ const Login = () => {
                         >
                             Verify
                         </button>
-                        <p style={{ ...FONTS.table_data, color: COLORS.primary }} className="text-white text-sm sm:text-base md:text-lg font-medium cursor-pointer">
+                        {/* <p style={{ ...FONTS.table_data, color: COLORS.primary }} className="text-white text-sm sm:text-base md:text-lg font-medium cursor-pointer">
                             Resend OTP
-                        </p>
+                        </p> */}
                     </div>
                 </section>}
 

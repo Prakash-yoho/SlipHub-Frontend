@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import { GetAllDepartmentThunks } from "../../features/Department/redux/thunks";
 import { GetAllHrThunks } from "../../features/HrProfile/redux/thunks";
-import { CreateDepartmentService, DeleteDepartment } from "../../features/Department/service";
+import { CreateDepartmentService } from "../../features/Department/service";
+// import {  DeleteDepartment } from "../../features/Department/service";
 
 const Department = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -142,7 +143,7 @@ console.log(AllDepartment,AllHrProfile,"asdfgnm,./")
                     {data?.no_of_emp}
                 </p>
               </div>
-              <button onClick={()=>{DeleteDepartment(data?.uuid)}} className="cursor-pointer">Remove Department</button>
+              {/* <button onClick={()=>{DeleteDepartment(data?.uuid)}} className="cursor-pointer">Remove Department</button> */}
             </div>
           ))}
       </div>

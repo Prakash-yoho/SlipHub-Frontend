@@ -103,10 +103,10 @@ export const DrawerForm: React.FC<props> = ({ isOpen, setIsOpen, setIsModalOpen,
                                         <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Mobile</p>
                                         <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{selectedHr?.contact_info?.phone}</p>
                                     </div>
-                                    <div className='flex justify-between gap-4 mt-1'>
+                                    {/* <div className='flex justify-between gap-4 mt-1'>
                                         <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Work Mode</p>
                                         <p style={{ ...FONTS.Nav, color: COLORS.primary }}>WFO??</p>
-                                    </div>
+                                    </div> */}
                                 </section>
 
                                 <div className='border border-[#C3C7C6]'></div>

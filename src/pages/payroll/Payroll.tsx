@@ -106,6 +106,7 @@ const Payroll = () => {
     const confirmGenerate = () => {
         if (selectedEmp.uuid) {
             handelGenerateSlip(selectedEmp.uuid);
+            toast.success("Slip Generated Succesfully")
         }
         setOpenConfirm(false);
     };
@@ -205,7 +206,7 @@ const Payroll = () => {
                                                 type="number"
                                                 min="0"
                                                 required={true}
-                                                // value={PayRollInput?.loss_of_pay == 0 ? '' : PayRollInput?.loss_of_pay}
+                                                value={PayRollInput?.loss_of_pay == 0 ? '' : PayRollInput?.loss_of_pay}
                                                 className="bg-[#EAEBE8] px-3 py-2 rounded-lg w-full border border-[#4A7079] outline-0
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="Loss Of Pay"
@@ -222,7 +223,7 @@ const Payroll = () => {
                                                 type="number"
                                                 min="0"
                                                 required={true}
-                                                // value={PayRollInput?.arrear_days == 0 ? '' : PayRollInput?.arrear_days}
+                                                value={PayRollInput?.arrear_days == 0 ? '' : PayRollInput?.arrear_days}
                                                 className="bg-[#EAEBE8] px-3 py-2 rounded-lg w-full border border-[#4A7079] outline-0
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="No of Arrear Day"
@@ -400,7 +401,7 @@ const Payroll = () => {
                                     <h1 style={{ ...FONTS.payroll_Head, color: COLORS.primary }}>Personal Information</h1>
                                     <div className='flex justify-between gap-4 mt-2'>
                                         <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Date of Birth</p>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }} className='uppercase'>{selectedEmp?.dob}</p>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{dayjs(selectedEmp?.dob).format("DD-MMM-YYYY")} </p>
                                     </div>
                                     <div className='flex justify-between gap-4 mt-1'>
                                         <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Father's Name</p>

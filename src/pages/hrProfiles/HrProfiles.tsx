@@ -111,12 +111,12 @@ const HrProfiles = () => {
                         )}
                     </div>
 
-                    <button
+                    {/* <button
                         style={{ ...FONTS.Main_btn, background: COLORS.sub_btn }}
                         className='text-[#FFFFFF] px-3 py-[4px] rounded-md'
                     >
                         Experience
-                    </button>
+                    </button> */}
                 </section>
 
                 <input

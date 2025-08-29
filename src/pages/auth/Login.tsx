@@ -13,8 +13,8 @@ import { MobileResponsive } from '../../hooks/MobileResponsive'
 
 const Login = () => {
 
-    const [email, setEmail] = useState("admin@gmail.com");
-    const [password, setPassword] = useState("admin@2025");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [handleOTP, setHandleOTP] = useState(false);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();

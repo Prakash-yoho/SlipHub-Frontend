@@ -4,7 +4,7 @@ import DepartmentImg from "../../assets/Comman/airpod.png";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import { GetAllDepartmentThunks } from "../../features/Department/redux/thunks";
-import { GetAllHrThunks } from "../../features/HrProfile/redux/thunks";
+// import { GetAllHrThunks } from "../../features/HrProfile/redux/thunks";
 import { CreateDepartmentService } from "../../features/Department/service";
 // import {  DeleteDepartment } from "../../features/Department/service";
 
@@ -23,16 +23,11 @@ const Department = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
 
-    // TODO: API call to save department
     const response = await CreateDepartmentService({
       ...formData,
       dpt_id: Number(formData.dpt_id),
     })
-
-    console.log(response,"responseeeeeeeeeeeee")
-
 
     setIsModalOpen(false);
     setFormData({
@@ -55,7 +50,7 @@ const Department = () => {
 
   useEffect(() => {
     dispatch(GetAllDepartmentThunks())
-    dispatch(GetAllHrThunks())
+    // dispatch(GetAllHrThunks())
   }, [dispatch]);
 
   // const options = AllHrProfile.map((data) => {
@@ -79,7 +74,6 @@ const Department = () => {
   // );
 
 
-console.log(AllDepartment,AllHrProfile,"asdfgnm,./")
   return (
     <div className="p-4 h-screen">
       {/* Header */}
@@ -122,7 +116,7 @@ console.log(AllDepartment,AllHrProfile,"asdfgnm,./")
               </section>
 
               <p style={{ ...FONTS.table_data, color: COLORS.primary }}>
-                HR Name : Kamal
+                HR Name : {data?.hr ?data?.hr?.first_name + " " + data?.hr?.last_name : "Not Assigned" }
               </p>
 
               <div className="flex justify-between items-center border border-[#4A7079] bg-[#4A70790D] p-2 rounded-lg">

@@ -81,7 +81,6 @@ const Payroll = () => {
 
 
     const handleReset = () => {
-        console.log("reset")
         setPayRollInput({
             worked_days: 0,
             loss_of_pay: 0,

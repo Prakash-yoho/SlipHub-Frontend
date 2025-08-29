@@ -21,8 +21,6 @@ const DashBoard = () => {
     })()
   }, [company]);
 
-  console.log(DashBoard, "dashboard")
-
   return (
     <div className="flex flex-col w-full p-4 h-[93vh] overflow-y-scroll" style={{ scrollbarWidth: 'none' }} >
       <h1 style={{ ...FONTS.Main }}>Home</h1>

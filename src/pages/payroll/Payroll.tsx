@@ -206,7 +206,7 @@ const Payroll = () => {
                                                 type="number"
                                                 min="0"
                                                 required={true}
-                                                value={PayRollInput?.loss_of_pay == 0 ? '' : PayRollInput?.loss_of_pay}
+                                                // value={PayRollInput?.loss_of_pay == 0 ? '' : PayRollInput?.loss_of_pay}
                                                 className="bg-[#EAEBE8] px-3 py-2 rounded-lg w-full border border-[#4A7079] outline-0
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="Loss Of Pay"
@@ -223,7 +223,7 @@ const Payroll = () => {
                                                 type="number"
                                                 min="0"
                                                 required={true}
-                                                value={PayRollInput?.arrear_days == 0 ? '' : PayRollInput?.arrear_days}
+                                                // value={PayRollInput?.arrear_days == 0 ? '' : PayRollInput?.arrear_days}
                                                 className="bg-[#EAEBE8] px-3 py-2 rounded-lg w-full border border-[#4A7079] outline-0
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="No of Arrear Day"

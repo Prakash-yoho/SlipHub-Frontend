@@ -31,8 +31,6 @@ const Login = () => {
             return;
         }
         setLoading(true);
-        toast.loading("Please Wait Until You Get OTP")
-
 
         const params = { email, password };
 
@@ -51,11 +49,10 @@ const Login = () => {
                 toast.error("Invalid credentials. Please try again.");
             }
         } catch (error: any) {
-            console.error("Sign-in error:", error);
             toast.error("Login failed");
+            console.error("Sign-in error:", error);
         } finally {
             setLoading(false);
-            toast.dismiss();
         }
     };
 

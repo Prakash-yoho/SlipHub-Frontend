@@ -24,10 +24,12 @@ const Department = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const response = await CreateDepartmentService({
+    await CreateDepartmentService({
       ...formData,
       dpt_id: Number(formData.dpt_id),
     })
+
+
 
     setIsModalOpen(false);
     setFormData({
@@ -44,7 +46,6 @@ const Department = () => {
  
 
   const AllDepartment = useSelector((state: RootState) => state.department.data)
-  const AllHrProfile = useSelector((state: RootState) => state.hrstore.data)
 
   const dispatch = useDispatch<AppDispatch>()
 
@@ -72,7 +73,6 @@ const Department = () => {
   // const selectedOption = options.find(
   //   (option) => option.value === formData.HrName
   // );
-
 
   return (
     <div className="p-4 h-screen">

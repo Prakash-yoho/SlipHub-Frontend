@@ -23,7 +23,7 @@ export const DrawerForm: React.FC<props> = ({ isOpen, setIsOpen, setIsModalOpen,
 
     const dispatch = useDispatch<AppDispatch>()
 
-    const closeDrawer = () => { setIsOpen(false); dispatch(clearHr()) };
+    const closeDrawer = () => { setIsOpen(false) };
 
     const selectedHr = useSelector((state: RootState) => state.hrstore.selectedHr)
 

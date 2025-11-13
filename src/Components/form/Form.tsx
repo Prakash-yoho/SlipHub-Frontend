@@ -370,6 +370,28 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
     )
   }
 
+  const departmentSelected = () => {
+
+    const hrdpt: string[] | undefined = HrEdit?.department?.map((item) => `${item?.dpt_name}`)
+
+    let dpt;
+
+    if (selectedDepartments.length !== 0) {
+      dpt = selectedDepartments.map((item) => {
+        if (hrdpt?.includes(item)) {
+          return hrdpt
+        } else {
+          hrdpt?.push(item)
+          return hrdpt?.join(",")
+        }
+      })
+    } else {
+      dpt = hrdpt
+    }
+
+    return dpt
+  }
+
   return (
     <div className="fixed inset-0 bg-black/50 bg-opacity-50  flex items-center justify-center z-50">
       <div className="bg-[#EAEBE8] rounded-xl shadow-lg w-[65%] h-[90vh] overflow-y-scroll scrollbar-hide p-6 ">
@@ -484,7 +506,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                       onClick={() => setIsOpenDpt(!isOpenDpt)}
                       className={`border ${errors.department ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full flex justify-between items-center`}
                     >
-                      <span className="font-medium">{selectedDepartments.map((item) => `${item}`).join(", ")}</span>
+                      <span className="font-medium">{departmentSelected()}</span>
                       {/* <span className="font-medium">{HrDetails?.department?.[0]?.dpt_name}</span> */}
                       <svg
                         className={`w-4 h-4 transition-transform ${isOpenDpt ? "rotate-180" : ""}`}

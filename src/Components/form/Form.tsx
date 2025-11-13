@@ -12,6 +12,7 @@ import type { EmployeeProfile } from "../../Type/Emp_profile/Type"
 import { CreateEmployeeThunks, UpdateEmployeeThunks } from "../../features/EmployeeProfile/redux/thunks"
 import { GetFormDepartmentThunks } from "../../features/common/redux/thunks"
 import toast from "react-hot-toast"
+// import { FaFileUpload } from "react-icons/fa"
 
 interface FormProps {
   isOpen: boolean
@@ -27,7 +28,7 @@ interface ValidationErrors {
 
 const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formType }) => {
   const dispatch = useDispatch<AppDispatch>()
-  const [preview, setPreview] = useState<string | null>(null)
+  // const [preview, setPreview] = useState<string | null>(null)
 
   const departmentData = useSelector((state: RootState) => state.common.department)
   const [selectedDepartments, setSelectedDepartments] = useState<string[]>([])
@@ -243,13 +244,13 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
   }
 
   if (!isOpen) return null
-  const handleImageChange = (e: any) => {
-    e.preventDefault()
-    const file = e.target.files[0]
-    if (file) {
-      setPreview(URL.createObjectURL(file))
-    }
-  }
+  // const handleImageChange = (e: any) => {
+  //   e.preventDefault()
+  //   const file = e.target.files[0]
+  //   if (file) {
+  //     setPreview(URL.createObjectURL(file))
+  //   }
+  // }
 
   const handelsubmit = (e: FormEvent<HTMLFormElement>) => {
     try {
@@ -375,7 +376,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
       <div className="bg-[#EAEBE8] rounded-xl shadow-lg w-[65%] h-[90vh] overflow-y-scroll scrollbar-hide p-6 ">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold text-center" style={{ ...FONTS.Main, color: COLORS.primary }}>
-            {formType === "hr" ? `${HrEdit ? "Edit" : "Add"} Hr` : `${EmplopyEdit ? "Edit" : "Add"}Add Employee`}
+            {formType === "hr" ? `${HrEdit ? "Edit" : "Add"} Hr` : `${EmplopyEdit ? "Edit" : "Add"} Employee`}
           </h2>
 
           <div
@@ -390,12 +391,12 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
         <div className="h-[1px] w-full my-4 bg-[#7697A066]"></div>
 
         <form className="" onSubmit={(e) => handelsubmit(e)}>
-          <section className="flex gap-4 items-center mb-4">
+          {/* <section className="flex gap-4 items-center mb-4">
             <div className="bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center overflow-hidden">
               {preview ? (
                 <img src={preview || "/placeholder.svg"} alt="Preview" className="h-full w-full object-cover" />
               ) : (
-                <span style={{ ...FONTS.card_initial }}>K</span>
+                <span style={{ ...FONTS.card_initial }}><FaFileUpload/></span>
               )}
             </div>
 
@@ -408,7 +409,6 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                 onChange={(e) => handleImageChange(e)}
               />
 
-              {/* Label as Button */}
               <label
                 htmlFor="imageUpload"
                 style={{ ...FONTS.Nav, background: COLORS.primary }}
@@ -417,7 +417,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                 Upload Image
               </label>
             </div>
-          </section>
+          </section> */}
 
           <section>
             <p className="mb-3" style={{ ...FONTS.view_btn, color: COLORS.primary }}>

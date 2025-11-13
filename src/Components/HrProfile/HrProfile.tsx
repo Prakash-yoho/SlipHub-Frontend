@@ -8,7 +8,7 @@ import type { AppDispatch, RootState } from '../../store/store';
 import { GetHrUUIDThunks } from '../../features/HrProfile/redux/thunks';
 import type { HrProfileType } from '../../Type/HrProfiles/Type';
 import dayjs from 'dayjs';
-import { clearHr } from '../../features/HrProfile/redux/slice';
+// import { clearHr } from '../../features/HrProfile/redux/slice';
 
 interface props {
     isOpen: boolean;

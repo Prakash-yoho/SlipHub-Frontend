@@ -156,7 +156,11 @@ const EmployerProfile: React.FC = () => {
                                         </div>
                                         <div className='flex justify-between gap-4 mt-1'>
                                             <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Email</p>
-                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.contact_info?.email}</p>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.contact_info?.email
+                                                ? employer.contact_info.email.length > 20
+                                                    ? employer.contact_info.email.slice(0, 20) + "...."
+                                                    : employer.contact_info.email
+                                                : ""}</p>
                                         </div>
                                         <div className='flex justify-between gap-4 mt-1'>
                                             <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Mobile</p>

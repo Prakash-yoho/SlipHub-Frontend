@@ -39,11 +39,9 @@ const Login = () => {
         try {
             const response = await Signin(params);
             const token = response?.data?.token;
-            const otp = response?.data?.otp;
 
             if (token) {
                 StoreLocalStorage("token", token);
-                StoreLocalStorage("otp", otp);
                 login(token);
                 setHandleOTP(true);
 

@@ -8,6 +8,7 @@ import type { AppDispatch, RootState } from '../../store/store';
 import { GetHrUUIDThunks } from '../../features/HrProfile/redux/thunks';
 import type { HrProfileType } from '../../Type/HrProfiles/Type';
 import dayjs from 'dayjs';
+import { clearHr } from '../../features/HrProfile/redux/slice';
 
 interface props {
     isOpen: boolean;
@@ -19,8 +20,10 @@ interface props {
 
 export const DrawerForm: React.FC<props> = ({ isOpen, setIsOpen, setIsModalOpen, hrUUID, seletedHrData }) => {
 
-    const closeDrawer = () => { setIsOpen(false); };
+
     const dispatch = useDispatch<AppDispatch>()
+
+    const closeDrawer = () => { setIsOpen(false); dispatch(clearHr()) };
 
     const selectedHr = useSelector((state: RootState) => state.hrstore.selectedHr)
 

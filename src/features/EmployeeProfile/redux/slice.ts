@@ -29,10 +29,13 @@ const employeeSlice = createSlice({
         },
         getOneemployee: (state, action) => {
             state.selectedEmployee = action.payload
+        },
+        clearEmployee: (state) => {
+            state.selectedEmployee = {}
         }
     }
 })
 
-export const { getAllemployee, addAndUpdateEmployee, deleteEmployeeDetails, getOneemployee } = employeeSlice.actions
+export const { getAllemployee, addAndUpdateEmployee, deleteEmployeeDetails, getOneemployee, clearEmployee } = employeeSlice.actions
 
 export default employeeSlice.reducer

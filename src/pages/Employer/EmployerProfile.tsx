@@ -18,6 +18,7 @@ import type { EmployeeProfile } from '../../Type/Emp_profile/Type'
 import edit from '../../assets/edit.png'
 import Form from '../../Components/form/Form'
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { clearEmployee } from '../../features/EmployeeProfile/redux/slice'
 
 
 const EmployerProfile: React.FC = () => {
@@ -207,7 +208,7 @@ const EmployerProfile: React.FC = () => {
                 </div>
             </div>
 
-            <Form isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} formType='employee' EmplopyEdit={Edits} />
+            <Form isOpen={isModalOpen} onClose={() => { setIsModalOpen(false); dispatch(clearEmployee()) }} formType='employee' EmplopyEdit={Edits} />
 
         </div>
     )

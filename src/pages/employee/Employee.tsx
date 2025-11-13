@@ -68,14 +68,14 @@ const Employee = () => {
     <div className='py-6 px-8 h-screen'>
       <div className='flex justify-between items-center'>
         <h1 style={{ ...FONTS.Main, color: COLORS.primary }}>Employee Profiles</h1>
-        {role==="hr" && <button
+        {role === "hr" && <button
           onClick={() => setIsOpen(true)}
           style={{ ...FONTS.Main_btn, background: COLORS.primary }}
           className='text-[#FFFFFF] px-3 py-[4px] rounded-md cursor-pointer'
         >
           Add Employee
         </button>}
-        
+
       </div>
 
       <Form isOpen={isOpen} onClose={onclose} formType='employee' />
@@ -216,7 +216,7 @@ const Employee = () => {
               <th style={{ ...FONTS.table_head }} className="px-4 py-3">Join Date</th>
               <th style={{ ...FONTS.table_head }} className="px-4 py-3">Designation</th>
               <th style={{ ...FONTS.table_head }} className="px-4 py-3">Email</th>
-              <th style={{ ...FONTS.table_head }} className="px-4 py-3 rounded-r-lg">CTC</th>
+              <th style={{ ...FONTS.table_head }} className="px-4 py-3 rounded-r-lg">CTC(Monthly)</th>
             </tr>
           </thead>
 

@@ -31,7 +31,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
 
   const departmentData = useSelector((state: RootState) => state.common.department)
   const [selectedDepartments, setSelectedDepartments] = useState<string[]>([])
-  const [empDpt, setempDpt] = useState<string >("Select")
+  const [empDpt, setempDpt] = useState<string>("Select")
   const [dptDate, setdptDate] = useState<string[]>([])
   const [isOpenDpt, setIsOpenDpt] = useState(false)
 
@@ -210,7 +210,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
 
     if (!currentData.qualification || !validateRequired(currentData.qualification.percentage)) {
       newErrors.percentage = "Percentage is required"
-    } else if (!currentData.qualification || !validatePercentage(currentData.qualification.percentage??"")) {
+    } else if (!currentData.qualification || !validatePercentage(currentData.qualification.percentage ?? "")) {
       newErrors.percentage = "Please enter a valid percentage (0-100)"
     }
 
@@ -361,7 +361,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
       <div className="bg-[#EAEBE8] rounded-xl shadow-lg w-[65%] h-[90vh] overflow-y-scroll scrollbar-hide p-6 ">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold text-center" style={{ ...FONTS.Main, color: COLORS.primary }}>
-            {formType==="hr"?"Add Hr":"Add Employee"}
+            {formType === "hr" ? "Add Hr" : "Add Employee"}
           </h2>
 
           <div
@@ -631,7 +631,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                   placeholder="Date of Joining"
                   className={`border ${errors.join_date ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
-                  style={{color: COLORS.primary }}
+                  style={{ color: COLORS.primary }}
                   onChange={(e) => handleChangeInput("join_date", e)}
                 />
                 <ErrorMessage error={errors.join_date} />
@@ -655,7 +655,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
 
               <div className="">
                 <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  CTC
+                  CTC(Monthly)
                 </p>
                 <input
                   type="text"
@@ -680,7 +680,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                   value={EmplopyEdit?.dob || HrEdit?.dob || undefined}
                   className={`border ${errors.dob ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
-                  style={{color: COLORS.primary }}
+                  style={{ color: COLORS.primary }}
                   onChange={(e) => handleChangeInput("dob", e)}
                 />
                 <ErrorMessage error={errors.dob} />

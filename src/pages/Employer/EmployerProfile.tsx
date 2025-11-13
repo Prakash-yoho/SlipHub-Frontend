@@ -128,7 +128,7 @@ const EmployerProfile: React.FC = () => {
                                             <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.emp_role}</p>
                                         </div>
                                         <div className='flex justify-between gap-4 mt-1'>
-                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>CTC</p>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>CTC(Monthly)</p>
                                             <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.ctc}</p>
                                         </div>
                                         <div className='flex justify-between gap-4 mt-1'>

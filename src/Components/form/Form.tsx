@@ -65,6 +65,8 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
     },
     image: HrEdit?.image || "",
     pf_acc: HrEdit?.pf_acc || "",
+    level_grade:HrEdit?.level_grade||""
+
   })
 
   const [EmployeeDetails, setEmployeeDetails] = useState<EmployeeProfile | any>({
@@ -91,6 +93,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
     },
     image: EmplopyEdit?.image || "",
     pf_acc: EmplopyEdit?.pf_acc || "",
+    level_grade:EmplopyEdit?.level_grade||""
   })
 
   useEffect(() => {
@@ -288,7 +291,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
       if (formType === "hr") {
         setHrDetails((prev) => ({ ...prev, [key]: value }))
       } else if (formType === "employee") {
-        setEmployeeDetails((prev) => ({ ...prev, [key]: value }))
+        setEmployeeDetails((prev:any) => ({ ...prev, [key]: value }))
       } else {
         console.log("change input error")
       }
@@ -327,7 +330,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
       if (formType === "hr") {
         setHrDetails((prev) => ({ ...prev, qualification: { ...prev.qualification, [key]: value } }))
       } else if (formType === "employee") {
-        setEmployeeDetails((prev) => ({ ...prev, qualification: { ...prev.qualification, [key]: value } }))
+        setEmployeeDetails((prev:any) => ({ ...prev, qualification: { ...prev.qualification, [key]: value } }))
       } else {
         console.log("change input error")
       }
@@ -540,7 +543,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                             key={index}
                             onClick={() => {
                               setempDpt(option?.dpt_name)
-                              setEmployeeDetails((prev) => ({ ...prev, department: option?._id }))
+                              setEmployeeDetails((prev:any) => ({ ...prev, department: option?._id }))
                               setIsOpenDpt(false)
                               clearFieldError("department")
                             }}
@@ -665,7 +668,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
 
               <div className="">
                 <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  CTC(Monthly)
+                  CTC (Monthly)
                 </p>
                 <input
                   type="text"
@@ -679,6 +682,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                 <ErrorMessage error={errors.ctc} />
               </div>
 
+              
               <div className="">
                 <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
                   UAN No
@@ -686,13 +690,29 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                 <input
                   type="text"
                   name="CTC"
-                  placeholder="Enter CTC"
+                  placeholder="Enter UAN No"
                   value={EmplopyEdit?.pf_acc || HrEdit?.pf_acc || undefined}
                   className={`border ${errors.pf_acc ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
                   onChange={(e) => handleChangeInput("pf_acc", e)}
                 />
                 <ErrorMessage error={errors.pf_acc} />
+              </div>
+
+              <div className="">
+                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
+                  Level /Grade
+                </p>
+                <input
+                  type="text"
+                  name="Level/Grade"
+                  placeholder="Enter Level/Grade"
+                  value={EmplopyEdit?.level_grade || HrEdit?.level_grade || undefined}
+                  className={`border ${errors.level_grade ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
+                  // required
+                  onChange={(e) => handleChangeInput("level_grade", e)}
+                />
+                {/* <ErrorMessage error={errors.pf_acc} /> */}
               </div>
 
               <div className="">

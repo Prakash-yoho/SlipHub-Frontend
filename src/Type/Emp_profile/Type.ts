@@ -25,6 +25,7 @@ export type EmployeeProfile = {
         percentage?: string
     },
     pf_acc: string,
+    level_grade:string,
     join_date?: string,
     pf_active?: boolean,
     dob?: string,

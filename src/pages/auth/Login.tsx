@@ -182,7 +182,7 @@ const Login = () => {
                                         <button
                                             type="button"
                                             onClick={() => setShowPassword(!showPassword)}
-                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-[#4A7079] text-2xl"
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-[#4A7079] text-2xl cursor-pointer"
                                         >
                                             {showPassword ? <FaEyeSlash /> : <FaEye />}
                                         </button>

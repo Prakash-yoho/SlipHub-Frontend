@@ -10,6 +10,7 @@ import { GetLocalStorage, RemoveLocalStorage, StoreLocalStorage } from '../../ut
 import { COLORS, FONTS } from '../../constants/uiconstants'
 import { verifyOtp } from '../../features/Auth/service'
 import { MobileResponsive } from '../../hooks/MobileResponsive'
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
 
@@ -21,6 +22,7 @@ const Login = () => {
     const { login } = useAuth()
     const { verifyOTP } = useAuth();
     const { MobileView } = MobileResponsive()
+    const [showPassword, setShowPassword] = useState(false);
 
 
     const handleSignIn = async (e: React.FormEvent) => {
@@ -150,7 +152,7 @@ const Login = () => {
                         <h1 style={{ ...FONTS.login_head, color: COLORS.primary }} className={MobileView ? '!text-3xl -mt-20' : ''}>Welcome!</h1>
 
                         <div>
-                            <form onSubmit={handleSignIn} className="flex flex-col items-center w-full mt-4 gap-4">
+                            <form onSubmit={handleSignIn} className="flex flex-col w-full mt-4 gap-4">
                                 <div className='w-full'>
                                     <p style={{ ...FONTS.payroll_mainhead, color: COLORS.primary, padding: "0 0 10px 0" }} className={MobileView ? '!text-lg' : ''}>Email</p>
                                     <input
@@ -162,17 +164,29 @@ const Login = () => {
                                         className={`flex-1 ${MobileView && '!text-md'} p-2 w-full rounded-lg outline-none bg-[#4A70790D] text-black placeholder-gray-500 border border-[#4A7079]`}
                                     />
                                 </div>
-
-                                <div className='w-full'>
+                                <div>
                                     <p style={{ ...FONTS.payroll_mainhead, color: COLORS.primary, padding: "0 0 10px 0" }} className={MobileView ? '!text-lg' : ''}>Password</p>
-                                    <input
-                                        type="password"
-                                        placeholder="Password"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        style={{ ...FONTS.login_input, color: COLORS.primary }}
-                                        className={`flex-1 p-2 ${MobileView && '!text-md'} w-full rounded-lg outline-none bg-[#4A70790D] text-black placeholder-gray-500 border border-[#4A7079]`}
-                                    />
+                                    <div className="relative w-full">
+
+                                        <input
+                                            type={showPassword ? "text" : "password"}
+                                            placeholder="Password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            style={{ ...FONTS.login_input, color: COLORS.primary }}
+                                            className={`flex-1 p-2 ${MobileView && "!text-md"
+                                                } w-full rounded-lg outline-none bg-[#4A70790D] text-black placeholder-gray-500 border border-[#4A7079] pr-10`} // add pr-10 for icon space
+                                        />
+
+                                        {/* Eye Icon */}
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowPassword(!showPassword)}
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-[#4A7079] text-2xl"
+                                        >
+                                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <button

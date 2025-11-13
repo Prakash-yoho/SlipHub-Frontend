@@ -293,9 +293,9 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
       clearFieldError(key)
 
       if (formType === "hr") {
-        setHrDetails((prev: any) => ({ ...prev, [key]: value }))
+        setHrDetails((prev: HrProfileType) => ({ ...prev, [key]: value }))
       } else if (formType === "employee") {
-        setEmployeeDetails((prev: any) => ({ ...prev, [key]: value }))
+        setEmployeeDetails((prev: EmployeeProfile) => ({ ...prev, [key]: value }))
       } else {
         console.log("change input error")
       }
@@ -332,9 +332,9 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
       clearFieldError(key)
 
       if (formType === "hr") {
-        setHrDetails((prev: any) => ({ ...prev, qualification: { ...prev.qualification, [key]: value } }))
+        setHrDetails((prev: HrProfileType) => ({ ...prev, qualification: { ...prev.qualification, [key]: value } }))
       } else if (formType === "employee") {
-        setEmployeeDetails((prev: any) => ({ ...prev, qualification: { ...prev.qualification, [key]: value } }))
+        setEmployeeDetails((prev: EmployeeProfile) => ({ ...prev, qualification: { ...prev.qualification, [key]: value } }))
       } else {
         console.log("change input error")
       }

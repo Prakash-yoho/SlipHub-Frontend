@@ -293,7 +293,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
       clearFieldError(key)
 
       if (formType === "hr") {
-        setHrDetails((prev) => ({ ...prev, [key]: value }))
+        setHrDetails((prev: any) => ({ ...prev, [key]: value }))
       } else if (formType === "employee") {
         setEmployeeDetails((prev: any) => ({ ...prev, [key]: value }))
       } else {
@@ -332,7 +332,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
       clearFieldError(key)
 
       if (formType === "hr") {
-        setHrDetails((prev) => ({ ...prev, qualification: { ...prev.qualification, [key]: value } }))
+        setHrDetails((prev: any) => ({ ...prev, qualification: { ...prev.qualification, [key]: value } }))
       } else if (formType === "employee") {
         setEmployeeDetails((prev: any) => ({ ...prev, qualification: { ...prev.qualification, [key]: value } }))
       } else {

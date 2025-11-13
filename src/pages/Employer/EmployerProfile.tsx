@@ -41,6 +41,11 @@ const EmployerProfile: React.FC = () => {
 
     const role = GetLocalStorage("role")
 
+    const toback = () => {
+        dispatch(clearEmployee())
+        navigate(-1)
+    }
+
 
     useEffect(() => {
         if (role == "employee") {
@@ -67,7 +72,7 @@ const EmployerProfile: React.FC = () => {
                             <div className="w-full h-20 flex rounded-4xl items-baseline ml-5">
                                 {
                                     role !== "employee" && <div>
-                                        <div className='bg-[#7697A0] p-2 h-10 w-10 rounded-[50%]' onClick={() => navigate(-1)}>
+                                        <div className='bg-[#7697A0] p-2 h-10 w-10 rounded-[50%]' onClick={toback}>
                                             <IoMdArrowRoundBack className='text-white h-5 w-5' />
                                         </div>
                                     </div>
@@ -208,7 +213,7 @@ const EmployerProfile: React.FC = () => {
                 </div>
             </div>
 
-            <Form isOpen={isModalOpen} onClose={() => { setIsModalOpen(false); dispatch(clearEmployee()) }} formType='employee' EmplopyEdit={Edits} />
+            <Form isOpen={isModalOpen} onClose={() => { setIsModalOpen(false) }} formType='employee' EmplopyEdit={Edits} />
 
         </div>
     )

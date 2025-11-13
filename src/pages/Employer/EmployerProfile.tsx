@@ -5,7 +5,7 @@ import DownloadIcon from '../../assets/Comman/Download.png'
 import { COLORS, FONTS } from '../../constants/uiconstants'
 import CalendarPicker from '../../Components/ui/CalendarPicker'
 import EmployerPrevSlip from '../../Components/employer/EmployerPrevSlip'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import type { AppDispatch, RootState } from '../../store/store'
 import { getOneemployeeThunks } from '../../features/EmployeeProfile/redux/thunks'
@@ -15,11 +15,20 @@ import dayjs from "dayjs";
 import { handleDownload, handleDownloadMonth } from '../../features/common/service'
 import { MobileResponsive } from '../../hooks/MobileResponsive'
 import type { EmployeeProfile } from '../../Type/Emp_profile/Type'
+import edit from '../../assets/edit.png'
+import Form from '../../Components/form/Form'
+import { IoMdArrowRoundBack } from "react-icons/io";
+
 
 const EmployerProfile: React.FC = () => {
 
     const { uuid } = useParams()
     const dispatch = useDispatch<AppDispatch>()
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [Edits, setEdits] = useState<EmployeeProfile | null>(null);
+
+    const navigate = useNavigate()
+
 
     const employer: EmployeeProfile = useSelector((state: RootState) => state.empolyee.selectedEmployee)
 
@@ -54,7 +63,14 @@ const EmployerProfile: React.FC = () => {
                 >
                     <div className="flex flex-row w-full gap-5">
                         <div className={MobileView ? 'flex flex-col w-full' : "flex flex-col w-8/12"}>
-                            <div className="w-full h-20 flex rounded-4xl items-baseline">
+                            <div className="w-full h-20 flex rounded-4xl items-baseline ml-5">
+                                {
+                                    role !== "employee" && <div>
+                                        <div className='bg-[#7697A0] p-2 h-10 w-10 rounded-[50%]' onClick={() => navigate(-1)}>
+                                            <IoMdArrowRoundBack className='text-white h-5 w-5' />
+                                        </div>
+                                    </div>
+                                }
                                 <CalendarPicker setselecteDate={setchoseDate} />
                                 <div className="bg-[#7697A0] w-max p-2 px-6 h-max rounded-lg font-bold text-white text-md cursor-pointer" onClick={() => handleDownloadMonth(choseDate, employer?.uuid)}>Generate</div>
                             </div>
@@ -107,11 +123,20 @@ const EmployerProfile: React.FC = () => {
                             !MobileView &&
                             <div className="bg-[#EAEBE8] w-3/10 h-[82.3vh] m-4 rounded-3xl overflow-scroll scrollbar-hide">
                                 <div className='w-full rounded-2xl p-3  h-ful shadow-[0px_0px_15px_0px_#C3C7C64D]'>
-                                    <section className='flex gap-4 items-center mb-4'>
-                                        <div className='bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center' style={{ ...FONTS.card_initial }}>K</div>
-                                        <div className='grid gap-1'>
-                                            <h1 style={{ ...FONTS.payroll_profileHead, color: COLORS.primary }}>Name : {employer?.first_name + ' ' + employer?.last_name}</h1>
-                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.department?.dpt_name}</p>
+                                    <section className='flex justify-between items-center mb-4'>
+                                        <div className='flex gap-4'>
+                                            <div className='bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center' style={{ ...FONTS.card_initial }}>K</div>
+                                            <div className='grid gap-1'>
+                                                <h1 style={{ ...FONTS.payroll_profileHead, color: COLORS.primary }}>Name : {employer?.first_name + ' ' + employer?.last_name}</h1>
+                                                <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.department?.dpt_name}</p>
+                                            </div>
+                                        </div>
+                                        <div className='flex flex-row bg-[#7697A0] py-2  w-max gap-2 h-10 text-xl items-center rounded-lg text-white px-3 cursor-pointer' onClick={() => {
+                                            setIsModalOpen?.(true);
+                                            setEdits(employer)
+                                        }
+                                        }>
+                                            <img src={edit} alt="" className='w-5 h-5 ' />
                                         </div>
                                     </section>
 
@@ -130,6 +155,10 @@ const EmployerProfile: React.FC = () => {
                                         <div className='flex justify-between gap-4 mt-1'>
                                             <p style={{ ...FONTS.Nav, color: COLORS.primary }}>CTC(Monthly)</p>
                                             <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.ctc}</p>
+                                        </div>
+                                        <div className='flex justify-between gap-4 mt-1'>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>UAN No</p>
+                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.pf_acc}</p>
                                         </div>
                                         <div className='flex justify-between gap-4 mt-1'>
                                             <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Department</p>
@@ -177,6 +206,8 @@ const EmployerProfile: React.FC = () => {
                     </div>
                 </div>
             </div>
+
+            <Form isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} formType='employee' EmplopyEdit={Edits} />
 
         </div>
     )

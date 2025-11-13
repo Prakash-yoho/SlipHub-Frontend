@@ -23,6 +23,7 @@ export type HrProfileType = {
         year_of_completion?: string,
         percentage?: string
     },
+    pf_acc: string,
     pf_active?: boolean,
     image?: string,
     is_active?: boolean,

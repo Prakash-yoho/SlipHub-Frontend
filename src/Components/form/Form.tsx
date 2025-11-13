@@ -9,7 +9,7 @@ import type { AppDispatch, RootState } from "../../store/store"
 import { CreateHrThunks, UpdateHrThunks } from "../../features/HrProfile/redux/thunks"
 import type { HrProfileType } from "../../Type/HrProfiles/Type"
 import type { EmployeeProfile } from "../../Type/Emp_profile/Type"
-import { CreateEmployeeThunks } from "../../features/EmployeeProfile/redux/thunks"
+import { CreateEmployeeThunks, UpdateEmployeeThunks } from "../../features/EmployeeProfile/redux/thunks"
 import { GetFormDepartmentThunks } from "../../features/common/redux/thunks"
 import toast from "react-hot-toast"
 
@@ -64,8 +64,10 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
       percentage: HrEdit?.qualification?.percentage || "",
     },
     image: HrEdit?.image || "",
+    pf_acc: HrEdit?.pf_acc || "",
   })
-  const [EmployeeDetails, setEmployeeDetails] = useState<EmployeeProfile>({
+
+  const [EmployeeDetails, setEmployeeDetails] = useState<EmployeeProfile | any>({
     emp_id: EmplopyEdit?.emp_id || "",
     first_name: EmplopyEdit?.first_name || "",
     last_name: EmplopyEdit?.last_name || "",
@@ -88,7 +90,12 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
       percentage: EmplopyEdit?.qualification?.percentage || "",
     },
     image: EmplopyEdit?.image || "",
+    pf_acc: EmplopyEdit?.pf_acc || "",
   })
+
+  useEffect(() => {
+    setEmployeeDetails(EmplopyEdit)
+  }, [EmplopyEdit])
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -257,7 +264,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
         onClose()
       } else if (formType === "employee") {
         if (EmplopyEdit) {
-          console.log("under developement")
+          dispatch(UpdateEmployeeThunks(EmployeeDetails, EmplopyEdit?.uuid || ""))
         } else {
           dispatch(CreateEmployeeThunks(EmployeeDetails))
           onClose()
@@ -565,20 +572,23 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                 <ErrorMessage error={errors.email} />
               </div>
 
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  Password
-                </p>
-                <input
-                  type="text"
-                  name="Password"
-                  value={EmplopyEdit?.password || HrEdit?.password || undefined}
-                  placeholder="Enter Password"
-                  className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
-                  // required
-                  onChange={(e) => handleChangeInput("password", e)}
-                />
-              </div>
+              {
+                (!HrEdit && !EmplopyEdit) &&
+                <div className="">
+                  <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
+                    Password
+                  </p>
+                  <input
+                    type="text"
+                    name="Password"
+                    value={undefined}
+                    placeholder="Enter Password"
+                    className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
+                    // required
+                    onChange={(e) => handleChangeInput("password", e)}
+                  />
+                </div>
+              }
 
               <div className="">
                 <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
@@ -667,6 +677,22 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                   onChange={(e) => handleChangeInput("ctc", e)}
                 />
                 <ErrorMessage error={errors.ctc} />
+              </div>
+
+              <div className="">
+                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
+                  UAN No
+                </p>
+                <input
+                  type="text"
+                  name="CTC"
+                  placeholder="Enter CTC"
+                  value={EmplopyEdit?.pf_acc || HrEdit?.pf_acc || undefined}
+                  className={`border ${errors.pf_acc ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
+                  // required
+                  onChange={(e) => handleChangeInput("pf_acc", e)}
+                />
+                <ErrorMessage error={errors.pf_acc} />
               </div>
 
               <div className="">

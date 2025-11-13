@@ -432,7 +432,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                 <input
                   type="text"
                   name="FirstName"
-                  value={EmplopyEdit?.first_name || HrEdit?.first_name || undefined}
+                  value={EmployeeDetails?.first_name || HrDetails?.first_name || undefined}
                   placeholder="Enter Your Name"
                   className={`border ${errors.first_name ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
@@ -448,7 +448,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                 <input
                   type="text"
                   name="LastName"
-                  value={EmplopyEdit?.last_name || HrEdit?.last_name || undefined}
+                  value={EmployeeDetails?.last_name || HrDetails?.last_name || undefined}
                   placeholder="Enter Your Name"
                   className={`border ${errors.last_name ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
@@ -464,7 +464,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                 <input
                   type="text"
                   name="EmployeeID"
-                  value={EmplopyEdit?.emp_id || HrEdit?.emp_id || undefined}
+                  value={EmployeeDetails?.emp_id || HrDetails?.emp_id || undefined}
                   placeholder="Enter EmployeeID"
                   className={`border ${errors.emp_id ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
@@ -485,6 +485,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                       className={`border ${errors.department ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full flex justify-between items-center`}
                     >
                       <span className="font-medium">{selectedDepartments.map((item) => `${item}`).join(", ")}</span>
+                      {/* <span className="font-medium">{HrDetails?.department?.[0]?.dpt_name}</span> */}
                       <svg
                         className={`w-4 h-4 transition-transform ${isOpenDpt ? "rotate-180" : ""}`}
                         fill="none"
@@ -570,7 +571,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                 <input
                   type="text"
                   name="Email"
-                  value={EmplopyEdit?.contact_info?.email || HrEdit?.contact_info?.email || undefined}
+                  value={EmployeeDetails?.contact_info?.email || HrDetails?.contact_info?.email || undefined}
                   placeholder="Enter Email"
                   className={`border ${errors.email ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
@@ -605,7 +606,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                   type="text"
                   name="Role"
                   placeholder="Enter Role"
-                  value={EmplopyEdit?.emp_role || (HrEdit ? "HR" : undefined) || undefined}
+                  value={EmployeeDetails?.emp_role || (HrEdit ? "HR" : undefined) || undefined}
                   className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
                   // required
                   onChange={(e) => handleChangeInput("emp_role", e)}
@@ -619,7 +620,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                 <input
                   type="text"
                   name="Contact"
-                  value={EmplopyEdit?.contact_info?.phone || HrEdit?.contact_info?.phone || undefined}
+                  value={EmployeeDetails?.contact_info?.phone || HrDetails?.contact_info?.phone || undefined}
                   placeholder="Enter Contact"
                   className={`border ${errors.phone ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
@@ -645,10 +646,10 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                   type="date"
                   name="JoinDate"
                   value={
-                    EmplopyEdit?.join_date
-                      ? new Date(EmplopyEdit.join_date).toISOString().split('T')[0]
-                      : HrEdit?.join_date
-                        ? new Date(HrEdit.join_date).toISOString().split('T')[0]
+                    EmployeeDetails?.join_date
+                      ? new Date(EmployeeDetails.join_date).toISOString().split('T')[0]
+                      : HrDetails?.join_date
+                        ? new Date(HrDetails.join_date).toISOString().split('T')[0]
                         : ''
                   }                  // placeholder="Date of Joining"
                   className={`border ${errors.join_date ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
@@ -667,7 +668,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                   type="text"
                   name="Experience"
                   placeholder="Total Experience"
-                  value={EmplopyEdit?.experience || HrEdit?.experience || undefined}
+                  value={EmployeeDetails?.experience || HrDetails?.experience || undefined}
                   className={`border ${errors.experience ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
                   onChange={(e) => handleChangeInput("experience", e)}
@@ -683,7 +684,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                   type="text"
                   name="CTC"
                   placeholder="Enter CTC"
-                  value={EmplopyEdit?.ctc || HrEdit?.ctc || undefined}
+                  value={EmployeeDetails?.ctc || HrDetails?.ctc || undefined}
                   className={`border ${errors.ctc ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
                   onChange={(e) => handleChangeInput("ctc", e)}
@@ -700,7 +701,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                   type="text"
                   name="CTC"
                   placeholder="Enter UAN No"
-                  value={EmplopyEdit?.pf_acc || HrEdit?.pf_acc || undefined}
+                  value={EmployeeDetails?.pf_acc || HrDetails?.pf_acc || undefined}
                   className={`border ${errors.pf_acc ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
                   onChange={(e) => handleChangeInput("pf_acc", e)}
@@ -716,7 +717,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                   type="text"
                   name="Level/Grade"
                   placeholder="Enter Level/Grade"
-                  value={EmplopyEdit?.level_grade || HrEdit?.level_grade || undefined}
+                  value={EmployeeDetails?.level_grade || HrDetails?.level_grade || undefined}
                   className={`border ${errors.level_grade ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
                   onChange={(e) => handleChangeInput("level_grade", e)}
@@ -733,10 +734,10 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                   name="DOB"
                   placeholder="Enter DOB"
                   value={
-                    EmplopyEdit?.dob
-                      ? new Date(EmplopyEdit.dob).toISOString().split('T')[0]
-                      : HrEdit?.dob
-                        ? new Date(HrEdit.dob).toISOString().split('T')[0]
+                    EmployeeDetails?.dob
+                      ? new Date(EmployeeDetails.dob).toISOString().split('T')[0]
+                      : HrDetails?.dob
+                        ? new Date(HrDetails.dob).toISOString().split('T')[0]
                         : ''
                   } className={`border ${errors.dob ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
@@ -754,7 +755,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                   type="text"
                   name="Emergency Contact"
                   placeholder="Enter Emergency Contact"
-                  value={EmplopyEdit?.emg_contact || HrEdit?.emg_contact || undefined}
+                  value={EmployeeDetails?.emg_contact || HrDetails?.emg_contact || undefined}
                   className={`border ${errors.emg_contact ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
                   onChange={(e) => handleChangeInput("emg_contact", e)}
@@ -770,7 +771,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                   type="text"
                   name="Father's Name"
                   placeholder="Enter Father's Name"
-                  value={EmplopyEdit?.father_name || HrEdit?.father_name || undefined}
+                  value={EmployeeDetails?.father_name || HrDetails?.father_name || undefined}
                   className={`border ${errors.father_name ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
                   onChange={(e) => handleChangeInput("father_name", e)}
@@ -785,7 +786,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
               <textarea
                 name="Address"
                 placeholder="Enter Address"
-                value={EmplopyEdit?.contact_info?.address || HrEdit?.contact_info?.address || undefined}
+                value={EmployeeDetails?.contact_info?.address || HrDetails?.contact_info?.address || undefined}
                 className={`border ${errors.address ? "border-red-500" : "border-[#4A7079]"} h-20 rounded-md px-3 py-2 outline-0 w-full resize-none`}
                 // required
                 onChange={(e) => handleContactInput("address", e)}
@@ -810,7 +811,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                   type="text"
                   name="Degree"
                   placeholder="Enter Degree"
-                  value={EmplopyEdit?.qualification?.degree || HrEdit?.qualification?.degree || undefined}
+                  value={EmployeeDetails?.qualification?.degree || HrDetails?.qualification?.degree || undefined}
                   className={`border ${errors.degree ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
                   onChange={(e) => handleQualificationInput("degree", e)}
@@ -827,7 +828,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                   name="Specialization"
                   placeholder="Total Specialization"
                   value={
-                    EmplopyEdit?.qualification?.specialization || HrDetails?.qualification?.specialization || undefined
+                    EmployeeDetails?.qualification?.specialization || HrDetails?.qualification?.specialization || undefined
                   }
                   className={`border ${errors.specialization ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
@@ -845,8 +846,8 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                   name="Year Of Completion"
                   placeholder="Enter Year Of Completion"
                   value={
-                    EmplopyEdit?.qualification?.year_of_completion ||
-                    HrEdit?.qualification?.year_of_completion ||
+                    EmployeeDetails?.qualification?.year_of_completion ||
+                    HrDetails?.qualification?.year_of_completion ||
                     undefined
                   }
                   className={`border ${errors.year_of_completion ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
@@ -864,7 +865,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                   type="text"
                   name="Percentage"
                   placeholder="Enter Percentage"
-                  value={EmplopyEdit?.qualification?.percentage || HrEdit?.qualification?.percentage || undefined}
+                  value={EmployeeDetails?.qualification?.percentage || HrDetails?.qualification?.percentage || undefined}
                   className={`border ${errors.percentage ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
                   onChange={(e) => handleQualificationInput("percentage", e)}

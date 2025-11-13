@@ -62,7 +62,7 @@ const Login = () => {
     const inputLength = 6;
     const [otpInput, setOtpInput] = useState<string[]>(Array(inputLength).fill(''));
     const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
-    const otpValue = JSON.stringify(GetLocalStorage('otp'));
+    // const otpValue = JSON.stringify(GetLocalStorage('otp'));
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
@@ -213,10 +213,10 @@ const Login = () => {
 
                     <div>
                         <h1 style={{ ...FONTS.login_head, color: COLORS.primary }} className={MobileView ? '!text-3xl mt-10' : 'mb-2'}>Otp Verification</h1>
-                        <p style={{ ...FONTS.Nav, color: COLORS.primary }} className={MobileView ? '!text-sm' : ''}>Enter the 6 Digit OTP sent to your Mobile Number OTP</p>
-                        <p style={{ ...FONTS.Nav, color: COLORS.primary }} className={MobileView ? '!text-sm' : 'text-center'}>
+                        <p style={{ ...FONTS.Nav, color: COLORS.primary }} className={MobileView ? '!text-sm' : ''}>Enter the 6 Digit OTP sent to your Registered Mail</p>
+                        {/* <p style={{ ...FONTS.Nav, color: COLORS.primary }} className={MobileView ? '!text-sm' : 'text-center'}>
                             OTP (for demo): {otpValue ?? ""}
-                        </p>
+                        </p> */}
 
                     </div>
 

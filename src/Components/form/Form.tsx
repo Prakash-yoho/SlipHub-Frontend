@@ -41,7 +41,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
     dispatch(GetFormDepartmentThunks())
   }, [dispatch])
 
-  const [HrDetails, setHrDetails] = useState<HrProfileType>({
+  const [HrDetails, setHrDetails] = useState<HrProfileType | any>({
     emp_id: HrEdit?.emp_id || "",
     first_name: HrEdit?.first_name || "",
     last_name: HrEdit?.last_name || "",
@@ -65,7 +65,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
     },
     image: HrEdit?.image || "",
     pf_acc: HrEdit?.pf_acc || "",
-    level_grade:HrEdit?.level_grade||""
+    level_grade: HrEdit?.level_grade || ""
 
   })
 
@@ -93,8 +93,12 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
     },
     image: EmplopyEdit?.image || "",
     pf_acc: EmplopyEdit?.pf_acc || "",
-    level_grade:EmplopyEdit?.level_grade||""
+    level_grade: EmplopyEdit?.level_grade || ""
   })
+
+  useEffect(() => {
+    setHrDetails(HrEdit)
+  }, [HrEdit])
 
   useEffect(() => {
     setEmployeeDetails(EmplopyEdit)
@@ -291,7 +295,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
       if (formType === "hr") {
         setHrDetails((prev) => ({ ...prev, [key]: value }))
       } else if (formType === "employee") {
-        setEmployeeDetails((prev:any) => ({ ...prev, [key]: value }))
+        setEmployeeDetails((prev: any) => ({ ...prev, [key]: value }))
       } else {
         console.log("change input error")
       }
@@ -330,7 +334,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
       if (formType === "hr") {
         setHrDetails((prev) => ({ ...prev, qualification: { ...prev.qualification, [key]: value } }))
       } else if (formType === "employee") {
-        setEmployeeDetails((prev:any) => ({ ...prev, qualification: { ...prev.qualification, [key]: value } }))
+        setEmployeeDetails((prev: any) => ({ ...prev, qualification: { ...prev.qualification, [key]: value } }))
       } else {
         console.log("change input error")
       }
@@ -543,7 +547,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                             key={index}
                             onClick={() => {
                               setempDpt(option?.dpt_name)
-                              setEmployeeDetails((prev:any) => ({ ...prev, department: option?._id }))
+                              setEmployeeDetails((prev: any) => ({ ...prev, department: option?._id }))
                               setIsOpenDpt(false)
                               clearFieldError("department")
                             }}
@@ -682,7 +686,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                 <ErrorMessage error={errors.ctc} />
               </div>
 
-              
+
               <div className="">
                 <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
                   UAN No

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from '../../store/store';
 import { GetHrUUIDThunks } from '../../features/HrProfile/redux/thunks';
 import type { HrProfileType } from '../../Type/HrProfiles/Type';
+import dayjs from 'dayjs';
 
 interface props {
     isOpen: boolean;
@@ -60,7 +61,7 @@ export const DrawerForm: React.FC<props> = ({ isOpen, setIsOpen, setIsModalOpen,
                             </div>
                             <div className='w-full rounded-2xl overflow-scroll scrollbar-hide h-ful shadow-[0px_0px_15px_0px_#C3C7C64D] p-2'>
                                 <section className='flex gap-4 items-center mb-4'>
-                                    <div className='bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center' style={{ ...FONTS.card_initial }}>K</div>
+                                    <div className='bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center' style={{ ...FONTS.card_initial }}>{selectedHr?.first_name?.[0]}</div>
                                     <div className='grid gap-1'>
                                         <h1 style={{ ...FONTS.payroll_profileHead, color: COLORS.primary }} className='!font-bold !text-2xl'>{selectedHr?.first_name + ' ' + selectedHr?.last_name}</h1>
                                         <p style={{ ...FONTS.Nav, color: COLORS.primary }}>HR</p>
@@ -139,7 +140,7 @@ export const DrawerForm: React.FC<props> = ({ isOpen, setIsOpen, setIsModalOpen,
                                     <h1 style={{ ...FONTS.payroll_Head, color: COLORS.primary }} className='!text-2xl'>Personal Information</h1>
                                     <div className='flex justify-between gap-4 mt-2'>
                                         <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Date of Birth</p>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }} className='uppercase'>{selectedHr?.dob}</p>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }} className='uppercase'>{dayjs(selectedHr?.dob).format("DD-MMM-YYYY")}</p>
                                     </div>
                                     <div className='flex justify-between gap-4 mt-1'>
                                         <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Father's Name</p>

@@ -375,7 +375,7 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
       <div className="bg-[#EAEBE8] rounded-xl shadow-lg w-[65%] h-[90vh] overflow-y-scroll scrollbar-hide p-6 ">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold text-center" style={{ ...FONTS.Main, color: COLORS.primary }}>
-            {formType === "hr" ? "Add Hr" : "Add Employee"}
+            {formType === "hr" ? `${HrEdit ? "Edit" : "Add"} Hr` : `${EmplopyEdit ? "Edit" : "Add"}Add Employee`}
           </h2>
 
           <div
@@ -644,8 +644,13 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                 <input
                   type="date"
                   name="JoinDate"
-                  value={EmplopyEdit?.join_date || HrEdit?.join_date || undefined}
-                  placeholder="Date of Joining"
+                  value={
+                    EmplopyEdit?.join_date
+                      ? new Date(EmplopyEdit.join_date).toISOString().split('T')[0]
+                      : HrEdit?.join_date
+                        ? new Date(HrEdit.join_date).toISOString().split('T')[0]
+                        : ''
+                  }                  // placeholder="Date of Joining"
                   className={`border ${errors.join_date ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
                   style={{ color: COLORS.primary }}
@@ -727,8 +732,13 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
                   type="date"
                   name="DOB"
                   placeholder="Enter DOB"
-                  value={EmplopyEdit?.dob || HrEdit?.dob || undefined}
-                  className={`border ${errors.dob ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
+                  value={
+                    EmplopyEdit?.dob
+                      ? new Date(EmplopyEdit.dob).toISOString().split('T')[0]
+                      : HrEdit?.dob
+                        ? new Date(HrEdit.dob).toISOString().split('T')[0]
+                        : ''
+                  } className={`border ${errors.dob ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
                   // required
                   style={{ color: COLORS.primary }}
                   onChange={(e) => handleChangeInput("dob", e)}

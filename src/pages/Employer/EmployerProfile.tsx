@@ -125,7 +125,7 @@ const EmployerProfile: React.FC = () => {
                                 <div className='w-full rounded-2xl p-3  h-ful shadow-[0px_0px_15px_0px_#C3C7C64D]'>
                                     <section className='flex justify-between items-center mb-4'>
                                         <div className='flex gap-4'>
-                                            <div className='bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center' style={{ ...FONTS.card_initial }}>K</div>
+                                            <div className='bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center' style={{ ...FONTS.card_initial }}>{employer?.first_name?.[0].toLocaleUpperCase()}</div>
                                             <div className='grid gap-1'>
                                                 <h1 style={{ ...FONTS.payroll_profileHead, color: COLORS.primary }}>Name : {employer?.first_name + ' ' + employer?.last_name}</h1>
                                                 <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.department?.dpt_name}</p>
@@ -197,7 +197,7 @@ const EmployerProfile: React.FC = () => {
                                         </div>
                                         <div className='flex justify-between gap-4 mt-1'>
                                             <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Address</p>
-                                            <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.contact_info?.address}</p>
+                                            <p className='break-words' style={{ ...FONTS.Nav, color: COLORS.primary }}>{employer?.contact_info?.address}</p>
                                         </div>
                                     </section>
                                 </div>

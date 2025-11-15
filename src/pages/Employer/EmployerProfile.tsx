@@ -69,7 +69,7 @@ const EmployerProfile: React.FC = () => {
                 >
                     <div className="flex flex-row w-full gap-5">
                         <div className={MobileView ? 'flex flex-col w-full' : "flex flex-col w-8/12"}>
-                            <div className="w-full h-20 flex rounded-4xl items-center ml-5">
+                            <div className="w-full h-20 flex rounded-4xl items-center ml-5 relative bottom-3">
                                 {
                                     role !== "employee" && <div>
                                         <div className='bg-[#7697A0] hover:bg-[#4A7079] p-2 h-10 w-10 rounded-[50%] flex justify-center items-center cursor-pointer' onClick={toback}>

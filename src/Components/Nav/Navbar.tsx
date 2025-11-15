@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../../assets/Navbar/yohologo.png';
 import NotificationIcon from '../../assets/Navbar/notification-bing.png';
 import ProfileIcon from '../../assets/Navbar/Mask group.png';
-import { FONTS } from '../../constants/uiconstants';
+import { COLORS, FONTS } from '../../constants/uiconstants';
 import { ClearLocalStorage, GetLocalStorage } from '../../utils/localstorage';
 
 const Navbar: React.FC = () => {
 
+  const [confirmLogout, setConfirmLogout] = useState(false)
+
   const role = GetLocalStorage('role')
+
+
+
 
   const logout = () => {
     ClearLocalStorage()
@@ -119,11 +124,42 @@ const Navbar: React.FC = () => {
             <img src={ProfileIcon} alt="Notification" className="w-7 h-7" />
 
             {/* <div> */}
-            <button className='px-3 cursor-pointer' onClick={logout}>Logout</button>
+            <button className='px-3 cursor-pointer' onClick={() => setConfirmLogout(true)}>Logout</button>
             {/* </div> */}
           </div>
         </section>
       </div>
+
+      {confirmLogout && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+          <div className="bg-white rounded-2xl p-6 shadow-lg w-[400px]">
+            <h2 className="" style={{ ...FONTS.card_name, color: COLORS.primary }}>
+              Confirm Logout
+            </h2>
+
+            <p className="text-sm text-gray-600 mt-2">
+              Are you sure, By clicking Logout you will be redirect to Login Page
+            </p>
+
+            <div className="mt-4 flex justify-end gap-3">
+              <button
+                onClick={() => setConfirmLogout(false)}
+                className="px-4 py-1 rounded-md border border-gray-300 text-gray-700 cursor-pointer"
+                style={{ ...FONTS.view_btn }}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={logout}
+                className="px-4 py-1 rounded-md bg-[#ec1c1c] text-white cursor-pointer"
+                style={{ ...FONTS.view_btn }}
+              >
+                Yes, Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

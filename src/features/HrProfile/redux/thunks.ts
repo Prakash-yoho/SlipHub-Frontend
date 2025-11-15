@@ -27,6 +27,7 @@ export const UpdateHrThunks = (data: HrProfileType, params: string) => async (di
     try {
         await UpdateHrService(data, params)
         dispatch(addAndUpdateHrProfile(data))
+        toast.success("Hr Updated Successfully")
     } catch (error) {
         console.log(error, "hr add thunks error")
     }

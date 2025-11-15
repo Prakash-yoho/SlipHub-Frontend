@@ -69,10 +69,10 @@ const EmployerProfile: React.FC = () => {
                 >
                     <div className="flex flex-row w-full gap-5">
                         <div className={MobileView ? 'flex flex-col w-full' : "flex flex-col w-8/12"}>
-                            <div className="w-full h-20 flex rounded-4xl items-baseline ml-5">
+                            <div className="w-full h-20 flex rounded-4xl items-center ml-5">
                                 {
                                     role !== "employee" && <div>
-                                        <div className='bg-[#7697A0] p-2 h-10 w-10 rounded-[50%]' onClick={toback}>
+                                        <div className='bg-[#7697A0] hover:bg-[#4A7079] p-2 h-10 w-10 rounded-[50%] flex justify-center items-center cursor-pointer' onClick={toback}>
                                             <IoMdArrowRoundBack className='text-white h-5 w-5' />
                                         </div>
                                     </div>

@@ -21,10 +21,12 @@ const DashBoard = () => {
   }, [company]);
 
   return (
-    <div 
-      className="flex flex-col w-full p-4 h-[93vh] overflow-y-scroll"
-      style={{ scrollbarWidth: 'none' }}
-    >
+    <div
+  className={`flex flex-col w-full p-4 overflow-y-auto`}
+  style={{
+    scrollbarWidth: "none",
+  }}
+>
       <h1 style={{ ...FONTS.Main, color: COLORS.primary }}>Home</h1>
 
       <div className="flex flex-col h-full gap-5 w-full">

@@ -166,11 +166,11 @@ const Payroll = () => {
                             placeholder='Search By Employee Name'
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className='bg-[#4A70790D] absolute w-[94%] left-1/2 -translate-x-1/2 z-50 -top-3 p-3 px-4 border border-[#4A7079] outline-0 rounded-3xl'
+                            className='bg-[#4A70790D] absolute w-[94%] left-1/2 -translate-x-1/2 z-49 -top-3 p-3 px-4 border border-[#4A7079] outline-0 rounded-3xl'
                         />
 
 
-                        <div className='h-auto lg:h-[62vh] rounded-lg overflow-y-scroll scrollbar-hide mt-6 lg:mt-0'>
+                        <div className='h-auto lg:h-[62vh] rounded-lg overflow-y-scroll scrollbar-hide mt-6 lg:mt-6'>
                             {!selectedEmp?.uuid ? (
                                 <div className='flex items-center justify-center h-full'>
                                     <p style={{ ...FONTS.table_data, color: COLORS.primary }}>
@@ -317,7 +317,7 @@ const Payroll = () => {
                                     <div className='bg-[#E2E2DE] shadow-0px_0px_15px_0px_[#C3C7C64D] rounded-2xl p-3 mt-4 w-full overflow-x-auto'>
                                         <h1 style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Previous PaySlips</h1>
 
-                                        <div className='mt-4 flex justify-between gap-6 w-full overflow-x-auto'>
+                                        <div className='mt-4 flex justify-between gap-6 w-full overflow-x-auto scrollbar-hide'>
                                             <table className="w-full min-w-[600px] -mt-5 border-separate border-spacing-y-4 overflow-auto">
                                                 <thead className="sticky top-0">
                                                     <tr style={{ background: COLORS.primary }} className='text-left text-white rounded-lg'>
@@ -328,7 +328,7 @@ const Payroll = () => {
                                                     </tr>
                                                 </thead>
 
-                                                <tbody className='overflow-y-scroll'>
+                                                <tbody className='overflow-y-scroll scrollbar-hide'>
                                                     {selectedEmp?.payroll_slip && selectedEmp?.payroll_slip?.length ? selectedEmp?.payroll_slip?.map((items, index) => (
                                                         <tr key={index} style={{ color: COLORS.primary }} className='bg-[#EAEBE8] rounded-lg'>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">{dayjs(items?.created_month).format("MMMM-YYYY")}</td>
@@ -337,7 +337,7 @@ const Payroll = () => {
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg"><img src={DownloadIcon} alt="" className='w-[25px] h-[25px] cursor-pointer' onClick={() => handleDownload(items?.uuid)} /></td>
                                                         </tr>
                                                     )) :
-                                                        <tr style={{ color: COLORS.primary }} className='bg-[#EAEBE8]  rounded-lg '>
+                                                        <tr style={{ color: COLORS.primary }} className='bg-[#EAEBE8]  rounded-lg'>
                                                             <td colSpan={4} style={{ ...FONTS.table_data }} className="px-4 py-3 text-center">No Slip Found</td>
                                                         </tr>
                                                     }

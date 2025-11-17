@@ -64,7 +64,7 @@ const Employee = () => {
   const role = GetLocalStorage('role')
 
   return (
-    <div className='py-6 px-4 sm:px-6 md:px-8 h-screen overflow-hidden'>
+    <div className='py-6 px-4 sm:px-6 md:px-8 h-screen '>
 
       {/* Header */}
       <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4'>

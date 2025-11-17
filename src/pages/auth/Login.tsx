@@ -133,7 +133,7 @@ const Login = () => {
                     SlipHub
                 </h1>
                 <p style={{ ...FONTS.Nav, color: COLORS.primary }} className={MobileView ? `!w-full text-sm` : ``}>
-                    Your one-stop solution for all your HRMS needs. Streamline your processes and enhance productivity with Slip Hub.
+                    Your one-step solution for all your HRMS needs. Streamline your processes and enhance productivity with Slip Hub,Thank You.
                 </p>
             </div>
 

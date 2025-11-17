@@ -33,7 +33,6 @@ const Employee = () => {
     setIsOpen(false)
   }
 
-  // Filter employees
   const filteredEmployees = useMemo(() => {
     return employees
       ?.filter(emp =>
@@ -65,35 +64,39 @@ const Employee = () => {
   const role = GetLocalStorage('role')
 
   return (
-    <div className='py-6 px-8 h-screen'>
-      <div className='flex justify-between items-center'>
-        <h1 style={{ ...FONTS.Main, color: COLORS.primary }}>Employee Profiles</h1>
-        {role === "hr" && <button
-          onClick={() => setIsOpen(true)}
-          style={{ ...FONTS.Main_btn, background: COLORS.primary }}
-          className='text-[#FFFFFF] px-3 py-[4px] rounded-md cursor-pointer'
-        >
-          Add Employee
-        </button>}
+    <div className='py-6 px-4 sm:px-6 md:px-8 h-screen overflow-hidden'>
 
+      {/* Header */}
+      <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4'>
+        <h1 style={{ ...FONTS.Main, color: COLORS.primary }}>Employee Profiles</h1>
+
+        {role === "hr" && (
+          <button
+            onClick={() => setIsOpen(true)}
+            style={{ ...FONTS.Main_btn, background: COLORS.primary }}
+            className='text-[#FFFFFF] px-4 py-[6px] rounded-md cursor-pointer w-full sm:w-auto'
+          >
+            Add Employee
+          </button>
+        )}
       </div>
 
       <Form isOpen={isOpen} onClose={onclose} formType='employee' />
 
-      {/* Filters */}
-      <div className='flex justify-between items-center mt-6'>
-        <section className='flex gap-4'>
-          {/* Department dropdown */}
-          <div className="relative">
-            {/* Dropdown Trigger */}
+      {/* Filters Section */}
+      <div className='flex flex-col md:flex-row justify-between gap-4 mt-6'>
+
+        {/* Dropdown Section */}
+        <section className='flex flex-col sm:flex-row gap-4 w-full md:w-auto'>
+
+          {/* Department Dropdown */}
+          <div className="relative w-full sm:w-[200px]">
             <div
               onClick={() => setDeptOpen(!deptOpen)}
               style={{ ...FONTS.Main_btn, background: COLORS.sub_btn }}
-              className="text-[#FFFFFF] px-3 min-w-[170px] py-[4px] flex justify-between items-center cursor-pointer gap-5 rounded-md"
+              className="text-[#FFFFFF] px-3 py-[6px] flex justify-between items-center cursor-pointer gap-5 rounded-md w-full"
             >
-              <span style={{ ...FONTS.Main_btn }}>
-                {selectedDept ?? "Departments"}
-              </span>
+              {selectedDept}
               <svg
                 className={`w-4 h-4 transition-transform ${deptOpen ? "rotate-180" : ""}`}
                 fill="none"
@@ -109,57 +112,38 @@ const Employee = () => {
               </svg>
             </div>
 
-            {/* Dropdown List */}
             {deptOpen && (
-              <div className="absolute top-full h-[40vh] overflow-scroll scrollbar-hide left-0 right-0 mt-2 bg-gray-100 rounded-lg p-2 shadow-lg z-10">
-                {/* Departments Option */}
+              <div className="absolute top-full max-h-[40vh] left-0 right-0 overflow-scroll scrollbar-hide mt-2 bg-gray-100 rounded-lg p-2 shadow-lg z-10">
                 <button
-                  type="button"
-                  onClick={() => {
-                    setSelectedDept("Departments")
-                    setDeptOpen(false)
-                  }}
-                  className="w-full text-left px-4 py-3 mb-2 last:mb-0 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300 text-gray-700 transition-colors"
+                  onClick={() => { setSelectedDept("Departments"); setDeptOpen(false); }}
+                  className="w-full text-left px-4 py-3 mb-2 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300"
                 >
                   Departments
                 </button>
 
-                {/* Department Options */}
-                {departments?.length === 0 ? (
-                  <p className="text-center text-gray-500 py-4">No Departments Found</p>
-                ) : (
-                  departments?.map((dept: any) => (
-                    <button
-                      type="button"
-                      key={dept?.uuid}
-                      onClick={() => {
-                        setSelectedDept(dept?.dpt_name)
-                        setDeptOpen(false)
-                      }}
-                      className="w-full text-left px-4 py-3 mb-2 last:mb-0 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300 text-gray-700 transition-colors"
-                    >
-                      {dept?.dpt_name}
-                    </button>
-                  ))
-                )}
+                {departments?.map((dept: any) => (
+                  <button
+                    key={dept?.uuid}
+                    onClick={() => { setSelectedDept(dept?.dpt_name); setDeptOpen(false); }}
+                    className="w-full text-left px-4 py-3 mb-2 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300"
+                  >
+                    {dept?.dpt_name}
+                  </button>
+                ))}
               </div>
             )}
           </div>
 
-
-          {/* Experience dropdown */}
-          <div className="relative">
-            {/* Dropdown Trigger */}
+          {/* Experience Dropdown */}
+          <div className="relative w-full sm:w-[200px]">
             <div
               onClick={() => setExpOpen(!expOpen)}
               style={{ ...FONTS.Main_btn, background: COLORS.sub_btn }}
-              className="text-[#FFFFFF] px-3 min-w-[170px] py-[4px] flex justify-between items-center cursor-pointer gap-5 rounded-md"
+              className="text-[#FFFFFF] px-3 py-[6px] flex justify-between items-center cursor-pointer gap-5 rounded-md w-full"
             >
-              <span style={{ ...FONTS.Main_btn }}>
-                {selectedExp ?? "Experience"}
-              </span>
+              {selectedExp}
               <svg
-                className={`w-4 h-4 transition-transform ${expOpen ? "rotate-180" : ""}`}
+                className={`w-4 h-4 transition-transform ${deptOpen ? "rotate-180" : ""}`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -173,18 +157,13 @@ const Employee = () => {
               </svg>
             </div>
 
-            {/* Dropdown List */}
             {expOpen && (
-              <div className="absolute top-full max-h-[40vh] overflow-scroll scrollbar-hide left-0 right-0 mt-2 bg-gray-100 rounded-lg p-2 shadow-lg z-10">
+              <div className="absolute top-full max-h-[40vh] left-0 right-0 overflow-scroll scrollbar-hide mt-2 bg-gray-100 rounded-lg p-2 shadow-lg z-10">
                 {["All Experience", "0-1 Years", "1-3 Years", "3+ Years"].map((exp) => (
                   <button
-                    type="button"
                     key={exp}
-                    onClick={() => {
-                      setSelectedExp(exp)
-                      setExpOpen(false)
-                    }}
-                    className="w-full text-left px-4 py-3 mb-2 last:mb-0 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300 text-gray-700 transition-colors"
+                    onClick={() => { setSelectedExp(exp); setExpOpen(false); }}
+                    className="w-full text-left px-4 py-3 mb-2 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300"
                   >
                     {exp}
                   </button>
@@ -192,67 +171,71 @@ const Employee = () => {
               </div>
             )}
           </div>
-
         </section>
 
-        {/* Search */}
+        {/* SEARCH */}
         <input
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className='bg-[#4A70790D] text-[#4A7079] font-bold border border-[#4A7079] rounded-md px-3 py-[6px] outline-0 w-[400px]'
+          className='bg-[#4A70790D] text-[#4A7079] font-bold border border-[#4A7079] rounded-md px-3 py-[6px] outline-0 w-full md:w-[350px] lg:w-[400px]'
           placeholder='Search by name, ID, email...'
         />
       </div>
 
-      {/* Employee Table */}
-      <div className='rounded-lg mt-6 md:h-[55vh] lg:h-[60vh] xl:h-[65vh] 2xl:h-[70vh] overflow-y-scroll scrollbar-hide'>
-        <table className="w-full -mt-5 border-separate border-spacing-y-4 overflow-auto">
-          <thead className="sticky top-0">
-            <tr style={{ background: COLORS.primary }} className='text-left text-white rounded-lg'>
-              <th style={{ ...FONTS.table_head }} className="px-4 py-3 rounded-l-lg">S.No</th>
-              <th style={{ ...FONTS.table_head }} className="px-4 py-3">Name</th>
-              <th style={{ ...FONTS.table_head }} className="px-4 py-3">Employee ID</th>
-              <th style={{ ...FONTS.table_head }} className="px-4 py-3">Join Date</th>
-              <th style={{ ...FONTS.table_head }} className="px-4 py-3">Designation</th>
-              <th style={{ ...FONTS.table_head }} className="px-4 py-3">Email</th>
-              <th style={{ ...FONTS.table_head }} className="px-4 py-3 rounded-r-lg">CTC(Monthly)</th>
-            </tr>
-          </thead>
+      {/* TABLE CONTAINER */}
+      <div className='rounded-lg mt-6 h-[55vh] sm:h-[60vh] md:h-[62vh] lg:h-[65vh] xl:h-[67vh] 2xl:h-[70vh] 
+          overflow-y-scroll overflow-x-auto scrollbar-hide'>
 
-          <tbody>
-            {filteredEmployees.length > 0 ? (
-              filteredEmployees.map((items: EmployeeProfile, index) => (
-                <tr
-                  key={items?.uuid}
-                  style={{ color: COLORS.primary }}
-                  className='bg-[#DDDED980] rounded-lg cursor-pointer'
-                  onClick={() => navigate(`/employee/${items?.uuid}`)}
-                >
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">{index + 1}</td>
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.first_name + ' ' + items?.last_name}</td>
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3 uppercase">{items?.emp_id}</td>
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3">{dayjs(items?.join_date).format("DD-MMM-YYYY")}</td>
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.emp_role}</td>
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3">
-                    {items?.contact_info?.email
-                      ? items.contact_info.email.length > 20
-                        ? items.contact_info.email.slice(0, 20) + "...."
-                        : items.contact_info.email
-                      : ""}
-                  </td>
-                  <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg">{items?.ctc}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={7} className="text-center py-6 text-[#4A7079] font-semibold">
-                  No Employees Found
-                </td>
+        <div className="min-w-[900px]">
+          <table className="w-full border-separate border-spacing-y-4">
+            <thead className="sticky top-0">
+              <tr style={{ background: COLORS.primary }} className='text-left text-white'>
+                <th style={{ ...FONTS.table_head }} className="px-4 py-3 rounded-l-lg">S.No</th>
+                <th style={{ ...FONTS.table_head }} className="px-4 py-3">Name</th>
+                <th style={{ ...FONTS.table_head }} className="px-4 py-3">Employee ID</th>
+                <th style={{ ...FONTS.table_head }} className="px-4 py-3">Join Date</th>
+                <th style={{ ...FONTS.table_head }} className="px-4 py-3">Designation</th>
+                <th style={{ ...FONTS.table_head }} className="px-4 py-3">Email</th>
+                <th style={{ ...FONTS.table_head }} className="px-4 py-3 rounded-r-lg">CTC(Monthly)</th>
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {filteredEmployees.length > 0 ? (
+                filteredEmployees.map((items: EmployeeProfile, index) => (
+                  <tr
+                    key={items?.uuid}
+                    style={{ color: COLORS.primary }}
+                    className='bg-[#DDDED980] cursor-pointer'
+                    onClick={() => navigate(`/employee/${items?.uuid}`)}
+                  >
+                    <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">{index + 1}</td>
+                    <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.first_name + ' ' + items?.last_name}</td>
+                    <td style={{ ...FONTS.table_data }} className="px-4 py-3 uppercase">{items?.emp_id}</td>
+                    <td style={{ ...FONTS.table_data }} className="px-4 py-3">{dayjs(items?.join_date).format("DD-MMM-YYYY")}</td>
+                    <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.emp_role}</td>
+                    <td style={{ ...FONTS.table_data }} className="px-4 py-3">
+                      {items?.contact_info?.email
+                        ? items.contact_info.email.length > 20
+                          ? items.contact_info.email.slice(0, 20) + "...."
+                          : items.contact_info.email
+                        : ""}
+                    </td>
+                    <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg">{items?.ctc}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={7} className="text-center py-6 text-[#4A7079] font-semibold">
+                    No Employees Found
+                  </td>
+                </tr>
+              )}
+            </tbody>
+
+          </table>
+        </div>
       </div>
     </div>
   )

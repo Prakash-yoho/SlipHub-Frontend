@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import BgImg from '../../assets/Comman/Rectangle 1.png'
 import { COLORS, FONTS } from '../../constants/uiconstants';
 import DownloadIcon from '../../assets/Comman/Download.png'
@@ -111,17 +112,17 @@ const Payroll = () => {
     };
 
     return (
-        <div>
+        <div className="w-full">
             <h1 style={{ ...FONTS.Main, color: COLORS.primary }} className='p-2'>Payroll</h1>
 
             <div
-                className="h-[78vh] w-full bg-cover rounded-2xl"
+                className="min-h-[78vh] w-full bg-cover rounded-2xl"
                 style={{ backgroundImage: `url(${BgImg})` }}
             >
-                <div className=' flex justify-between w-full px-4 py-4'>
+                <div className='flex flex-col lg:flex-row justify-between w-full px-4 py-4 gap-4'>
 
                     {/* Employee List */}
-                    <div className='bg-[#E2E2DE] w-[24%] rounded-3xl p-3 shadow-[0px_0px_15px_0px_#C3C7C64D] h-[73vh] overflow-hidden'>
+                    <div className='bg-[#E2E2DE] w-full lg:w-[24%] rounded-3xl p-3 shadow-[0px_0px_15px_0px_#C3C7C64D] h-[350px] lg:h-[73vh] overflow-hidden'>
                         <h1
                             style={{ ...FONTS.payroll_head, color: COLORS.primary, padding: "10px 0" }}
                         >
@@ -158,18 +159,18 @@ const Payroll = () => {
 
 
                     {/* Generate & Previous Slips */}
-                    <div className=' relative w-[43.5%] rounded-2xl p-3 overflow-visible scrollbar-hide h-[68vh] pt-18'>
+                    <div className='relative w-full lg:w-[43.5%] rounded-2xl p-3 overflow-visible scrollbar-hide h-auto lg:h-[68vh] pt-10'>
                         <input
                             type="text"
                             style={{ ...FONTS.Nav, color: COLORS.primary }}
                             placeholder='Search By Employee Name'
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className='bg-[#4A70790D] absolute w-[94%] m-auto z-99 -top-3 p-3 px-4 border border-[#4A7079] outline-0 rounded-3xl'
+                            className='bg-[#4A70790D] absolute w-[94%] left-1/2 -translate-x-1/2 z-50 -top-3 p-3 px-4 border border-[#4A7079] outline-0 rounded-3xl'
                         />
 
 
-                        <div className=' h-[62vh] rounded-lg overflow-y-scroll scrollbar-hide'>
+                        <div className='h-auto lg:h-[62vh] rounded-lg overflow-y-scroll scrollbar-hide mt-6 lg:mt-0'>
                             {!selectedEmp?.uuid ? (
                                 <div className='flex items-center justify-center h-full'>
                                     <p style={{ ...FONTS.table_data, color: COLORS.primary }}>
@@ -182,7 +183,10 @@ const Payroll = () => {
                                     <div className='bg-[#E2E2DE] shadow-0px_0px_15px_0px_[#C3C7C64D] rounded-2xl p-3 mt-4'>
                                         <h1 style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Generate Slip</h1>
 
-                                        <div className='mt-4 grid grid-cols-2 justify-between gap-4'>
+                                        <div className='mt-4 grid grid-cols-1 md:grid-cols-2 justify-between gap-4'>
+                                            {/* (inputs unchanged) */}
+                                            {/* Keeping original input fields exactly as they are */}
+                                            {/* Only layout changed */}
                                             <input
                                                 style={{ ...FONTS.Nav, color: COLORS.primary }}
                                                 type="number"
@@ -200,12 +204,12 @@ const Payroll = () => {
                                                 onChange={(e) => handelInputChange('worked_days', e)}
                                                 onWheel={(e) => e.currentTarget.blur()}
                                             />
+
                                             <input
                                                 style={{ ...FONTS.Nav, color: COLORS.primary }}
                                                 type="number"
                                                 min="0"
                                                 required={true}
-                                                // value={PayRollInput?.loss_of_pay == 0 ? '' : PayRollInput?.loss_of_pay}
                                                 className="bg-[#EAEBE8] px-3 py-2 rounded-lg w-full border border-[#4A7079] outline-0
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="Loss Of Pay"
@@ -217,12 +221,12 @@ const Payroll = () => {
                                                 onChange={(e) => handelInputChange('loss_of_pay', e)}
                                                 onWheel={(e) => e.currentTarget.blur()}
                                             />
+
                                             <input
                                                 style={{ ...FONTS.Nav, color: COLORS.primary }}
                                                 type="number"
                                                 min="0"
                                                 required={true}
-                                                // value={PayRollInput?.arrear_days == 0 ? '' : PayRollInput?.arrear_days}
                                                 className="bg-[#EAEBE8] px-3 py-2 rounded-lg w-full border border-[#4A7079] outline-0
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="No of Arrear Day"
@@ -234,6 +238,7 @@ const Payroll = () => {
                                                 onChange={(e) => handelInputChange('arrear_days', e)}
                                                 onWheel={(e) => e.currentTarget.blur()}
                                             />
+
                                             <input
                                                 style={{ ...FONTS.Nav, color: COLORS.primary }}
                                                 type="number"
@@ -253,10 +258,10 @@ const Payroll = () => {
                                             />
                                         </div>
 
-                                        <div className='flex items-center justify-center mt-4'>
+                                        <div className='flex flex-col md:flex-row items-center justify-center mt-4 gap-3'>
                                             <CalendarPicker setselecteDate={setselecteDate} />
 
-                                            <div className='  rounded-lg flex gap-3 justify-end items-center '>
+                                            <div className='flex gap-3 justify-end items-center '>
                                                 <button
                                                     onClick={handleReset}
                                                     className='bg-[#4A70790D] border border-[#4A7079] px-6 py-1 rounded-md cursor-pointer'
@@ -271,11 +276,9 @@ const Payroll = () => {
                                                     Generate
                                                 </button>
 
-
-
                                                 {openConfirm && (
                                                     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-                                                        <div className="bg-white rounded-2xl p-6 shadow-lg w-[450px]">
+                                                        <div className="bg-white rounded-2xl p-6 shadow-lg w-[90%] sm:w-[450px]">
                                                             <h2 className="" style={{...FONTS.card_name,color:COLORS.primary}}>
                                                                 Confirm Slip Generation
                                                             </h2>
@@ -311,11 +314,11 @@ const Payroll = () => {
                                     </div>
 
                                     {/* Previous PaySlips */}
-                                    <div className='bg-[#E2E2DE] shadow-0px_0px_15px_0px_[#C3C7C64D] rounded-2xl p-3 mt-4'>
+                                    <div className='bg-[#E2E2DE] shadow-0px_0px_15px_0px_[#C3C7C64D] rounded-2xl p-3 mt-4 w-full overflow-x-auto'>
                                         <h1 style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Previous PaySlips</h1>
 
-                                        <div className='mt-4 flex justify-between gap-6'>
-                                            <table className="w-full -mt-5 border-separate border-spacing-y-4 overflow-auto">
+                                        <div className='mt-4 flex justify-between gap-6 w-full overflow-x-auto'>
+                                            <table className="w-full min-w-[600px] -mt-5 border-separate border-spacing-y-4 overflow-auto">
                                                 <thead className="sticky top-0">
                                                     <tr style={{ background: COLORS.primary }} className='text-left text-white rounded-lg'>
                                                         <th style={{ ...FONTS.table_head }} className="px-4 py-3 rounded-l-lg">Date</th>
@@ -327,7 +330,7 @@ const Payroll = () => {
 
                                                 <tbody className='overflow-y-scroll'>
                                                     {selectedEmp?.payroll_slip && selectedEmp?.payroll_slip?.length ? selectedEmp?.payroll_slip?.map((items, index) => (
-                                                        <tr key={index} style={{ color: COLORS.primary }} className='bg-[#EAEBE8]  rounded-lg'>
+                                                        <tr key={index} style={{ color: COLORS.primary }} className='bg-[#EAEBE8] rounded-lg'>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">{dayjs(items?.created_month).format("MMMM-YYYY")}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.paid_days}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.net_salary}</td>
@@ -347,9 +350,9 @@ const Payroll = () => {
                         </div>
                     </div>
 
-
                     {/* Profile Section */}
-                    <div className='bg-[#EAEBE8] w-[31%] rounded-3xl p-3 overflow-scroll scrollbar-hide h-[73vh] shadow-[0px_0px_15px_0px_#C3C7C64D]'>
+                    <div className='bg-[#EAEBE8] w-full lg:w-[31%] rounded-3xl p-3 overflow-scroll scrollbar-hide h-auto lg:h-[73vh] shadow-[0px_0px_15px_0px_#C3C7C64D]'>
+
                         {!selectedEmp?.uuid ? (
                             <div className='flex items-center justify-center h-full'>
                                 <p style={{ ...FONTS.table_data, color: COLORS.primary }}>
@@ -358,6 +361,9 @@ const Payroll = () => {
                             </div>
                         ) : (
                             <>
+                                {/* Profile content untouched */}
+                                {/* ...existing profile fields remain exactly the same... */}
+
                                 <section className='flex gap-4 items-center mb-4'>
                                     <div className='bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center' style={{ ...FONTS.card_initial }}>
                                         {selectedEmp?.first_name?.charAt(0)}
@@ -419,6 +425,7 @@ const Payroll = () => {
                                         <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{selectedEmp?.contact_info?.address}</p>
                                     </div>
                                 </section>
+
                             </>
                         )}
                     </div>

@@ -393,531 +393,472 @@ const Form: React.FC<FormProps> = ({ isOpen, onClose, EmplopyEdit, HrEdit, formT
     return dpt
   }
 
-  return (
-    <div className="fixed inset-0 bg-black/50 bg-opacity-50  flex items-center justify-center z-50">
-      <div className="bg-[#EAEBE8] rounded-xl shadow-lg w-[65%] h-[90vh] overflow-y-scroll scrollbar-hide p-6 ">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold text-center" style={{ ...FONTS.Main, color: COLORS.primary }}>
-            {formType === "hr" ? `${HrEdit ? "Edit" : "Add"} Hr` : `${EmplopyEdit ? "Edit" : "Add"} Employee`}
-          </h2>
+ return (
+  <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+    <div className="bg-[#EAEBE8] rounded-xl shadow-lg 
+      w-full sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[65%] 
+      h-[90vh] overflow-y-scroll scrollbar-hide p-4 sm:p-6">
 
-          <div
-            className=" h-8 w-8 flex justify-center items-center cursor-pointer text-white rounded-md"
-            style={{ background: COLORS.primary }}
-            onClick={onClose}
-          >
-            x
+      {/* HEADER */}
+      <div className="flex items-center justify-between flex-wrap gap-3">
+        <h2 className="text-lg sm:text-xl font-semibold"
+          style={{ ...FONTS.Main, color: COLORS.primary }}
+        >
+          {formType === "hr" ? `${HrEdit ? "Edit" : "Add"} Hr` : `${EmplopyEdit ? "Edit" : "Add"} Employee`}
+        </h2>
+
+        <div
+          className="h-8 w-8 flex justify-center items-center cursor-pointer text-white rounded-md"
+          style={{ background: COLORS.primary }}
+          onClick={onClose}
+        >
+          x
+        </div>
+      </div>
+
+      <div className="h-[1px] w-full my-4 bg-[#7697A066]"></div>
+
+      <form className="w-full" onSubmit={(e) => handelsubmit(e)}>
+
+        {/* ---------------- PERSONAL INFO ---------------- */}
+        <section>
+          <p className="mb-3 text-base sm:text-lg"
+            style={{ ...FONTS.view_btn, color: COLORS.primary }}>
+            Personal Informations
+          </p>
+
+          {/* Responsive Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+
+            {/* FIRST NAME */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>First Name</p>
+              <input
+                type="text"
+                value={EmployeeDetails?.first_name || HrDetails?.first_name || undefined}
+                placeholder="Enter Your Name"
+                className={`border ${errors.first_name ? "border-red-500" : "border-[#4A7079]"}
+                 rounded-md px-3 py-2 outline-0 w-full`}
+                onChange={(e) => handleChangeInput("first_name", e)}
+              />
+              <ErrorMessage error={errors.first_name} />
+            </div>
+
+            {/* LAST NAME */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Last Name</p>
+              <input
+                type="text"
+                value={EmployeeDetails?.last_name || HrDetails?.last_name || undefined}
+                placeholder="Enter Your Name"
+                className={`border ${errors.last_name ? "border-red-500" : "border-[#4A7079]"}
+                 rounded-md px-3 py-2 outline-0 w-full`}
+                onChange={(e) => handleChangeInput("last_name", e)}
+              />
+              <ErrorMessage error={errors.last_name} />
+            </div>
+
+            {/* EMPLOYEE ID */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>EmployeeID</p>
+              <input
+                type="text"
+                value={EmployeeDetails?.emp_id || HrDetails?.emp_id || undefined}
+                placeholder="Enter EmployeeID"
+                className={`border ${errors.emp_id ? "border-red-500" : "border-[#4A7079]"}
+                 rounded-md px-3 py-2 outline-0 w-full`}
+                onChange={(e) => handleChangeInput("emp_id", e)}
+              />
+              <ErrorMessage error={errors.emp_id} />
+            </div>
+
+            {/* HR DEPARTMENT (Multi-select) */}
+            {formType === "hr" && (
+              <div className="col-span-1 sm:col-span-2 lg:col-span-1">
+                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Department</p>
+
+                <div className="relative">
+                  <div
+                    onClick={() => setIsOpenDpt(!isOpenDpt)}
+                    className={`border ${errors.department ? "border-red-500" : "border-[#4A7079]"}
+                     rounded-md px-3 py-2 w-full flex justify-between items-center cursor-pointer`}
+                  >
+                    <span>{departmentSelected()}</span>
+
+                    <svg className={`w-4 h-4 transition-transform ${isOpenDpt ? "rotate-180" : ""}`}
+                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+
+                  {isOpenDpt && (
+                    <div className="absolute top-full left-0 right-0 mt-2 bg-gray-100 
+                      rounded-lg p-2 shadow-lg z-10 max-h-[40vh] overflow-scroll scrollbar-hide">
+                      {departmentData.map((option: any) => (
+                        <button
+                          type="button"
+                          key={option._id}
+                          onClick={() => {
+                            handleDepartmentChange(option?._id, option?.dpt_name);
+                            setIsOpenDpt(false);
+                          }}
+                          className="w-full text-left px-4 py-3 mb-2 bg-gray-200 hover:bg-gray-300 rounded-lg"
+                        >
+                          {option.dpt_name}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <ErrorMessage error={errors.department} />
+              </div>
+            )}
+
+            {/* EMPLOYEE DEPARTMENT (Single-select) */}
+            {formType === "employee" && (
+              <div className="col-span-1 sm:col-span-2 lg:col-span-1">
+                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Department</p>
+
+                <div className="relative">
+                  <div
+                    onClick={() => setIsOpenDpt(!isOpenDpt)}
+                    className={`border ${errors.department ? "border-red-500" : "border-[#4A7079]"}
+                     rounded-md px-3 py-2 w-full flex justify-between items-center cursor-pointer`}
+                  >
+                    <span>{empDpt || "Select Department"}</span>
+
+                    <svg className={`w-4 h-4 transition-transform ${isOpenDpt ? "rotate-180" : ""}`}
+                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+
+                  {isOpenDpt && (
+                    <div className="absolute top-full left-0 right-0 mt-2 bg-gray-100 
+                      rounded-lg p-2 shadow-lg z-10 max-h-[40vh] overflow-scroll scrollbar-hide">
+                      {departmentData.map((option: any) => (
+                        <button
+                          type="button"
+                          key={option._id}
+                          onClick={() => {
+                            setempDpt(option.dpt_name);
+                            setEmployeeDetails((prev: any) => ({ ...prev, department: option?._id }));
+                            setIsOpenDpt(false);
+                            clearFieldError("department");
+                          }}
+                          className="w-full text-left px-4 py-3 mb-2 bg-gray-200 hover:bg-gray-300 rounded-lg"
+                        >
+                          {option.dpt_name}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <ErrorMessage error={errors.department} />
+              </div>
+            )}
+
+            {/* EMAIL */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Email</p>
+              <input
+                type="text"
+                value={EmployeeDetails?.contact_info?.email || HrDetails?.contact_info?.email || undefined}
+                placeholder="Enter Email"
+                className={`border ${errors.email ? "border-red-500" : "border-[#4A7079]"}
+                 rounded-md px-3 py-2 outline-0 w-full`}
+                onChange={(e) => handleContactInput("email", e)}
+              />
+              <ErrorMessage error={errors.email} />
+            </div>
+
+            {/* PASSWORD – ONLY ON CREATE */}
+            {(!HrEdit && !EmplopyEdit) && (
+              <div>
+                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Password</p>
+                <input
+                  type="text"
+                  placeholder="Enter Password"
+                  className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
+                  onChange={(e) => handleChangeInput("password", e)}
+                />
+              </div>
+            )}
+
+            {/* ROLE */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Role</p>
+              <input
+                type="text"
+                value={EmployeeDetails?.emp_role || (HrEdit ? "HR" : undefined) || undefined}
+                placeholder="Enter Role"
+                className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
+                onChange={(e) => handleChangeInput("emp_role", e)}
+              />
+            </div>
+
+            {/* CONTACT */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Contact</p>
+              <input
+                type="text"
+                value={EmployeeDetails?.contact_info?.phone || HrDetails?.contact_info?.phone || undefined}
+                placeholder="Enter Contact"
+                className={`border ${errors.phone ? "border-red-500" : "border-[#4A7079]"}
+                 rounded-md px-3 py-2 outline-0 w-full`}
+                onChange={(e) => handleContactInput("phone", e)}
+              />
+              <ErrorMessage error={errors.phone} />
+            </div>
+
           </div>
+        </section>
+
+        {/* ---------------- BASIC INFO (RESPONSIVE) ---------------- */}
+        <div className="h-[1px] w-full my-6 bg-[#7697A066]"></div>
+
+        <section>
+          <p className="mb-3 text-base sm:text-lg"
+            style={{ ...FONTS.view_btn, color: COLORS.primary }}>
+            Basic Info
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+
+            {/* JOIN DATE */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Join Date</p>
+              <input
+                type="date"
+                value={
+                  EmployeeDetails?.join_date
+                    ? new Date(EmployeeDetails.join_date).toISOString().split('T')[0]
+                    : HrDetails?.join_date
+                      ? new Date(HrDetails.join_date).toISOString().split('T')[0]
+                      : ''
+                }
+                className={`border ${errors.join_date ? "border-red-500" : "border-[#4A7079]"}
+                 rounded-md px-3 py-2 outline-0 w-full`}
+                style={{ color: COLORS.primary }}
+                onChange={(e) => handleChangeInput("join_date", e)}
+              />
+              <ErrorMessage error={errors.join_date} />
+            </div>
+
+            {/* EXPERIENCE */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Experience</p>
+              <input
+                type="text"
+                value={EmployeeDetails?.experience || HrDetails?.experience || undefined}
+                placeholder="Total Experience"
+                className={`border ${errors.experience ? "border-red-500" : "border-[#4A7079]"}
+                 rounded-md px-3 py-2 outline-0 w-full`}
+                onChange={(e) => handleChangeInput("experience", e)}
+              />
+              <ErrorMessage error={errors.experience} />
+            </div>
+
+            {/* CTC */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>CTC (Monthly)</p>
+              <input
+                type="text"
+                value={EmployeeDetails?.ctc || HrDetails?.ctc || undefined}
+                placeholder="Enter CTC"
+                className={`border ${errors.ctc ? "border-red-500" : "border-[#4A7079]"}
+                 rounded-md px-3 py-2 outline-0 w-full`}
+                onChange={(e) => handleChangeInput("ctc", e)}
+              />
+              <ErrorMessage error={errors.ctc} />
+            </div>
+
+            {/* UAN */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>UAN No</p>
+              <input
+                type="text"
+                value={EmployeeDetails?.pf_acc || HrDetails?.pf_acc || undefined}
+                placeholder="Enter UAN No"
+                className={`border ${errors.pf_acc ? "border-red-500" : "border-[#4A7079]"}
+                 rounded-md px-3 py-2 outline-0 w-full`}
+                onChange={(e) => handleChangeInput("pf_acc", e)}
+              />
+              <ErrorMessage error={errors.pf_acc} />
+            </div>
+
+            {/* LEVEL / GRADE */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Level / Grade</p>
+              <input
+                type="text"
+                value={EmployeeDetails?.level_grade || HrDetails?.level_grade || undefined}
+                placeholder="Enter Level/Grade"
+                className={`border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full`}
+                onChange={(e) => handleChangeInput("level_grade", e)}
+              />
+            </div>
+
+            {/* DOB */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>DOB</p>
+              <input
+                type="date"
+                value={
+                  EmployeeDetails?.dob
+                    ? new Date(EmployeeDetails.dob).toISOString().split('T')[0]
+                    : HrDetails?.dob
+                      ? new Date(HrDetails.dob).toISOString().split('T')[0]
+                      : ''
+                }
+                className={`border ${errors.dob ? "border-red-500" : "border-[#4A7079]"}
+                 rounded-md px-3 py-2 outline-0 w-full`}
+                style={{ color: COLORS.primary }}
+                onChange={(e) => handleChangeInput("dob", e)}
+              />
+              <ErrorMessage error={errors.dob} />
+            </div>
+
+            {/* EMERGENCY CONTACT */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Emergency Contact</p>
+              <input
+                type="text"
+                value={EmployeeDetails?.emg_contact || HrDetails?.emg_contact || undefined}
+                placeholder="Enter Emergency Contact"
+                className={`border ${errors.emg_contact ? "border-red-500" : "border-[#4A7079]"}
+                 rounded-md px-3 py-2 outline-0 w-full`}
+                onChange={(e) => handleChangeInput("emg_contact", e)}
+              />
+              <ErrorMessage error={errors.emg_contact} />
+            </div>
+
+            {/* FATHER'S NAME */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Father's Name</p>
+              <input
+                type="text"
+                value={EmployeeDetails?.father_name || HrDetails?.father_name || undefined}
+                placeholder="Enter Father's Name"
+                className={`border ${errors.father_name ? "border-red-500" : "border-[#4A7079]"}
+                 rounded-md px-3 py-2 outline-0 w-full`}
+                onChange={(e) => handleChangeInput("father_name", e)}
+              />
+              <ErrorMessage error={errors.father_name} />
+            </div>
+
+          </div>
+
+          {/* ADDRESS */}
+          <div className="mt-4">
+            <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Address</p>
+            <textarea
+              value={EmployeeDetails?.contact_info?.address || HrDetails?.contact_info?.address || undefined}
+              placeholder="Enter Address"
+              className={`border ${errors.address ? "border-red-500" : "border-[#4A7079]"}
+               h-20 rounded-md px-3 py-2 outline-0 w-full resize-none`}
+              onChange={(e) => handleContactInput("address", e)}
+            />
+            <ErrorMessage error={errors.address} />
+          </div>
+
+        </section>
+
+        {/* ---------------- QUALIFICATION ---------------- */}
+        <div className="h-[1px] w-full my-6 bg-[#7697A066]"></div>
+
+        <section>
+          <p className="mb-3 text-base sm:text-lg"
+            style={{ ...FONTS.view_btn, color: COLORS.primary }}>
+            Qualification
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+
+            {/* DEGREE */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Degree</p>
+              <input
+                type="text"
+                value={EmployeeDetails?.qualification?.degree || HrDetails?.qualification?.degree || undefined}
+                placeholder="Enter Degree"
+                className={`border ${errors.degree ? "border-red-500" : "border-[#4A7079]"}
+                 rounded-md px-3 py-2 outline-0 w-full`}
+                onChange={(e) => handleQualificationInput("degree", e)}
+              />
+              <ErrorMessage error={errors.degree} />
+            </div>
+
+            {/* SPECIALIZATION */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Specialization</p>
+              <input
+                type="text"
+                value={EmployeeDetails?.qualification?.specialization || HrDetails?.qualification?.specialization || undefined}
+                placeholder="Enter Specialization"
+                className={`border ${errors.specialization ? "border-red-500" : "border-[#4A7079]"}
+                 rounded-md px-3 py-2 outline-0 w-full`}
+                onChange={(e) => handleQualificationInput("specialization", e)}
+              />
+              <ErrorMessage error={errors.specialization} />
+            </div>
+
+            {/* YEAR OF COMPLETION */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Year Of Completion</p>
+              <input
+                type="text"
+                value={EmployeeDetails?.qualification?.year_of_completion || HrDetails?.qualification?.year_of_completion || ''}
+                placeholder="Enter Year Of Completion"
+                className={`border ${errors.year_of_completion ? "border-red-500" : "border-[#4A7079]"}
+                 rounded-md px-3 py-2 outline-0 w-full`}
+                onChange={(e) => handleQualificationInput("year_of_completion", e)}
+              />
+              <ErrorMessage error={errors.year_of_completion} />
+            </div>
+
+            {/* PERCENTAGE */}
+            <div>
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>Percentage</p>
+              <input
+                type="text"
+                value={EmployeeDetails?.qualification?.percentage || HrDetails?.qualification?.percentage || undefined}
+                placeholder="Enter Percentage"
+                className={`border ${errors.percentage ? "border-red-500" : "border-[#4A7079]"}
+                 rounded-md px-3 py-2 outline-0 w-full`}
+                onChange={(e) => handleQualificationInput("percentage", e)}
+              />
+              <ErrorMessage error={errors.percentage} />
+            </div>
+
+          </div>
+        </section>
+
+        {/* ---------------- BUTTONS ---------------- */}
+        <div className="flex flex-wrap justify-end gap-3 mt-4">
+          <button
+            type="button"
+            className="bg-[#4A70790D] border border-[#4A7079] px-6 py-1 rounded-md"
+            onClick={onClose}
+            style={{ ...FONTS.view_btn, color: COLORS.primary }}
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="bg-[#4A7079] border border-[#4A7079] text-white px-6 py-1 rounded-md"
+            style={{ ...FONTS.view_btn }}
+          >
+            Submit
+          </button>
         </div>
 
-        <div className="h-[1px] w-full my-4 bg-[#7697A066]"></div>
-
-        <form className="" onSubmit={(e) => handelsubmit(e)}>
-          {/* <section className="flex gap-4 items-center mb-4">
-            <div className="bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center overflow-hidden">
-              {preview ? (
-                <img src={preview || "/placeholder.svg"} alt="Preview" className="h-full w-full object-cover" />
-              ) : (
-                <span style={{ ...FONTS.card_initial }}><FaFileUpload/></span>
-              )}
-            </div>
-
-            <div className="grid gap-1">
-              <input
-                type="file"
-                id="imageUpload"
-                accept="image/*"
-                className="hidden"
-                onChange={(e) => handleImageChange(e)}
-              />
-
-              <label
-                htmlFor="imageUpload"
-                style={{ ...FONTS.Nav, background: COLORS.primary }}
-                className="uppercase text-[#FFFFFF] p-2 px-4 rounded-lg cursor-pointer"
-              >
-                Upload Image
-              </label>
-            </div>
-          </section> */}
-
-          <section>
-            <p className="mb-3" style={{ ...FONTS.view_btn, color: COLORS.primary }}>
-              Personal Informations
-            </p>
-
-            <div className="grid grid-cols-3 gap-3">
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  First Name
-                </p>
-                <input
-                  type="text"
-                  name="FirstName"
-                  value={EmployeeDetails?.first_name || HrDetails?.first_name || undefined}
-                  placeholder="Enter Your Name"
-                  className={`border ${errors.first_name ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
-                  // required
-                  onChange={(e) => handleChangeInput("first_name", e)}
-                />
-                <ErrorMessage error={errors.first_name} />
-              </div>
-
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  Last Name
-                </p>
-                <input
-                  type="text"
-                  name="LastName"
-                  value={EmployeeDetails?.last_name || HrDetails?.last_name || undefined}
-                  placeholder="Enter Your Name"
-                  className={`border ${errors.last_name ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
-                  // required
-                  onChange={(e) => handleChangeInput("last_name", e)}
-                />
-                <ErrorMessage error={errors.last_name} />
-              </div>
-
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  EmployeeID
-                </p>
-                <input
-                  type="text"
-                  name="EmployeeID"
-                  value={EmployeeDetails?.emp_id || HrDetails?.emp_id || undefined}
-                  placeholder="Enter EmployeeID"
-                  className={`border ${errors.emp_id ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
-                  // required
-                  onChange={(e) => handleChangeInput("emp_id", e)}
-                />
-                <ErrorMessage error={errors.emp_id} />
-              </div>
-
-              {formType === "hr" && (
-                <div className="w-full">
-                  <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                    Department
-                  </p>
-
-                  <div className="relative">
-                    <div
-                      onClick={() => setIsOpenDpt(!isOpenDpt)}
-                      className={`border ${errors.department ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full flex justify-between items-center`}
-                    >
-                      <span className="font-medium">{departmentSelected()}</span>
-                      {/* <span className="font-medium">{HrDetails?.department?.[0]?.dpt_name}</span> */}
-                      <svg
-                        className={`w-4 h-4 transition-transform ${isOpenDpt ? "rotate-180" : ""}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </div>
-
-                    {isOpenDpt && (
-                      <div className="absolute top-full h-[40vh] overflow-scroll scrollbar-hide left-0 right-0 mt-2 bg-gray-100 rounded-lg p-2 shadow-lg z-10">
-                        {departmentData.map((option: any, index) => (
-                          <button
-                            type="button"
-                            key={index}
-                            onClick={() => {
-                              handleDepartmentChange(option?._id, option?.dpt_name)
-                              setIsOpenDpt(false)
-                            }}
-                            className="w-full text-left px-4 py-3 mb-2 last:mb-0 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300 text-gray-700 transition-colors"
-                          >
-                            {option?.dpt_name}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                  <ErrorMessage error={errors.department} />
-                </div>
-              )}
-
-              {formType === "employee" && (
-                <div className="w-full">
-                  <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                    Department
-                  </p>
-
-                  <div className="relative">
-                    <div
-                      onClick={() => setIsOpenDpt(!isOpenDpt)}
-                      className={`border ${errors.department ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full flex justify-between items-center`}
-                    >
-                      <span className="font-medium">{empDpt ? empDpt : "select Department"}</span>
-                      <svg
-                        className={`w-4 h-4 transition-transform ${isOpenDpt ? "rotate-180" : ""}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </div>
-
-                    {isOpenDpt && (
-                      <div className="absolute top-full h-[40vh] overflow-scroll scrollbar-hide left-0 right-0 mt-2 bg-gray-100 rounded-lg p-2 shadow-lg z-10">
-                        {departmentData.map((option: any, index) => (
-                          <button
-                            type="button"
-                            key={index}
-                            onClick={() => {
-                              setempDpt(option?.dpt_name)
-                              setEmployeeDetails((prev: any) => ({ ...prev, department: option?._id }))
-                              setIsOpenDpt(false)
-                              clearFieldError("department")
-                            }}
-                            className="w-full text-left px-4 py-3 mb-2 last:mb-0 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300 text-gray-700 transition-colors"
-                          >
-                            {option?.dpt_name}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                  <ErrorMessage error={errors.department} />
-                </div>
-              )}
-
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  Email
-                </p>
-                <input
-                  type="text"
-                  name="Email"
-                  value={EmployeeDetails?.contact_info?.email || HrDetails?.contact_info?.email || undefined}
-                  placeholder="Enter Email"
-                  className={`border ${errors.email ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
-                  // required
-                  onChange={(e) => handleContactInput("email", e)}
-                />
-                <ErrorMessage error={errors.email} />
-              </div>
-
-              {
-                (!HrEdit && !EmplopyEdit) &&
-                <div className="">
-                  <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                    Password
-                  </p>
-                  <input
-                    type="text"
-                    name="Password"
-                    value={undefined}
-                    placeholder="Enter Password"
-                    className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
-                    // required
-                    onChange={(e) => handleChangeInput("password", e)}
-                  />
-                </div>
-              }
-
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  Role
-                </p>
-                <input
-                  type="text"
-                  name="Role"
-                  placeholder="Enter Role"
-                  value={EmployeeDetails?.emp_role || (HrEdit ? "HR" : undefined) || undefined}
-                  className="border border-[#4A7079] rounded-md px-3 py-2 outline-0 w-full"
-                  // required
-                  onChange={(e) => handleChangeInput("emp_role", e)}
-                />
-              </div>
-
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  Contact
-                </p>
-                <input
-                  type="text"
-                  name="Contact"
-                  value={EmployeeDetails?.contact_info?.phone || HrDetails?.contact_info?.phone || undefined}
-                  placeholder="Enter Contact"
-                  className={`border ${errors.phone ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
-                  // required
-                  onChange={(e) => handleContactInput("phone", e)}
-                />
-                <ErrorMessage error={errors.phone} />
-              </div>
-            </div>
-          </section>
-          <div className="h-[1px] w-full my-6 bg-[#7697A066]"></div>
-
-          <section>
-            <p className="mb-3" style={{ ...FONTS.view_btn, color: COLORS.primary }}>
-              Basic Info
-            </p>
-
-            <div className="grid grid-cols-3 gap-3">
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  Join Date
-                </p>
-                <input
-                  type="date"
-                  name="JoinDate"
-                  value={
-                    EmployeeDetails?.join_date
-                      ? new Date(EmployeeDetails.join_date).toISOString().split('T')[0]
-                      : HrDetails?.join_date
-                        ? new Date(HrDetails.join_date).toISOString().split('T')[0]
-                        : ''
-                  }                  // placeholder="Date of Joining"
-                  className={`border ${errors.join_date ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
-                  // required
-                  style={{ color: COLORS.primary }}
-                  onChange={(e) => handleChangeInput("join_date", e)}
-                />
-                <ErrorMessage error={errors.join_date} />
-              </div>
-
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  Experience
-                </p>
-                <input
-                  type="text"
-                  name="Experience"
-                  placeholder="Total Experience"
-                  value={EmployeeDetails?.experience || HrDetails?.experience || undefined}
-                  className={`border ${errors.experience ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
-                  // required
-                  onChange={(e) => handleChangeInput("experience", e)}
-                />
-                <ErrorMessage error={errors.experience} />
-              </div>
-
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  CTC (Monthly)
-                </p>
-                <input
-                  type="text"
-                  name="CTC"
-                  placeholder="Enter CTC"
-                  value={EmployeeDetails?.ctc || HrDetails?.ctc || undefined}
-                  className={`border ${errors.ctc ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
-                  // required
-                  onChange={(e) => handleChangeInput("ctc", e)}
-                />
-                <ErrorMessage error={errors.ctc} />
-              </div>
-
-
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  UAN No
-                </p>
-                <input
-                  type="text"
-                  name="CTC"
-                  placeholder="Enter UAN No"
-                  value={EmployeeDetails?.pf_acc || HrDetails?.pf_acc || undefined}
-                  className={`border ${errors.pf_acc ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
-                  // required
-                  onChange={(e) => handleChangeInput("pf_acc", e)}
-                />
-                <ErrorMessage error={errors.pf_acc} />
-              </div>
-
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  Level /Grade
-                </p>
-                <input
-                  type="text"
-                  name="Level/Grade"
-                  placeholder="Enter Level/Grade"
-                  value={EmployeeDetails?.level_grade || HrDetails?.level_grade || undefined}
-                  className={`border ${errors.level_grade ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
-                  // required
-                  onChange={(e) => handleChangeInput("level_grade", e)}
-                />
-                {/* <ErrorMessage error={errors.pf_acc} /> */}
-              </div>
-
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  DOB
-                </p>
-                <input
-                  type="date"
-                  name="DOB"
-                  placeholder="Enter DOB"
-                  value={
-                    EmployeeDetails?.dob
-                      ? new Date(EmployeeDetails.dob).toISOString().split('T')[0]
-                      : HrDetails?.dob
-                        ? new Date(HrDetails.dob).toISOString().split('T')[0]
-                        : ''
-                  } className={`border ${errors.dob ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
-                  // required
-                  style={{ color: COLORS.primary }}
-                  onChange={(e) => handleChangeInput("dob", e)}
-                />
-                <ErrorMessage error={errors.dob} />
-              </div>
-
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  Emergency Contact
-                </p>
-                <input
-                  type="text"
-                  name="Emergency Contact"
-                  placeholder="Enter Emergency Contact"
-                  value={EmployeeDetails?.emg_contact || HrDetails?.emg_contact || undefined}
-                  className={`border ${errors.emg_contact ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
-                  // required
-                  onChange={(e) => handleChangeInput("emg_contact", e)}
-                />
-                <ErrorMessage error={errors.emg_contact} />
-              </div>
-
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  Father's Name
-                </p>
-                <input
-                  type="text"
-                  name="Father's Name"
-                  placeholder="Enter Father's Name"
-                  value={EmployeeDetails?.father_name || HrDetails?.father_name || undefined}
-                  className={`border ${errors.father_name ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
-                  // required
-                  onChange={(e) => handleChangeInput("father_name", e)}
-                />
-                <ErrorMessage error={errors.father_name} />
-              </div>
-            </div>
-            <div className="mt-4">
-              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                Address
-              </p>
-              <textarea
-                name="Address"
-                placeholder="Enter Address"
-                value={EmployeeDetails?.contact_info?.address || HrDetails?.contact_info?.address || undefined}
-                className={`border ${errors.address ? "border-red-500" : "border-[#4A7079]"} h-20 rounded-md px-3 py-2 outline-0 w-full resize-none`}
-                // required
-                onChange={(e) => handleContactInput("address", e)}
-              />
-              <ErrorMessage error={errors.address} />
-            </div>
-          </section>
-
-          <div className="h-[1px] w-full my-6 bg-[#7697A066]"></div>
-
-          <section>
-            <p className="mb-3" style={{ ...FONTS.view_btn, color: COLORS.primary }}>
-              Qualification
-            </p>
-
-            <div className="grid grid-cols-3 gap-3">
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  Degree
-                </p>
-                <input
-                  type="text"
-                  name="Degree"
-                  placeholder="Enter Degree"
-                  value={EmployeeDetails?.qualification?.degree || HrDetails?.qualification?.degree || undefined}
-                  className={`border ${errors.degree ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
-                  // required
-                  onChange={(e) => handleQualificationInput("degree", e)}
-                />
-                <ErrorMessage error={errors.degree} />
-              </div>
-
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  Specialization
-                </p>
-                <input
-                  type="text"
-                  name="Specialization"
-                  placeholder="Total Specialization"
-                  value={
-                    EmployeeDetails?.qualification?.specialization || HrDetails?.qualification?.specialization || undefined
-                  }
-                  className={`border ${errors.specialization ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
-                  // required
-                  onChange={(e) => handleQualificationInput("specialization", e)}
-                />
-                <ErrorMessage error={errors.specialization} />
-              </div>
-
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  Year Of Completion
-                </p>
-                <input
-                  type="text"
-                  name="Year Of Completion"
-                  placeholder="Enter Year Of Completion"
-                  value={
-                    EmployeeDetails?.qualification?.year_of_completion ||
-                    HrDetails?.qualification?.year_of_completion ||
-                    undefined
-                  }
-                  className={`border ${errors.year_of_completion ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
-                  // required
-                  onChange={(e) => handleQualificationInput("year_of_completion", e)}
-                />
-                <ErrorMessage error={errors.year_of_completion} />
-              </div>
-
-              <div className="">
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }} className="pb-1">
-                  Percentage
-                </p>
-                <input
-                  type="text"
-                  name="Percentage"
-                  placeholder="Enter Percentage"
-                  value={EmployeeDetails?.qualification?.percentage || HrDetails?.qualification?.percentage || undefined}
-                  className={`border ${errors.percentage ? "border-red-500" : "border-[#4A7079]"} rounded-md px-3 py-2 outline-0 w-full`}
-                  // required
-                  onChange={(e) => handleQualificationInput("percentage", e)}
-                />
-                <ErrorMessage error={errors.percentage} />
-              </div>
-            </div>
-          </section>
-
-          <div className="  rounded-lg flex gap-3 justify-end items-center mt-4">
-            <button
-              type="button"
-              className="bg-[#4A70790D] border border-[#4A7079] px-6 py-1 rounded-md cursor-pointer"
-              onClick={onClose}
-              style={{ ...FONTS.view_btn, color: COLORS.primary }}
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="bg-[#4A7079] border border-[#4A7079] text-[#FFFFFF] px-6 py-1 rounded-md cursor-pointer"
-              style={{ ...FONTS.view_btn }}
-            >
-              submit
-            </button>
-          </div>
-        </form>
-      </div>
+      </form>
     </div>
-  )
+  </div>
+);
+
 }
 
 export default Form

@@ -12,19 +12,32 @@ const Navbar: React.FC = () => {
 
   const role = GetLocalStorage('role')
 
-
-
-
   const logout = () => {
     ClearLocalStorage()
     window.location.reload()
   }
-  return (
-    <div className="flex justify-between items-center text-white px-4 py-3 pr-8">
-      <img src={Logo} alt="Logo" className="w-[100px]" />
-      <div className="flex items-center gap-8">
 
-        <nav className="flex items-center gap-3 p-[1px] bg-[#4A7079] rounded-lg *:p-2 *:px-6 *:border *:border-transparent">
+  return (
+    <div className="flex justify-between items-center text-white px-4 py-3 pr-8 
+      flex-wrap gap-4 md:gap-0">
+
+      {/* LOGO */}
+      <img 
+        src={Logo} 
+        alt="Logo" 
+        className="w-[80px] sm:w-[90px] md:w-[100px]" 
+      />
+
+      {/* MAIN RIGHT SECTION */}
+      <div className="flex items-center gap-4 md:gap-8 flex-wrap justify-end w-full md:w-auto">
+
+        {/* NAV LINKS */}
+        <nav className="
+          flex items-center gap-2 sm:gap-3
+          p-[1px] bg-[#4A7079] rounded-lg 
+          *:p-2 *:px-4 sm:*:px-6 *:border *:border-transparent 
+          flex-wrap
+        ">
           {(role === "admin" || role === "hr") &&
             <NavLink
               to="/"
@@ -99,41 +112,36 @@ const Navbar: React.FC = () => {
               Payroll
             </NavLink>
           }
-
-          {/* <NavLink
-            to="/employer"
-            className={({ isActive }) =>
-              `font-semibold px-3 py-1 rounded-lg transition-colors ${
-                isActive
-                  ? 'bg-white text-[#4A7079] border border-[#4A7079] shadow-[0px_10px_44px_0px_#4A707926_inset]'
-                  : 'text-white hover:bg-white hover:text-[#4A7079] hover:shadow-[0px_10px_44px_0px_#4A707926_inset]'
-              }`
-            }
-            style={{...FONTS.Nav}}
-          >
-            Employer
-          </NavLink> */}
         </nav>
 
-        {/* Notification Icons */}
-        <section className="flex items-center gap-6">
-          <div className="flex items-center justify-center cursor-pointer bg-[#4A7079] p-2 rounded-full">
-            <img src={NotificationIcon} alt="Notification" className="w-7 h-7" />
-          </div>
-          <div className="flex items-center justify-center cursor-pointer bg-[#5A5A5A] p-2 rounded-full">
-            <img src={ProfileIcon} alt="Notification" className="w-7 h-7" />
+        {/* ICONS + LOGOUT */}
+        <section className="flex items-center gap-4 sm:gap-6">
 
-            {/* <div> */}
-            <button className='px-3 cursor-pointer' onClick={() => setConfirmLogout(true)}>Logout</button>
-            {/* </div> */}
+          {/* Notification */}
+          <div className="flex items-center justify-center cursor-pointer 
+            bg-[#4A7079] p-2 rounded-full">
+            <img src={NotificationIcon} alt="Notification" className="w-6 h-6 sm:w-7 sm:h-7" />
+          </div>
+
+          {/* Profile */}
+          <div className="flex items-center gap-2 cursor-pointer bg-[#5A5A5A] p-2 rounded-full">
+            <img src={ProfileIcon} alt="Profile" className="w-6 h-6 sm:w-7 sm:h-7" />
+
+            <button 
+              className="px-2 sm:px-3 cursor-pointer text-sm sm:text-base" 
+              onClick={() => setConfirmLogout(true)}
+            >
+              Logout
+            </button>
           </div>
         </section>
       </div>
 
+      {/* LOGOUT CONFIRMATION MODAL */}
       {confirmLogout && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-          <div className="bg-white rounded-2xl p-6 shadow-lg w-[400px]">
-            <h2 className="" style={{ ...FONTS.card_name, color: COLORS.primary }}>
+          <div className="bg-white rounded-2xl p-6 shadow-lg w-[90%] sm:w-[400px]">
+            <h2 style={{ ...FONTS.card_name, color: COLORS.primary }}>
               Confirm Logout
             </h2>
 
@@ -149,6 +157,7 @@ const Navbar: React.FC = () => {
               >
                 Cancel
               </button>
+
               <button
                 onClick={logout}
                 className="px-4 py-1 rounded-md bg-[#ec1c1c] text-white cursor-pointer"

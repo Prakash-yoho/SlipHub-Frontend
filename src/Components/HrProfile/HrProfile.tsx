@@ -101,7 +101,14 @@ export const DrawerForm: React.FC<props> = ({ isOpen, setIsOpen, setIsModalOpen,
                                     </div>
                                     <div className='flex justify-between gap-4 mt-1'>
                                         <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Email</p>
-                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>{selectedHr?.contact_info?.email}</p>
+                                        <p style={{ ...FONTS.Nav, color: COLORS.primary }}>
+
+                                            {selectedHr?.contact_info?.email
+                                                ? selectedHr.contact_info.email.length > 20
+                                                    ? selectedHr.contact_info.email.slice(0, 20) + "...."
+                                                    : selectedHr.contact_info.email
+                                                : ""}
+                                        </p>
                                     </div>
                                     <div className='flex justify-between gap-4 mt-1'>
                                         <p style={{ ...FONTS.Nav, color: COLORS.primary }}>Mobile</p>

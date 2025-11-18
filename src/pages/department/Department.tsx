@@ -27,9 +27,7 @@ const Department = () => {
     await CreateDepartmentService({
       ...formData,
       dpt_id: Number(formData.dpt_id),
-    })
-
-
+    });
 
     setIsModalOpen(false);
     setFormData({
@@ -43,15 +41,13 @@ const Department = () => {
   // Dropdown state
   // const [isOpen, setIsOpen] = useState(false);
 
- 
+  const AllDepartment = useSelector((state: RootState) => state.department.data);
 
-  const AllDepartment = useSelector((state: RootState) => state.department.data)
-
-  const dispatch = useDispatch<AppDispatch>()
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(GetAllDepartmentThunks())
-    // dispatch(GetAllHrThunks())
+    dispatch(GetAllDepartmentThunks());
+    // dispatch(GetAllHrThunks());
   }, [dispatch]);
 
   // const options = AllHrProfile.map((data) => {
@@ -75,13 +71,14 @@ const Department = () => {
   // );
 
   return (
-    <div className="p-4 h-screen">
+    <div className="p-4 min-h-screen">
       {/* Header */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center">
         <h1 style={{ ...FONTS.Main, color: COLORS.primary }}>Department</h1>
+
         <button
           style={{ ...FONTS.Main_btn, background: COLORS.primary }}
-          className="text-[#FFFFFF] px-3 py-[4px] rounded-md cursor-pointer"
+          className="text-[#FFFFFF] px-3 py-[6px] rounded-md cursor-pointer w-full sm:w-auto"
           onClick={() => setIsModalOpen(true)}
         >
           Add Department
@@ -92,60 +89,59 @@ const Department = () => {
       <div className="mt-6">
         <input
           type="text"
-          className="bg-[#4A70790D] text-[#4A7079] font-bold border border-[#4A7079] rounded-md px-3 py-[6px] outline-0 w-[40%]"
+          className="bg-[#4A70790D] text-[#4A7079] font-bold border border-[#4A7079] rounded-md px-3 py-[6px] outline-0 
+          w-full sm:w-[60%] md:w-[40%]"
           placeholder="Search"
         />
       </div>
 
       {/* Department Cards */}
-      <div className="h-[65vh] mt-6 grid grid-cols-3 gap-4 p-2 overflow-y-scroll scrollbar-hide">
+      <div className="h-[65vh] mt-6 grid items-start grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-2 overflow-y-scroll scrollbar-hide">
         {AllDepartment?.map((data, index) => (
-            <div
-              key={index}
-              className="bg-[#DDDED980] shadow-[0px_0px_15px_0px_#4A707966] p-3 rounded-lg grid items-center h-fit gap-3"
-            >
-              <section className="flex items-center gap-4">
-                <img
-                  src={DepartmentImg}
-                  alt="dept img"
-                  className="w-[25px] h-[25px]"
-                />
-                <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>
-                  {data?.dpt_name}
-                </p>
-              </section>
-
-              <p style={{ ...FONTS.table_data, color: COLORS.primary }}>
-                HR Name : {data?.hr ?data?.hr?.first_name + " " + data?.hr?.last_name : "Not Assigned" }
+          <div
+            key={index}
+            className="bg-[#DDDED980] shadow-[0px_0px_15px_0px_#4A707966] p-4 rounded-lg grid gap-3"
+          >
+            <section className="flex items-center gap-4">
+              <img
+                src={DepartmentImg}
+                alt="dept img"
+                className="w-[25px] h-[25px]"
+              />
+              <p style={{ ...FONTS.payroll_head, color: COLORS.primary }}>
+                {data?.dpt_name}
               </p>
+            </section>
 
-              <div className="flex justify-between items-center border border-[#4A7079] bg-[#4A70790D] p-2 rounded-lg">
-                <p
-                  style={{
-                    ...FONTS.payroll_profileHead,
-                    color: COLORS.primary,
-                  }}
-                >
-                  Total Employee
-                </p>
-                <p
-                  style={{
-                    ...FONTS.payroll_profileHead,
-                    color: COLORS.primary,
-                  }}
-                >
-                    {data?.no_of_emp}
-                </p>
-              </div>
-              {/* <button onClick={()=>{DeleteDepartment(data?.uuid)}} className="cursor-pointer">Remove Department</button> */}
+            <p style={{ ...FONTS.table_data, color: COLORS.primary }}>
+              HR Name :{" "}
+              {data?.hr
+                ? data?.hr?.first_name + " " + data?.hr?.last_name
+                : "Not Assigned"}
+            </p>
+
+            <div className="flex justify-between items-center border border-[#4A7079] bg-[#4A70790D] p-2 rounded-lg">
+              <p
+                style={{ ...FONTS.payroll_profileHead, color: COLORS.primary }}
+              >
+                Total Employee
+              </p>
+              <p
+                style={{ ...FONTS.payroll_profileHead, color: COLORS.primary }}
+              >
+                {data?.no_of_emp}
+              </p>
             </div>
-          ))}
+
+            {/* <button onClick={()=>{DeleteDepartment(data?.uuid)}} className="cursor-pointer">Remove Department</button> */}
+          </div>
+        ))}
       </div>
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-          <div className="bg-[#EAEBE8] rounded-xl shadow-lg w-[50%] p-6 grid gap-4">
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 p-2">
+          <div className="bg-[#EAEBE8] rounded-xl shadow-lg w-[90%] sm:w-[70%] lg:w-[50%] p-6 grid items-center gap-4">
             <div className="flex items-center justify-between">
               <h2
                 className="text-xl font-semibold text-center"
@@ -166,7 +162,7 @@ const Department = () => {
             <div className="h-[1px] w-full bg-[#7697A066]"></div>
 
             <form onSubmit={handleSubmit} className="grid gap-30">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Department ID */}
                 <div className="w-full">
                   <p
@@ -205,7 +201,7 @@ const Department = () => {
                   />
                 </div>
 
-                {/* Department Head */}
+                {/* Department Head (Commented – kept exactly) */}
                 {/* <div className="w-full">
                   <p
                     style={{ ...FONTS.payroll_head, color: COLORS.primary }}
@@ -224,7 +220,7 @@ const Department = () => {
                   />
                 </div> */}
 
-                {/* HR Dropdown */}
+                {/* HR Dropdown (Commented – kept exactly) */}
                 {/* <div className="w-full">
                   <p
                     style={{ ...FONTS.payroll_head, color: COLORS.primary }}
@@ -275,11 +271,11 @@ const Department = () => {
                 </div> */}
               </div>
 
-              <div className="flex justify-between mt-2">
+              <div className="flex flex-col sm:flex-row justify-between mt-2 gap-3">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-md border border-[#4A7079] bg-[#4A70790D]"
+                  className="px-4 py-2 rounded-md border border-[#4A7079] bg-[#4A70790D] w-full sm:w-auto"
                   style={{
                     ...FONTS.payroll_profileHead,
                     color: COLORS.primary,
@@ -293,7 +289,7 @@ const Department = () => {
                     ...FONTS.payroll_profileHead,
                     background: COLORS.primary,
                   }}
-                  className="px-4 py-2 rounded-md text-[#FFFFFF] cursor-pointer"
+                  className="px-4 py-2 rounded-md text-[#FFFFFF] cursor-pointer w-full sm:w-auto"
                 >
                   Submit
                 </button>

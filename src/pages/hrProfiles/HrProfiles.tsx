@@ -36,10 +36,9 @@ const HrProfiles = () => {
     };
 
     const filteredProfiles = AllHrProfile?.filter((hrdata: HrProfileType) => {
-        // Department filter
+        
         const matchesDepartment = !selectedDepartment || hrdata?.department?.[0]?.dpt_name === selectedDepartment;
 
-        // Search filter (by name or emp_id)
         const fullName = (hrdata?.first_name + " " + hrdata?.last_name).toLowerCase();
         const empId = hrdata?.emp_id?.toLowerCase() || "";
         const matchesSearch =
@@ -50,28 +49,35 @@ const HrProfiles = () => {
     });
 
     return (
-        <div className='py-6 '>
-            <div className='flex justify-between items-center'>
+        <div className='py-6 px-2 sm:px-6'>
+            
+            <div className='flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3'>
                 <h1 style={{ ...FONTS.Main, color: COLORS.primary }}>Hr Profiles</h1>
                 <button
                     onClick={() => setIsModalOpen(true)}
                     style={{ ...FONTS.Main_btn, background: COLORS.primary }}
-                    className='text-[#FFFFFF] px-3 py-[4px] rounded-md cursor-pointer'
+                    className='text-[#FFFFFF] px-3 py-[4px] rounded-md cursor-pointer w-full sm:w-auto'
                 >
                     Add HR
                 </button>
             </div>
 
-            <DrawerForm isOpen={isOpen} setIsOpen={setisOpen} hrUUID={selectedHr} seletedHrData={setselectHrData} setIsModalOpen={setIsModalOpen} />
+            <DrawerForm 
+                isOpen={isOpen} 
+                setIsOpen={setisOpen} 
+                hrUUID={selectedHr} 
+                seletedHrData={setselectHrData} 
+                setIsModalOpen={setIsModalOpen} 
+            />
 
-            <div className='flex justify-between items-center mt-6'>
-                <section className='flex gap-4'>
-                    {/* Department Dropdown */}
-                    <div className="relative">
+            <div className='flex flex-col lg:flex-row justify-between items-start lg:items-center mt-6 gap-4'>
+                <section className='flex flex-col sm:flex-row gap-4 w-full lg:w-auto'>
+                    
+                    <div className="relative w-full sm:w-auto">
                         <div
                             onClick={() => setIsOpenDpt(!isOpenDpt)}
                             style={{ ...FONTS.Main_btn, background: COLORS.sub_btn }}
-                            className="text-[#FFFFFF] px-3 min-w-[170px] py-[4px] flex justify-between items-center cursor-pointer gap-5 rounded-md"
+                            className="text-[#FFFFFF] px-3 py-[4px] min-w-full sm:min-w-[170px] flex justify-between items-center cursor-pointer gap-5 rounded-md"
                         >
                             <span style={{ ...FONTS.Main_btn }}>
                                 {selectedDepartment ?? "Departments"}
@@ -82,12 +88,7 @@ const HrProfiles = () => {
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
                             >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M19 9l-7 7-7-7"
-                                />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                             </svg>
                         </div>
 
@@ -101,7 +102,7 @@ const HrProfiles = () => {
                                             type="button"
                                             key={index}
                                             onClick={() => handleDepartmentChange(option?.dpt_name)}
-                                            className="w-full text-left px-4 py-3 mb-2 last:mb-0 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300 text-gray-700 transition-colors"
+                                            className="w-full text-left px-4 py-3 mb-2 bg-gray-200 hover:bg-gray-300 rounded-lg border border-gray-300 text-gray-700 transition-colors"
                                         >
                                             {option?.dpt_name}
                                         </button>
@@ -111,26 +112,20 @@ const HrProfiles = () => {
                         )}
                     </div>
 
-                    {/* <button
-                        style={{ ...FONTS.Main_btn, background: COLORS.sub_btn }}
-                        className='text-[#FFFFFF] px-3 py-[4px] rounded-md'
-                    >
-                        Experience
-                    </button> */}
                 </section>
 
                 <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className='bg-[#4A70790D] text-[#4A7079] font-bold border border-[#4A7079] rounded-md px-3 py-[6px] outline-0 w-[400px]'
+                    className='bg-[#4A70790D] text-[#4A7079] font-bold border border-[#4A7079] rounded-md px-3 py-[6px] outline-0 
+                    w-full sm:w-[350px] lg:w-[400px]'
                     placeholder='Search by name or HR ID'
                 />
             </div>
 
-
             {/* HR Profiles List */}
-            <div className='mt-10 grid grid-cols-3 gap-6 lg:h-[57vh] xl:h-[62vh] 2xl:h-[70vh] p-2 overflow-y-scroll scrollbar-hide'>
+            <div className='mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:h-[57vh] xl:h-[62vh] 2xl:h-[70vh] p-2 overflow-y-scroll scrollbar-hide'>
                 {filteredProfiles && filteredProfiles.length > 0 ? (
                     filteredProfiles.map((hrdata: HrProfileType, index) => (
                         <section
@@ -138,10 +133,10 @@ const HrProfiles = () => {
                             className='shadow-[0px_0px_15px_0px_#4A707966] p-4 rounded-xl h-max w-full'
                             style={{ background: COLORS.card_bg }}
                         >
-                            <div className='flex justify-between items-center'>
+                            <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3'>
                                 <section className='flex gap-4 items-center mb-4'>
                                     <div
-                                        className='bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center'
+                                        className='bg-[#DDDED9] text-[#4A7079] h-[80px] w-[80px] rounded-xl flex justify-center items-center text-3xl'
                                         style={{ ...FONTS.card_initial }}
                                     >
                                         {hrdata?.first_name?.[0]}
@@ -155,19 +150,22 @@ const HrProfiles = () => {
                                         </p>
                                     </div>
                                 </section>
+
                                 <button
                                     style={{ ...FONTS.view_btn, background: COLORS.primary }}
                                     onClick={() => { setisOpen(true); setselectedHr(hrdata?.uuid ?? "") }}
-                                    className='text-[#FFFFFF] px-3 py-[4px] rounded-md cursor-pointer'
+                                    className='text-[#FFFFFF] px-3 py-[4px] rounded-md cursor-pointer w-full sm:w-auto'
                                 >
                                     View
                                 </button>
                             </div>
 
-                            <div className='text-[#7697A0] flex justify-evenly'>
-                                <p className='break-words w-1/2' style={{ ...FONTS.card_role }}>{hrdata?.department?.[0]?.dpt_name}</p>
+                            <div className='text-[#7697A0] flex justify-evenly text-sm sm:text-base'>
+                                <p className='break-words w-1/2' style={{ ...FONTS.card_role }}>
+                                    {hrdata?.department?.[0]?.dpt_name}
+                                </p>
                                 <span className='w-[2px] bg-[#C3C7C6]'></span>
-                                <p className="break-words pl-3" style={{ ...FONTS.card_role }}>
+                                <p className='break-words pl-3' style={{ ...FONTS.card_role }}>
                                     {hrdata?.contact_info?.email
                                         ? hrdata.contact_info.email.length > 20
                                             ? hrdata.contact_info.email.slice(0, 20) + "..."
@@ -176,14 +174,17 @@ const HrProfiles = () => {
                                 </p>
                             </div>
 
-                            <div className=' grid grid-cols-3 gap-2 mt-5'>
-                                <p className='bg-[#E0E0E0] p-2 rounded-lg font-semibold' style={{ ...FONTS.card_detail, color: COLORS.primary }}>
-                                    Join Date : { } {dayjs(hrdata?.join_date).format("DD-MMM-YYYY")}
+                            <div className='grid grid-cols-1 sm:grid-cols-3 gap-2 mt-5'>
+                                <p className='bg-[#E0E0E0] p-2 rounded-lg font-semibold'
+                                    style={{ ...FONTS.card_detail, color: COLORS.primary }}>
+                                    Join Date : {dayjs(hrdata?.join_date).format("DD-MMM-YYYY")}
                                 </p>
-                                <p className='bg-[#E0E0E0] p-2 rounded-lg font-semibold' style={{ ...FONTS.card_detail, color: COLORS.primary }}>
+                                <p className='bg-[#E0E0E0] p-2 rounded-lg font-semibold'
+                                    style={{ ...FONTS.card_detail, color: COLORS.primary }}>
                                     Experience : {hrdata?.experience} years
                                 </p>
-                                <p className='bg-[#E0E0E0] p-2 rounded-lg font-semibold' style={{ ...FONTS.card_detail, color: COLORS.primary }}>
+                                <p className='bg-[#E0E0E0] p-2 rounded-lg font-semibold'
+                                    style={{ ...FONTS.card_detail, color: COLORS.primary }}>
                                     Current CTC : {hrdata?.ctc}
                                 </p>
                             </div>
@@ -198,7 +199,12 @@ const HrProfiles = () => {
                 )}
             </div>
 
-            <Form isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} formType='hr' HrEdit={selectHrData} />
+            <Form 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)} 
+                formType='hr' 
+                HrEdit={selectHrData} 
+            />
         </div>
     )
 }

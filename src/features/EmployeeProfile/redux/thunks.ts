@@ -36,7 +36,7 @@ export const UpdateEmployeeThunks = (data: EmployeeProfile, params: string) => a
     try {
         await UpdateEmployeeService(data, params)
         dispath(addAndUpdateEmployee(data))
-        toast.success("Employee Added Successfully")
+        toast.success("Employee Updated Successfully")
     } catch (error) {
         console.error(error, "update employee error")
     }

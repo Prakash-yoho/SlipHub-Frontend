@@ -129,10 +129,10 @@ const CompanyInfo: React.FC<props> = ({ company_details }) => {
                                     className="text-[#4A7079] !font-bold">
                                     website:
                                 </h1>
-                                <h1 style={{ ...FONTS.table_data }}
+                                <a href='https://yohotechnologies.com/' target='_blank' style={{ ...FONTS.table_data }}
                                     className="text-[#4A7079] !font-medium break-words">
                                     {company_details?.website}
-                                </h1>
+                                </a>
                             </div>
 
                         </div>

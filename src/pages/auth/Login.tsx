@@ -211,7 +211,7 @@ const Login = () => {
 
                     <div>
                         <h1 style={{ ...FONTS.login_head, color: COLORS.primary }} className={MobileView ? '!text-3xl mt-10' : 'mb-2'}>Otp Verification</h1>
-                        <p style={{ ...FONTS.Nav, color: COLORS.primary }} className={MobileView ? '!text-sm' : ''}>Enter the 6 Digit OTP sent to your Registered Mail</p>
+                        <p style={{ ...FONTS.Nav, color: COLORS.primary }} className={MobileView ? '!text-sm' : ''}>Please enter the 6-digit OTP sent to your registered email address. If you do not see it in your inbox, kindly check your spam or junk folder.</p>
                         {/* <p style={{ ...FONTS.Nav, color: COLORS.primary }} className={MobileView ? '!text-sm' : 'text-center'}>
                             OTP (for demo): {otpValue ?? ""}
                         </p> */}

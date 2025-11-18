@@ -29,7 +29,7 @@ const CompanyInfo: React.FC<props> = ({ company_details }) => {
                                 p-4 flex flex-col gap-5 rounded-xl">
                                 <h1 style={{ ...FONTS.table_head }}
                                     className="text-[#4A7079] !text-[12px] !font-bold">
-                                    Organsation Name:
+                                    Organisation Name:
                                 </h1>
                                 <h1 style={{ ...FONTS.table_data }}
                                     className="text-[#4A7079] !text-[10px] !font-medium break-words">
@@ -41,7 +41,7 @@ const CompanyInfo: React.FC<props> = ({ company_details }) => {
                                 p-4 flex flex-col gap-5 rounded-xl">
                                 <h1 style={{ ...FONTS.table_head }}
                                     className="text-[#4A7079] !text-[12px] !font-bold">
-                                    Organsation Mail:
+                                    Organisation Mail:
                                 </h1>
                                 <h1 style={{ ...FONTS.table_data }}
                                     className="text-[#4A7079] !text-[10px] !font-medium break-words">
@@ -53,7 +53,7 @@ const CompanyInfo: React.FC<props> = ({ company_details }) => {
                                 p-4 flex flex-col gap-5 rounded-xl">
                                 <h1 style={{ ...FONTS.table_head }}
                                     className="text-[#4A7079] !text-[12px] !font-bold">
-                                    Organsation Phone:
+                                    Organisation Phone:
                                 </h1>
                                 <h1 style={{ ...FONTS.table_data }}
                                     className="text-[#4A7079] !text-[10px] !font-medium break-words">
@@ -67,7 +67,7 @@ const CompanyInfo: React.FC<props> = ({ company_details }) => {
                         p-4 flex flex-col gap-5 rounded-xl">
                         <h1 style={{ ...FONTS.table_head }}
                             className="text-[#4A7079] !text-[12px] !font-bold">
-                            Organsation Address:
+                            Organisation Address:
                         </h1>
                         <h1 style={{ ...FONTS.table_data }}
                             className="text-[#4A7079] !text-[10px] !font-medium break-words">
@@ -91,7 +91,7 @@ const CompanyInfo: React.FC<props> = ({ company_details }) => {
                                 p-4 flex flex-col gap-5 rounded-xl">
                                 <h1 style={{ ...FONTS.table_head }}
                                     className="text-[#4A7079] !font-bold">
-                                    Organsation Name:
+                                    Organisation Name:
                                 </h1>
                                 <h1 style={{ ...FONTS.table_data }}
                                     className="text-[#4A7079] !font-medium break-words">
@@ -103,7 +103,7 @@ const CompanyInfo: React.FC<props> = ({ company_details }) => {
                                 p-4 flex flex-col gap-5 rounded-xl">
                                 <h1 style={{ ...FONTS.table_head }}
                                     className="text-[#4A7079] !font-bold">
-                                    Organsation Mail:
+                                    Organisation Mail:
                                 </h1>
                                 <h1 style={{ ...FONTS.table_data }}
                                     className="text-[#4A7079] !font-medium break-words">
@@ -115,7 +115,7 @@ const CompanyInfo: React.FC<props> = ({ company_details }) => {
                                 p-4 flex flex-col gap-5 rounded-xl">
                                 <h1 style={{ ...FONTS.table_head }}
                                     className="text-[#4A7079] !font-bold">
-                                    Organsation Phone:
+                                    Organisation Phone:
                                 </h1>
                                 <h1 style={{ ...FONTS.table_data }}
                                     className="text-[#4A7079] !font-medium break-words">
@@ -142,7 +142,7 @@ const CompanyInfo: React.FC<props> = ({ company_details }) => {
                         p-4 flex flex-col gap-5 rounded-xl">
                         <h1 style={{ ...FONTS.table_head }}
                             className="text-[#4A7079] !font-bold">
-                            Organsation Address:
+                            Organisation Address:
                         </h1>
                         <h1 style={{ ...FONTS.table_data }}
                             className="text-[#4A7079] !font-medium break-words">

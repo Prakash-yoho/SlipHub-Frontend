@@ -33,5 +33,6 @@ export const API_ENDPOINTS = {
         create: `/api/payroll/:companyid/generate`,
         download: `/api/payroll/:companyid/slip/:uuid/download`,
         downloadMonth: '/api/payroll/:companyid/download/:date/:employee',
+        deleteSlip:'/api/payroll/:companyid/slip/:uuid/delete'
     }
 }

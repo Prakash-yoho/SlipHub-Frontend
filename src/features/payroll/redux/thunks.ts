@@ -1,8 +1,9 @@
+import toast from "react-hot-toast";
 import type { AppDispatch } from "../../../store/store";
 import type { PayRollType } from "../../../Type/payroll/type";
 import { GetEmployeeByUUIDService } from "../../EmployeeProfile/service";
-import { GeneratePayrollService, GetPayrollEmpService } from "../service";
-import { getPayrollEmp, selectedEmp, updatePayslip } from "./slice";
+import { GeneratePayrollService, GetPayrollEmpService, handleDeleteSlip } from "../service";
+import { deleteSlip, getPayrollEmp, selectedEmp, updatePayslip } from "./slice";
 
 export const GetPayrollEmpThunks = () => async (dispatch: AppDispatch) => {
     try {
@@ -30,3 +31,22 @@ export const GeneratePayrollThunks = (data: PayRollType) => async (dispath: AppD
         console.log(error, "payroll generate thunks")
     }
 }
+
+// export const deletePaySlips=(data:string)=>async(dispatch:AppDispatch)=>{
+//     try {
+//         const res = await handleDeleteSlip(data)
+//         dispatch(deleteSlip(res.data))
+//     } catch (error:any) {
+//         toast.error(error)
+//     }
+// }
+
+export const deletePaySlips = (uuid: string) => async (dispatch: AppDispatch) => {
+  try {
+    await handleDeleteSlip(uuid);
+    dispatch(deleteSlip(uuid));
+    toast.success("Payslip deleted successfully");
+  } catch (error: any) {
+    toast.error(error?.message || "Failed to delete payslip");
+  }
+};

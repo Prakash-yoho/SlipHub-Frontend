@@ -6,13 +6,13 @@ import CalendarPicker from '../../Components/ui/CalendarPicker';
 import { useEffect, useState, type ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from '../../store/store';
-import { GeneratePayrollThunks, GetPayrollEmpThunks, PayrollSelectedEmpThunks } from '../../features/payroll/redux/thunks';
+import { deletePaySlips, GeneratePayrollThunks, GetPayrollEmpThunks, PayrollSelectedEmpThunks } from '../../features/payroll/redux/thunks';
 import type { EmployeeProfile } from '../../Type/Emp_profile/Type';
 import type { PayRollType } from '../../Type/payroll/type';
 import { handleDownload } from '../../features/common/service';
 import dayjs from 'dayjs';
 import toast from 'react-hot-toast';
-
+import { FaTrash } from "react-icons/fa";
 
 const Payroll = () => {
 
@@ -197,7 +197,7 @@ const Payroll = () => {
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="No of Worked Days"
                                                 onKeyDown={(e) => {
-                                                    if (["e", "E", "+", "-", "."].includes(e.key)) {
+                                                    if (["e", "E", "+", "-"].includes(e.key)) {
                                                         e.preventDefault();
                                                     }
                                                 }}
@@ -214,7 +214,7 @@ const Payroll = () => {
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="Loss Of Pay"
                                                 onKeyDown={(e) => {
-                                                    if (["e", "E", "+", "-", "."].includes(e.key)) {
+                                                    if (["e", "E", "+", "-"].includes(e.key)) {
                                                         e.preventDefault();
                                                     }
                                                 }}
@@ -231,7 +231,7 @@ const Payroll = () => {
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="No of Arrear Day"
                                                 onKeyDown={(e) => {
-                                                    if (["e", "E", "+", "-", "."].includes(e.key)) {
+                                                    if (["e", "E", "+", "-"].includes(e.key)) {
                                                         e.preventDefault();
                                                     }
                                                 }}
@@ -249,7 +249,7 @@ const Payroll = () => {
                                                 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 placeholder="Paid Days"
                                                 onKeyDown={(e) => {
-                                                    if (["e", "E", "+", "-", "."].includes(e.key)) {
+                                                    if (["e", "E", "+", "-"].includes(e.key)) {
                                                         e.preventDefault();
                                                     }
                                                 }}
@@ -334,7 +334,7 @@ const Payroll = () => {
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-l-lg">{dayjs(items?.created_month).format("MMMM-YYYY")}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.paid_days}</td>
                                                             <td style={{ ...FONTS.table_data }} className="px-4 py-3">{items?.net_salary}</td>
-                                                            <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg"><img src={DownloadIcon} alt="" className='w-[25px] h-[25px] cursor-pointer' onClick={() => handleDownload(items?.uuid)} /></td>
+                                                            <td style={{ ...FONTS.table_data }} className="px-4 py-3 rounded-r-lg flex justify-evenly gap-4 items-center"><img src={DownloadIcon} alt="" className='w-[25px] h-[25px] cursor-pointer' onClick={() => handleDownload(items?.uuid)} /> <span className='cursor-pointer' onClick={() => dispatch(deletePaySlips(items?.uuid))}><FaTrash/></span></td>
                                                         </tr>
                                                     )) :
                                                         <tr style={{ color: COLORS.primary }} className='bg-[#EAEBE8]  rounded-lg'>

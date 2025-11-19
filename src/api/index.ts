@@ -46,7 +46,7 @@ class Client {
 		getemp: () => httpClient.get(API_ENDPOINTS.payroll.getemp.replace(":companyid", getid())),
 		download: (params: string) => httpClient.getfile(API_ENDPOINTS.payroll.download.replace(":uuid", params).replace(":companyid", getid())),
 		downloadMonth: (params: any, emp: any) => httpClient.getfile(API_ENDPOINTS.payroll.downloadMonth.replace(":date", params).replace(":companyid", getid()).replace(":employee", emp)),
-
+		deletepaySlip:(params:string)=>httpClient.delete(API_ENDPOINTS.payroll.deleteSlip.replace(":uuid", params).replace(":companyid", getid()))
 	}
 }
 export default new Client();

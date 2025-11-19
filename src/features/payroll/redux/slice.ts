@@ -20,10 +20,19 @@ const payrollSlice = createSlice({
             const data = action.payload
 
             state.selectedEmp?.payroll_slip?.push(data)
-        }
+        },
+        deleteSlip: (state, action: PayloadAction<string>) => {
+            if (state.selectedEmp?.payroll_slip) {
+                state.selectedEmp.payroll_slip = state.selectedEmp.payroll_slip.filter(
+                    (p: any) => p.uuid !== action.payload
+                );
+            }
+        },
+
+
     }
 })
 
-export const { getAllpayroll, getPayrollEmp, selectedEmp, updatePayslip } = payrollSlice.actions
+export const { getAllpayroll, getPayrollEmp, selectedEmp, updatePayslip, deleteSlip } = payrollSlice.actions
 
 export default payrollSlice.reducer
